@@ -4,10 +4,16 @@
 
 int main() {
 
-	char harry[100][100];
-	char ron[100][100];
-	char buf[100];
+	const int maxSize = 100;
 	int i, k, j, flag, r_counter, h_counter;
+	char **harry = malloc(maxSize * sizeof(char*));
+	char **ron = malloc(maxSize * sizeof(char*));
+	char *buf = malloc(maxSize * sizeof(char));
+	for (i = 0; i < 100; i++) {
+		harry[i] = malloc(maxSize * sizeof(char));
+		ron[i] = malloc(maxSize * sizeof(char));
+	}
+	
 	FILE *input;
 	FILE *output;
 
@@ -36,7 +42,6 @@ int main() {
 					}
 					h_counter--;
 					flag = 1;
-					//i--;
 				}
 				else if (h_counter < r_counter) {
 					for (j = k; j <= r_counter; j++) {
@@ -47,19 +52,19 @@ int main() {
 				}
 			}
 		}
-		printf("%d\n", i);
+		if (flag) {
+			i--;
+			flag = 0;
+		}
 	}
-	printf("%d %d\n", h_counter, r_counter);
-	//for (k = 0; k < i; k++) fprintf(output, "%s", harry[i]);
-	for (i = 0; i <= h_counter; i++) printf("%s", harry[i]);
-        for (k = 0; k <= r_counter; k++) printf("%s", ron[k]);
-	//printf("%s", ron[r_counter-1]);
-	//for (i = 0; i < 2; i++) printf("%s", ron[i]);
-	/*for (i = 0; i <= 2; i++) {
-		fgets(str[i], 100, input);
-	}
-	for (i = 0; i <= 2; i++) {
-		fprintf(output, "%s", str[i]);
-	}*/
+	fprintf(output, "Harry's book of adventures:\n");
+	for (i = 0; i <= h_counter; i++) fprintf(output, "%s", harry[i]);
+	fprintf(output, "\nRon's book of adventures:\n");
+        for (k = 0; k <= r_counter; k++) fprintf(output, "%s", ron[k]);	
+	fclose(input);
+	fclose(output);
+	free(harry);
+	free(ron);
 
+	return 0;
 }
