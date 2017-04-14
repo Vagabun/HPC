@@ -17,8 +17,8 @@ int main() {
 	FILE *input;
 	FILE *output;
 
-	input = fopen("input.txt", "r");
-	output = fopen("output.txt", "w");
+	input = fopen("predictions_in.txt", "r");
+	output = fopen("predictions_out.txt", "w");
 
 	h_counter = 0, r_counter = 0;
 	while (fgets(buf, 100, input) != NULL) {
