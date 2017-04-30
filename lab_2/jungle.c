@@ -11,14 +11,16 @@ int main() {
 	const int maxSize = 1000;
 	int **game = malloc(maxSize * sizeof(int*));
 	int **path = malloc(maxSize * sizeof(int*));
+	int **route = malloc(2 * sizeof(int*));
 	int i, j, size_i, size_j;
 	for (i = 0; i < maxSize; i++) { 
 		game[i] = malloc(maxSize * sizeof(int));
 		path[i] = malloc(maxSize * sizeof(int));
 	}
+	for (i = 0; i < 2; i++) 
+		route[i] = malloc(1000000 * sizeof(int));
 	FILE *input;
 	FILE *output;
-	printf("%d\n", path[0][5]);
 	input = fopen("jungle_game.txt", "r");
 	fscanf(input, "%d %d", &size_i, &size_j);
 	for (i = 1; i <= size_i; i++) 
@@ -27,19 +29,21 @@ int main() {
 	for (i = 1; i <= size_i; i++) {
 		for (j = 1; j <= size_j; j++) {
 		       path[i][j] = min(path[i-1][j], path[i][j-1]) + game[i][j];
-		       printf("%d ", path[i][j]);
+		       //printf("%d ", path[i][j]);
 		}
-		printf("\n");
+		//printf("\n");
 	}		
 	
 	
-	printf("%d\n", min(15, 15));	
+	//route[0][999999] = 7;
+	//route[999999][1] = 9;
+	//printf("%d\n", route[0][999999]);
 	
 	
 	
 	
-	/*for (i = 0; i < size_i; i++) { 
-		for (j = 0; j < size_j; j++)
+	for (i = 1; i <= size_i; i++) { 
+		for (j = 1; j <= size_j; j++)
 		       printf("%d ", game[i][j]);	
 		printf("\n");
 	}
@@ -48,6 +52,9 @@ int main() {
 		for (j = 1; j <= size_j; j++)
 		       printf("%d ", path[i][j]);	
 		printf("\n");
-	}*/
+	}
+	free(game);
+	free(path);
+	free(route);
 	return 0;
 }
