@@ -1,0 +1,6 @@
+Maximum available area for a glass is 4.718282
+All possible areas: 
+0.459698
+0.381773
+0.217707
+4.718282
