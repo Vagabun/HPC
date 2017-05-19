@@ -27,7 +27,8 @@ int main() {
 	FILE *input;
 	FILE *output;
 
-	input = fopen("jungle_game.txt", "r");
+	input = fopen("jungle_in.txt", "r");
+	output = fopen("jungle_out.txt", "w");
 	fscanf(input, "%d %d", &size_i, &size_j);
 	for (i = 1; i <= size_i; i++) 
 		for (j = 1; j <= size_j; j++) 
@@ -57,36 +58,36 @@ int main() {
 		}
 	}		
 	
-	printf("game matrix & path matrix: \n");
+	fprintf(output, "game matrix & path matrix: \n");
 	for (i = 1; i <= size_i; i++) { 
 		for (j = 1; j <= size_j; j++)
-		       printf("%d ", game[i][j]);	
-		printf("\n");
+		       fprintf(output, "%d ", game[i][j]);	
+		fprintf(output, "\n");
 	}
-	printf("\n");
+	fprintf(output, "\n");
 	for (i = 1; i <= size_i; i++) { 
 		for (j = 1; j <= size_j; j++)
-		       printf("%d ", path[i][j]);	
-		printf("\n");
+		       fprintf(output, "%d ", path[i][j]);	
+		fprintf(output, "\n");
 	}
-	printf("\n");
+	fprintf(output, "\n");
 
-	printf("coordinate matrix: \n");
+	fprintf(output, "coordinate matrix: \n");
 	for (i = 0; i < 2; i++) {
 		for (j = 1; j <= size_i*size_j; j++) 
-			printf("%d ", route[i][j]);
-		printf("\n");
+			fprintf(output, "%d ", route[i][j]);
+		fprintf(output, "\n");
 	}
-	printf("\n");
+	fprintf(output, "\n");
 		
-	printf("route: \n");
+	fprintf(output, "route: \n");
 	j = size_i*size_j;
 	while (1) {
-		printf("[%d][%d] ", route[0][j], route[1][j]);
+		fprintf(output, "[%d][%d] ", route[0][j], route[1][j]);
 		if (route[0][j] == 1 && route[1][j] == 1) break;
 		j = size_j * route[0][j] + route[1][j] - size_j;
 	}	
-	printf("\n");	
+	fprintf(output, "\n");	
 
 	free(game);
 	free(path);
