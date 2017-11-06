@@ -34,3 +34,7 @@
 
 # Swap files
 *.swp
+
+# Folders
+cmake-build-debug/
+.idea/
