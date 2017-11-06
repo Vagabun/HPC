@@ -27,19 +27,42 @@ NODE* insert(NODE* node, int key) {
     return node;
 }
 
-void search(NODE* node, int key) {
-    if (node == NULL) {
-        printf("%d is not found\n", key);
-        return;
-    }
-    else if (node->data == key) {
-        printf("found %d\n", key);
-        return;
-    }
+NODE* search(NODE* node, int key) {
+    if (node == NULL || node->data == key)
+        return node;
+//    if (node == NULL) {
+//        printf("%d is not found\n", key);
+//        return;
+//    }
+//    else if (node->data == key) {
+//        printf("found %d\n", key);
+//        return;
+//    }
     if (key > node->data)
-        search(node->right, key);
+        return search(node->right, key);
     else
-        search(node->left, key);
+        return search(node->left, key);
+}
+
+void delete(NODE* node, int key) {
+    NODE* temp = search(node, key);
+
+    if (temp == NULL)
+        return;
+
+
+    if (temp->right == NULL && temp->left == NULL)
+        free(temp);
+
+    if (temp->right != NULL || temp->left != NULL) {}
+}
+
+void inorder(NODE* node) {
+    if (node != NULL) {
+        inorder(node->left);
+        printf("%d ", node->data);
+        inorder(node->right);
+    }
 }
 
 int main() {
@@ -51,8 +74,16 @@ int main() {
     insert(root, 45);
     insert(root, 15);
 
-    search(root, 98);
-    search(root, 15);
+    insert(root, 30);
+    insert(root, 20);
+    insert(root, 40);
+    insert(root, 70);
+    insert(root, 60);
+    insert(root, 80);
+
+    inorder(root);
+//    search(root, 98);
+//    search(root, 15);
 
     return 0;
 }
