@@ -27,6 +27,21 @@ NODE* insert(NODE* node, int key) {
     return node;
 }
 
+void search(NODE* node, int key) {
+    if (node == NULL) {
+        printf("%d is not found\n", key);
+        return;
+    }
+    else if (node->data == key) {
+        printf("found %d\n", key);
+        return;
+    }
+    if (key > node->data)
+        search(node->right, key);
+    else
+        search(node->left, key);
+}
+
 int main() {
 
     NODE* root = NULL;
@@ -36,7 +51,8 @@ int main() {
     insert(root, 45);
     insert(root, 15);
 
-    printf("hey\n");
+    search(root, 98);
+    search(root, 15);
 
     return 0;
 }
