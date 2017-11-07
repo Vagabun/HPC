@@ -44,17 +44,31 @@ NODE* search(NODE* node, int key) {
         return search(node->left, key);
 }
 
-void delete(NODE* node, int key) {
-    NODE* temp = search(node, key);
+// pass search as a parameter?
+NODE* delete(NODE* node, int key) {
+//    NODE* temp = search(node, key);
 
-    if (temp == NULL)
-        return;
+    if (node == NULL)
+        return node;
 
+    if (key < node->data)
+        node->left = delete(node->left, key);
+    else if (key > node->data)
+        node->right = delete(node->right, key);
+    else {
+        if (node->left == NULL) {
+            NODE* temp = node->right;
+            free(node);
+            return temp;
+        }
+        else if (node->right == NULL) {
+            NODE* temp = node->left;
+            free(node);
+            return temp;
+        }
+    }
 
-    if (temp->right == NULL && temp->left == NULL)
-        free(temp);
-
-    if (temp->right != NULL || temp->left != NULL) {}
+    return node;
 }
 
 void inorder(NODE* node) {
@@ -69,11 +83,23 @@ int main() {
 
     NODE* root = NULL;
 
-    root = insert(root, 50);
-    insert(root, 25);
-    insert(root, 45);
-    insert(root, 15);
+//    root = insert(root, 50);
+//    insert(root, 25);
+//    insert(root, 45);
+//    insert(root, 15);
+//
+//    insert(root, 30);
+//    insert(root, 20);
+//    insert(root, 40);
+//    insert(root, 70);
+//    insert(root, 60);
+//    insert(root, 80);
+//
+//    inorder(root);
+//    search(root, 98);
+//    search(root, 15);
 
+    root = insert(root, 50);
     insert(root, 30);
     insert(root, 20);
     insert(root, 40);
@@ -82,8 +108,17 @@ int main() {
     insert(root, 80);
 
     inorder(root);
-//    search(root, 98);
-//    search(root, 15);
+    printf("\n");
+
+    delete(root, 20);
+
+    inorder(root);
+    printf("\n");
+
+    delete(root, 30);
+
+    inorder(root);
+    printf("\n");
 
     return 0;
 }
