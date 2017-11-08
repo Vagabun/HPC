@@ -7,24 +7,14 @@ typedef struct node {
     struct node *right;
 } NODE;
 
-NODE* new_node(int data) {
-    NODE* temp = malloc(sizeof(*temp)); // why explicit conversion (struct node*)?
+void new_node(NODE** tmp, int data) {
+    //is it right malloc?
+    *tmp = malloc(sizeof(NODE*)); // why explicit conversion (struct node*)?
     /* NODE* tmp = (NODE*)malloc(sizeof(NODE)); */
-    temp->data = data;
-    temp->left = NULL;
-    temp->right = NULL;
-    return temp;
-}
 
-NODE* insert(NODE* node, int key) {
-    if (node == NULL)
-        return new_node(key);
-    if (key < node->data)
-        node->left = insert(node->left, key);
-    else if (key > node->data)
-        node->right = insert(node->right, key);
-
-    return node;
+    (*tmp)->data = data;
+    (*tmp)->left = NULL;
+    (*tmp)->right = NULL;
 }
 
 NODE* search(NODE* node, int key) {
@@ -44,31 +34,42 @@ NODE* search(NODE* node, int key) {
         return search(node->left, key);
 }
 
+void insert(NODE** node, int key) {
+    if (*node == NULL) {
+        new_node(node, key);
+        return;
+    }
+    if (key < (*node)->data)
+        insert(&(*node)->left, key);
+    else if (key > (*node)->data)
+        insert(&(*node)->right, key);
+}
+
 // pass search as a parameter?
-NODE* delete(NODE* node, int key) {
-//    NODE* temp = search(node, key);
+void delete(NODE* node, int key) {
+    node = search(node, key);
 
     if (node == NULL)
-        return node;
+        return;
 
-    if (key < node->data)
-        node->left = delete(node->left, key);
-    else if (key > node->data)
-        node->right = delete(node->right, key);
-    else {
-        if (node->left == NULL) {
-            NODE* temp = node->right;
-            free(node);
-            return temp;
-        }
-        else if (node->right == NULL) {
-            NODE* temp = node->left;
-            free(node);
-            return temp;
-        }
+//    if (key < node->data)
+//        node->left = delete(node->left, key);
+//    else if (key > node->data)
+//        node->right = delete(node->right, key);
+//    else {
+    if (node->left == NULL) {
+        NODE* temp = node->right;
+        free(node);
+        return;
     }
+    else if (node->right == NULL) {
+        NODE* temp = node->left;
+        free(node);
+        return;
+    }
+//    }
 
-    return node;
+//    return node;
 }
 
 void inorder(NODE* node) {
@@ -99,26 +100,28 @@ int main() {
 //    search(root, 98);
 //    search(root, 15);
 
-    root = insert(root, 50);
-    insert(root, 30);
-    insert(root, 20);
-    insert(root, 40);
-    insert(root, 70);
-    insert(root, 60);
-    insert(root, 80);
+    insert(&root, 50);
+    insert(&root, 30);
+    insert(&root, 20);
+    insert(&root, 40);
+    insert(&root, 70);
+    insert(&root, 60);
+    insert(&root, 80);
 
     inorder(root);
     printf("\n");
 
-    delete(root, 20);
+//    delete(root, 20);
+//
+//    inorder(root);
 
-    inorder(root);
-    printf("\n");
-
-    delete(root, 30);
-
-    inorder(root);
-    printf("\n");
+//    inorder(root);
+//    printf("\n");
+//
+//    delete(root, 30);
+//
+//    inorder(root);
+//    printf("\n");
 
     return 0;
 }
