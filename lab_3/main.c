@@ -16,7 +16,6 @@ void new_node(NODE** tmp, int data) {
     (*tmp)->data = data;
     (*tmp)->left = NULL;
     (*tmp)->right = NULL;
-//    free(*tmp);
 }
 
 NODE* search(NODE* node, int key) {
@@ -45,6 +44,14 @@ void insert(NODE** node, int key) {
         insert(&(*node)->left, key);
     else if (key > (*node)->data)
         insert(&(*node)->right, key);
+}
+
+NODE* get_right_min(NODE* node) {
+    NODE* current = node;
+    while (current->left != NULL) {
+        current = current->left;
+    }
+    return current;
 }
 
 // pass search as a parameter?
@@ -78,12 +85,18 @@ void delete(NODE** node, int key) {
             *node = tmp;
             free((*node)->right);
             (*node)->right = NULL;
-//            free((*node)->right);
+
+            return;
+        }
+        else if ((*node)->right != NULL && (*node)->left != NULL) {
+            //get inorder successor
+            NODE* tmp = get_right_min((*node)->right);
+            (*node)->data = tmp->data;
+            delete(&(*node)->right, tmp->data);
+
             return;
         }
     }
-
-//    return node;
 }
 
 void inorder(NODE* node) {
@@ -133,17 +146,10 @@ int main() {
     inorder(root);
     printf("\n");
 
-//    printf("\n");
-//
-//    inorder(root);
+    delete(&root, 50);
 
-//    inorder(root);
-//    printf("\n");
-//
-//    delete(root, 30);
-//
-//    inorder(root);
-//    printf("\n");
+    inorder(root);
+    printf("\n");
 
     return 0;
 }
