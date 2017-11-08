@@ -9,12 +9,14 @@ typedef struct node {
 
 void new_node(NODE** tmp, int data) {
     //is it right malloc?
-    *tmp = malloc(sizeof(NODE*)); // why explicit conversion (struct node*)?
+    //why not *tmp = malloc(sizeof(NODE*));
+    *tmp = (NODE*)malloc(sizeof(NODE)); // why explicit conversion (struct node*)?
     /* NODE* tmp = (NODE*)malloc(sizeof(NODE)); */
 
     (*tmp)->data = data;
     (*tmp)->left = NULL;
     (*tmp)->right = NULL;
+//    free(*tmp);
 }
 
 NODE* search(NODE* node, int key) {
@@ -46,28 +48,40 @@ void insert(NODE** node, int key) {
 }
 
 // pass search as a parameter?
-void delete(NODE* node, int key) {
-    node = search(node, key);
+void delete(NODE** node, int key) {
 
-    if (node == NULL)
+    if (*node == NULL)
         return;
 
-//    if (key < node->data)
-//        node->left = delete(node->left, key);
-//    else if (key > node->data)
-//        node->right = delete(node->right, key);
-//    else {
-    if (node->left == NULL) {
-        NODE* temp = node->right;
-        free(node);
-        return;
+    if (key < (*node)->data)
+        delete(&(*node)->left, key);
+    else if (key > (*node)->data)
+        delete(&(*node)->right, key);
+    else {
+        if ((*node)->left == NULL && (*node)->right == NULL) {
+            free(*node);
+            *node = NULL;
+
+            //is it correct free?
+            return;
+        }
+        else if ((*node)->left != NULL && (*node)->right == NULL) {
+            NODE* tmp = (*node)->left;
+            *node = tmp;
+            free((*node)->left);
+            (*node)->left = NULL;
+
+            return;
+        }
+        else if ((*node)->right != NULL && (*node)->left == NULL) {
+            NODE* tmp = (*node)->right;
+            *node = tmp;
+            free((*node)->right);
+            (*node)->right = NULL;
+//            free((*node)->right);
+            return;
+        }
     }
-    else if (node->right == NULL) {
-        NODE* temp = node->left;
-        free(node);
-        return;
-    }
-//    }
 
 //    return node;
 }
@@ -111,7 +125,15 @@ int main() {
     inorder(root);
     printf("\n");
 
-//    delete(root, 20);
+    delete(&root, 20);
+    inorder(root);
+    printf("\n");
+
+    delete(&root, 30);
+    inorder(root);
+    printf("\n");
+
+//    printf("\n");
 //
 //    inorder(root);
 
