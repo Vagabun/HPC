@@ -2,7 +2,7 @@
 #include <stdlib.h>
 
 typedef struct node {
-    int data;
+    int data, height;
     struct node *left;
     struct node *right;
 } NODE;
@@ -14,6 +14,7 @@ void new_node(NODE** tmp, int data) {
     /* NODE* tmp = (NODE*)malloc(sizeof(NODE)); */
 
     (*tmp)->data = data;
+    (*tmp)->height = 1;
     (*tmp)->left = NULL;
     (*tmp)->right = NULL;
 }
@@ -33,6 +34,44 @@ NODE* search(NODE* node, int key) {
         return search(node->right, key);
     else
         return search(node->left, key);
+}
+
+int max(int a, int b) {
+    return (a > b) ? a : b;
+}
+int height(NODE* tmp) {
+    if (tmp == NULL)
+        return 0;
+    return tmp->height;
+}
+
+void rotate_right(NODE** node) {
+    //malloc for temp NODE inside function?
+    NODE* x = (*node)->left;
+    NODE* t2 = x->right;
+
+    //rotate
+    (*node)->left = t2;
+    x->right = *node;
+
+    //new heights
+    (*node)->height = max(height((*node)->left), height((*node)->right)) + 1;
+    x->height = max(height(x->left), height(x->right)) + 1;
+
+    *node = x;
+}
+
+void rotate_left(NODE** node) {
+    NODE* y = (*node)->right;
+    NODE* t2 = y->left;
+
+    (*node)->right = t2;
+    y->left = *node;
+
+    (*node)->height = max(height((*node)->left), height((*node)->right)) + 1;
+    y->height = max(height(y->left), height(y->right)) + 1;
+
+    *node = y;
 }
 
 void insert(NODE** node, int key) {
@@ -118,47 +157,37 @@ int main() {
 
     NODE* root = NULL;
 
-//    root = insert(root, 50);
-//    insert(root, 25);
-//    insert(root, 45);
-//    insert(root, 15);
-//
-//    insert(root, 30);
-//    insert(root, 20);
-//    insert(root, 40);
-//    insert(root, 70);
-//    insert(root, 60);
-//    insert(root, 80);
-//
-//    inorder(root);
-//    search(root, 98);
-//    search(root, 15);
-
     insert(&root, 50);
     insert(&root, 30);
     insert(&root, 20);
     insert(&root, 40);
     insert(&root, 70);
-    insert(&root, 60);
-    insert(&root, 80);
-    insert(&root, 35);
-    insert(&root, 45);
 
-    inorder(root);
-    printf("\n");
+    rotate_right(&root);
 
-    delete(&root, 20);
-    inorder(root);
-    printf("\n");
+    rotate_left(&root);
 
-    delete(&root, 30);
-    inorder(root);
-    printf("\n");
 
-    delete(&root, 50);
-
-    inorder(root);
-    printf("\n");
+//    insert(&root, 60);
+//    insert(&root, 80);
+//    insert(&root, 35);
+//    insert(&root, 45);
+//
+//    inorder(root);
+//    printf("\n");
+//
+//    delete(&root, 20);
+//    inorder(root);
+//    printf("\n");
+//
+//    delete(&root, 30);
+//    inorder(root);
+//    printf("\n");
+//
+//    delete(&root, 50);
+//
+//    inorder(root);
+//    printf("\n");
 
     return 0;
 }
