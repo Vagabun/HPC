@@ -10,7 +10,7 @@ typedef struct node {
 void new_node(NODE** tmp, int data) {
     //is it right malloc?
     //why not *tmp = malloc(sizeof(NODE*));
-    *tmp = (NODE*)malloc(sizeof(NODE)); // why explicit conversion (struct node*)?
+    *tmp = malloc(sizeof(NODE)); // why explicit conversion (struct node*)?
     /* NODE* tmp = (NODE*)malloc(sizeof(NODE)); */
 
     (*tmp)->data = data;
@@ -73,19 +73,26 @@ void delete(NODE** node, int key) {
             return;
         }
         else if ((*node)->left != NULL && (*node)->right == NULL) {
-            NODE* tmp = (*node)->left;
-            *node = tmp;
-            free((*node)->left);
-            (*node)->left = NULL;
+//            NODE* tmp = (*node)->left;
+//            *node = tmp;
+//            free((*node)->left);
+//            (*node)->left = NULL;
+
+            *node = (*node)->left;
 
             return;
         }
         else if ((*node)->right != NULL && (*node)->left == NULL) {
-            NODE* tmp = (*node)->right;
-            *node = tmp;
-            free((*node)->right);
-            (*node)->right = NULL;
+//            NODE* tmp = (*node)->right;
+//            free(*node);
+//            *node = tmp;
 
+//            *node = tmp;
+//            free((*node)->right);
+//            (*node)->right = NULL;
+
+            //free memory in this case?
+            *node = (*node)->right;
             return;
         }
         else if ((*node)->right != NULL && (*node)->left != NULL) {
@@ -134,6 +141,8 @@ int main() {
     insert(&root, 70);
     insert(&root, 60);
     insert(&root, 80);
+    insert(&root, 35);
+    insert(&root, 45);
 
     inorder(root);
     printf("\n");
