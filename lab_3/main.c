@@ -39,6 +39,7 @@ NODE* search(NODE* node, int key) {
 int max(int a, int b) {
     return (a > b) ? a : b;
 }
+
 int height(NODE* tmp) {
     if (tmp == NULL)
         return 0;
@@ -99,7 +100,6 @@ void insert(NODE** node, int key) {
     int balance = balance_factor(&(*node));
 
     //consider 4 cases of rotation
-
     //left left
     if (balance > 1 && key < (*node)->left->data)
         rotate_right(&(*node));
@@ -126,7 +126,6 @@ NODE* get_right_min(NODE* node) {
     return current;
 }
 
-// pass search as a parameter?
 void delete(NODE** node, int key) {
 
     if (*node == NULL)
@@ -138,32 +137,25 @@ void delete(NODE** node, int key) {
         delete(&(*node)->right, key);
     else {
         if ((*node)->left == NULL && (*node)->right == NULL) {
+            //is it correct free?
+
             free(*node);
             *node = NULL;
-
-            //is it correct free?
             return;
         }
         else if ((*node)->left != NULL && (*node)->right == NULL) {
-//            NODE* tmp = (*node)->left;
-//            *node = tmp;
-//            free((*node)->left);
-//            (*node)->left = NULL;
+            //free memory in this case???
 
             *node = (*node)->left;
-
             return;
         }
         else if ((*node)->right != NULL && (*node)->left == NULL) {
-//            NODE* tmp = (*node)->right;
-//            free(*node);
-//            *node = tmp;
 
-//            *node = tmp;
+            //free memory in this case (example)???
+//            NODE tmp = *(*node)->right;
 //            free((*node)->right);
-//            (*node)->right = NULL;
+//            **node = tmp;
 
-            //free memory in this case?
             *node = (*node)->right;
             return;
         }
@@ -176,12 +168,37 @@ void delete(NODE** node, int key) {
             return;
         }
     }
+
+    //update height for node after insert
+    (*node)->height = max(height((*node)->left), height((*node)->right)) + 1;
+
+    //get balance
+    int balance = balance_factor(&(*node));
+
+    //consider 4 cases of rotation
+    //left left
+    if (balance > 1 && balance_factor(&(*node)->left) >= 0)
+        rotate_right(&(*node));
+    //left right
+    if (balance > 1 && balance_factor(&(*node)->left) < 0) {
+        rotate_left(&(*node)->left);
+        rotate_right(&(*node));
+    }
+    //right right
+    if (balance < -1 && balance_factor(&(*node)->right) <= 0)
+        rotate_left(&(*node));
+    //right left
+    if (balance < -1 && balance_factor(&(*node)->right) > 0) {
+        rotate_right(&(*node)->right);
+        rotate_left(&(*node));
+    }
 }
 
 void inorder(NODE* node) {
     if (node != NULL) {
-        inorder(node->left);
         printf("%d ", node->data);
+        inorder(node->left);
+//        printf("%d ", node->data);
         inorder(node->right);
     }
 }
@@ -190,38 +207,28 @@ int main() {
 
     NODE* root = NULL;
 
-    insert(&root, 10);
-    insert(&root, 20);
-    insert(&root, 30);
-    insert(&root, 40);
-    insert(&root, 50);
-    insert(&root, 28);
-
-//    insert(&root, 50);
-//    insert(&root, 30);
+    // rotate test
+//    insert(&root, 10);
 //    insert(&root, 20);
+//    insert(&root, 30);
 //    insert(&root, 40);
-//    insert(&root, 70);
+//    insert(&root, 50);
+//    insert(&root, 28);
 
-
-//    insert(&root, 60);
-//    insert(&root, 80);
-//    insert(&root, 35);
-//    insert(&root, 45);
+    //delete test
+//    insert(&root, 9);
+//    insert(&root, 5);
+//    insert(&root, 10);
+//    insert(&root, 0);
+//    insert(&root, 6);
+//    insert(&root, 11);
+//    insert(&root, -1);
+//    insert(&root, 1);
+//    insert(&root, 2);
 //
 //    inorder(root);
 //    printf("\n");
-//
-//    delete(&root, 20);
-//    inorder(root);
-//    printf("\n");
-//
-//    delete(&root, 30);
-//    inorder(root);
-//    printf("\n");
-//
-//    delete(&root, 50);
-//
+//    delete(&root, 10);
 //    inorder(root);
 //    printf("\n");
 
