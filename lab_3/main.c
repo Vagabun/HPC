@@ -74,7 +74,15 @@ void rotate_left(NODE** node) {
     *node = y;
 }
 
+int balance_factor(NODE** node) {
+    //return balance factor between left and right subtree
+    if (*node == NULL)
+        return 0;
+    return height((*node)->left) - height((*node)->right);
+}
+
 void insert(NODE** node, int key) {
+    //typical bst insert
     if (*node == NULL) {
         new_node(node, key);
         return;
@@ -83,6 +91,31 @@ void insert(NODE** node, int key) {
         insert(&(*node)->left, key);
     else if (key > (*node)->data)
         insert(&(*node)->right, key);
+
+    //update height for node after insert
+    (*node)->height = max(height((*node)->left), height((*node)->right)) + 1;
+
+    //get balance
+    int balance = balance_factor(&(*node));
+
+    //consider 4 cases of rotation
+
+    //left left
+    if (balance > 1 && key < (*node)->left->data)
+        rotate_right(&(*node));
+    //left right
+    if (balance > 1 && key > (*node)->left->data) {
+        rotate_left(&(*node)->left);
+        rotate_right(&(*node));
+    }
+    //right right
+    if (balance < -1 && key > (*node)->right->data)
+        rotate_left(&(*node));
+    //right left
+    if (balance < -1 && key < (*node)->right->data) {
+        rotate_right(&(*node)->right);
+        rotate_left(&(*node));
+    }
 }
 
 NODE* get_right_min(NODE* node) {
@@ -157,15 +190,18 @@ int main() {
 
     NODE* root = NULL;
 
-    insert(&root, 50);
-    insert(&root, 30);
+    insert(&root, 10);
     insert(&root, 20);
+    insert(&root, 30);
     insert(&root, 40);
-    insert(&root, 70);
+    insert(&root, 50);
+    insert(&root, 28);
 
-    rotate_right(&root);
-
-    rotate_left(&root);
+//    insert(&root, 50);
+//    insert(&root, 30);
+//    insert(&root, 20);
+//    insert(&root, 40);
+//    insert(&root, 70);
 
 
 //    insert(&root, 60);
