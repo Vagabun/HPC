@@ -22,6 +22,7 @@ void rotate_left(NODE** node);
 int balance_factor(NODE** node);
 void insert(NODE** node, int key);
 NODE* get_right_min(NODE* node);
-void delete(NODE** node, int key);
+void delete(NODE** node, NODE** parent, int key);
 void inorder(NODE* node);
+
 #endif //LAB_3_AVL_TREE_H

@@ -121,44 +121,52 @@ NODE* get_right_min(NODE* node) {
     return current;
 }
 
-void delete(NODE** node, int key) {
+void delete(NODE** node, NODE** parent, int key) {
     if (*node == NULL)
         return;
 
     if (key < (*node)->data)
-        delete(&(*node)->left, key);
+        delete(&(*node)->left, &(*node), key);
     else if (key > (*node)->data)
-        delete(&(*node)->right, key);
+        delete(&(*node)->right, &(*node), key);
     else {
         if ((*node)->left == NULL && (*node)->right == NULL) {
-            //is it correct free?
-
             free(*node);
             *node = NULL;
             return;
         }
+        //parent's pointer to child that we want to delete reallocate to childes of our child
         else if ((*node)->left != NULL && (*node)->right == NULL) {
-            //free memory in this case???
-
-            *node = (*node)->left;
+            NODE* tmp = (*node)->left;
+            if ((*parent)->right == (*node)) {
+//                free((*node)->data); this is for void*
+                free(*node);
+                (*parent)->right = tmp;
+            }
+            else if ((*parent)->left == (*node)) {
+                free(*node);
+                (*parent)->left = tmp;
+            }
             return;
         }
         else if ((*node)->right != NULL && (*node)->left == NULL) {
-
-            //free memory in this case (example)???
-//            NODE tmp = *(*node)->right;
-//            free((*node)->right);
-//            **node = tmp;
-
-            *node = (*node)->right;
+            NODE* tmp = (*node)->right;
+            if ((*parent)->right == (*node)) {
+//                free((*node)->data); this is for void*
+                free(*node);
+                (*parent)->right = tmp;
+            }
+            else if ((*parent)->left == (*node)) {
+                free(*node);
+                (*parent)->left = tmp;
+            }
             return;
         }
         else if ((*node)->right != NULL && (*node)->left != NULL) {
             //get inorder successor
             NODE* tmp = get_right_min((*node)->right);
             (*node)->data = tmp->data;
-            delete(&(*node)->right, tmp->data);
-
+            delete(&(*node)->right, &(*node), tmp->data);
             return;
         }
     }
@@ -190,9 +198,9 @@ void delete(NODE** node, int key) {
 
 void inorder(NODE* node) {
     if (node != NULL) {
-//        printf("%d ", node->data);
-        inorder(node->left);
         printf("%d ", node->data);
+        inorder(node->left);
+//        printf("%d ", node->data);
         inorder(node->right);
 //        printf("%d ", node->data);
     }
