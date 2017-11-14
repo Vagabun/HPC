@@ -1,4 +1,5 @@
 #include "avl_tree.h"
+#include <stdio.h>
 
 //long long (or intptr_t) because on a lot of systems sizeof(long long) == sizeof(void*)
 //if int -> warning: cast from pointer to integer of different size
@@ -12,15 +13,26 @@ int compare_int(void* a, void* b) {
     return 0;
 }
 
+void cast_to_int(void* data) {
+    int a = *(int*)(&data);
+    printf("%d ", a);
+}
+
 int main() {
 
     avl_tree a;
-    init_tree(&a, compare_int);
+    init_tree(&a, compare_int, cast_to_int);
 
     //difference between (int*) and *(int*)???
     insert(&a, (int*)10);
     insert(&a, (int*)20);
-    insert(&a, (int*)5);
+    insert(&a, (int*)30);
+    insert(&a, (int*)40);
+    insert(&a, (int*)50);
+    insert(&a, (int*)25);
+    traversal(&a);
+    printf("\n");
+
 
     // rotate and delete test
 

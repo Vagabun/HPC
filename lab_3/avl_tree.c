@@ -2,9 +2,10 @@
 #include <stdlib.h>
 #include "avl_tree.h"
 
-void init_tree(avl_tree* tree, compare_f cmp) {
+void init_tree(avl_tree* tree, compare_f cmp, casting_f cst) {
     tree->root = NULL;
     tree->cmp = cmp;
+    tree->cst = cst;
 }
 
 void new_node(NODE** tmp, void* data) {
@@ -34,96 +35,79 @@ void insert_helper(NODE** node, void* key, compare_f cmp) {
                     //        insert_helper(&(*node)->right, key);
 
     //update height for node after insert
-//    (*node)->height = max(height((*node)->left), height((*node)->right)) + 1;
+    (*node)->height = max(height((*node)->left), height((*node)->right)) + 1;
 
     //get balance
-//    int balance = balance_factor(&(*node));
-//
-//    //consider 4 cases of rotation
-//    //left left
-//    if (balance > 1 && key < (*node)->left->data)
-//        rotate_right(&(*node));
-//    //left right
-//    if (balance > 1 && key > (*node)->left->data) {
-//        rotate_left(&(*node)->left);
-//        rotate_right(&(*node));
-//    }
-//    //right right
-//    if (balance < -1 && key > (*node)->right->data)
-//        rotate_left(&(*node));
-//    //right left
-//    if (balance < -1 && key < (*node)->right->data) {
-//        rotate_right(&(*node)->right);
-//        rotate_left(&(*node));
-//    }
+    int balance = balance_factor(&(*node));
+
+    //consider 4 cases of rotation
+    //left left
+    if (balance > 1 && !cmp(key, (*node)->left->data))
+        rotate_right(&(*node));
+    //left right
+    if (balance > 1 && cmp(key, (*node)->left->data)) {
+        rotate_left(&(*node)->left);
+        rotate_right(&(*node));
+    }
+    //right right
+    if (balance < -1 && cmp(key, (*node)->right->data))
+        rotate_left(&(*node));
+    //right left
+    if (balance < -1 && !cmp(key, (*node)->right->data)) {
+        rotate_right(&(*node)->right);
+        rotate_left(&(*node));
+    }
 }
 
 void insert(avl_tree* tree, void* key) {
     insert_helper(&tree->root, key, tree->cmp);
 }
 
-//NODE* search(NODE* node, int key) {
-//    if (node == NULL || node->data == key)
-//        return node;
-////    if (node == NULL) {
-////        printf("%d is not found\n", key);
-////        return;
-////    }
-////    else if (node->data == key) {
-////        printf("found %d\n", key);
-////        return;
-////    }
-//    if (key > node->data)
-//        return search(node->right, key);
-//    else
-//        return search(node->left, key);
-//}
-//
-//int max(int a, int b) {
-//    return (a > b) ? a : b;
-//}
-//
-//int height(NODE* tmp) {
-//    if (tmp == NULL)
-//        return 0;
-//    return tmp->height;
-//}
-//
-//void rotate_right(NODE** node) {
-//    //malloc for temp NODE inside function?
-//    NODE* x = (*node)->left;
-//    NODE* t2 = x->right;
-//
-//    //rotate
-//    (*node)->left = t2;
-//    x->right = *node;
-//
-//    //new heights
-//    (*node)->height = max(height((*node)->left), height((*node)->right)) + 1;
-//    x->height = max(height(x->left), height(x->right)) + 1;
-//
-//    *node = x;
-//}
-//
-//void rotate_left(NODE** node) {
-//    NODE* y = (*node)->right;
-//    NODE* t2 = y->left;
-//
-//    (*node)->right = t2;
-//    y->left = *node;
-//
-//    (*node)->height = max(height((*node)->left), height((*node)->right)) + 1;
-//    y->height = max(height(y->left), height(y->right)) + 1;
-//
-//    *node = y;
-//}
-//
-//int balance_factor(NODE** node) {
-//    //return balance factor between left and right subtree
-//    if (*node == NULL)
-//        return 0;
-//    return height((*node)->left) - height((*node)->right);
-//}
+int max(int a, int b) {
+    return (a > b) ? a : b;
+}
+
+int height(NODE* tmp) {
+    if (tmp == NULL)
+        return 0;
+    return tmp->height;
+}
+
+void rotate_right(NODE** node) {
+    //malloc for temp NODE inside function?
+    NODE* x = (*node)->left;
+    NODE* t2 = x->right;
+
+    //rotate
+    (*node)->left = t2;
+    x->right = *node;
+
+    //new heights
+    (*node)->height = max(height((*node)->left), height((*node)->right)) + 1;
+    x->height = max(height(x->left), height(x->right)) + 1;
+
+    *node = x;
+}
+
+void rotate_left(NODE** node) {
+    NODE* y = (*node)->right;
+    NODE* t2 = y->left;
+
+    (*node)->right = t2;
+    y->left = *node;
+
+    (*node)->height = max(height((*node)->left), height((*node)->right)) + 1;
+    y->height = max(height(y->left), height(y->right)) + 1;
+
+    *node = y;
+}
+
+int balance_factor(NODE** node) {
+    //return balance factor between left and right subtree
+    if (*node == NULL)
+        return 0;
+    return height((*node)->left) - height((*node)->right);
+}
 //
 //NODE* get_right_min(NODE* node) {
 //    NODE* current = node;
@@ -208,12 +192,33 @@ void insert(avl_tree* tree, void* key) {
 //    }
 //}
 //
-//void inorder(NODE* node) {
-//    if (node != NULL) {
-//        printf("%d ", node->data);
-//        inorder(node->left);
-////        printf("%d ", node->data);
-//        inorder(node->right);
-////        printf("%d ", node->data);
-//    }
+//NODE* search(NODE* node, int key) {
+//    if (node == NULL || node->data == key)
+//        return node;
+////    if (node == NULL) {
+////        printf("%d is not found\n", key);
+////        return;
+////    }
+////    else if (node->data == key) {
+////        printf("found %d\n", key);
+////        return;
+////    }
+//    if (key > node->data)
+//        return search(node->right, key);
+//    else
+//        return search(node->left, key);
 //}
+//
+void traversal_helper(NODE* node, casting_f cst) {
+    if (node != NULL) {
+        cst(node->data);
+        traversal_helper(node->left, cst);
+//        printf("%d ", node->data);
+        traversal_helper(node->right, cst);
+//        printf("%d ", node->data);
+    }
+}
+
+void traversal(avl_tree* tree) {
+    traversal_helper(tree->root, tree->cst);
+}
