@@ -1,13 +1,30 @@
-#include <stdio.h>
-#include <stdlib.h>
 #include "avl_tree.h"
+
+//long long (or intptr_t) because on a lot of systems sizeof(long long) == sizeof(void*)
+//if int -> warning: cast from pointer to integer of different size
+int compare_int(void* a, void* b) {
+//    int i_a = (intptr_t*)a;
+//    int i_b = (intptr_t)b;
+    int i_a = *(int*)(&a);
+    int i_b = *(int*)(&b);
+    if (i_a > i_b)
+        return 1;
+    return 0;
+}
 
 int main() {
 
-    NODE* root = NULL;
+    avl_tree a;
+    init_tree(&a, compare_int);
+
+    //difference between (int*) and *(int*)???
+    insert(&a, (int*)10);
+    insert(&a, (int*)20);
+    insert(&a, (int*)5);
 
     // rotate and delete test
 
+//    NODE* root = NULL;
 //    insert(&root, 30);
 //    insert(&root, 10);
 //    insert(&root, 20);
