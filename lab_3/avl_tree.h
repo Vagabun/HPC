@@ -3,6 +3,7 @@
 
 typedef int (*compare_f)(void* a, void* b);
 typedef void (*print_f)(void* data);
+typedef void (*delete_f)(void* data);
 
 typedef struct node {
     void* data;
@@ -15,6 +16,7 @@ typedef struct {
     NODE* root;
     compare_f cmp;
     print_f prnt;
+    delete_f del;
 } avl_tree;
 
 void init_tree(avl_tree* tree, compare_f cmp, print_f prnt);
@@ -28,7 +30,8 @@ void rotate_right(NODE** node);
 void rotate_left(NODE** node);
 int balance_factor(NODE** node);
 NODE* get_right_min(NODE* node);
-void delete(NODE** node, NODE** parent, int key);
+void delete_helper(NODE** node, NODE** parent, void* key, compare_f cmp, delete_f del);
+void delete(avl_tree* tree, void* key);
 void traversal_helper(NODE* node, print_f prnt);
 void traversal(avl_tree* tree);
 

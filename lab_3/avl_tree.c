@@ -27,7 +27,7 @@ void insert_helper(NODE** node, void* key, compare_f cmp) {
     }
     if (cmp(key, (*node)->data))
         insert_helper(&(*node)->right, key, cmp);
-    else
+    else if (cmp(key, (*node)->data) == 0)
         insert_helper(&(*node)->left, key, cmp);
                     //    if (key < (*node)->data)
                     //        insert_helper(&(*node)->left, key);
@@ -108,89 +108,94 @@ int balance_factor(NODE** node) {
         return 0;
     return height((*node)->left) - height((*node)->right);
 }
-//
-//NODE* get_right_min(NODE* node) {
-//    NODE* current = node;
-//    while (current->left != NULL) {
-//        current = current->left;
-//    }
-//    return current;
-//}
-//
-//void delete(NODE** node, NODE** parent, int key) {
-//    if (*node == NULL)
-//        return;
-//
-//    if (key < (*node)->data)
-//        delete(&(*node)->left, &(*node), key);
-//    else if (key > (*node)->data)
-//        delete(&(*node)->right, &(*node), key);
-//    else {
-//        if ((*node)->left == NULL && (*node)->right == NULL) {
-//            free(*node);
-//            *node = NULL;
-//            return;
-//        }
-//        //parent's pointer to child that we want to delete reallocate to childes of our child
-//        else if ((*node)->left != NULL && (*node)->right == NULL) {
-//            NODE* tmp = (*node)->left;
-//            if ((*parent)->right == (*node)) {
-////                free((*node)->data); this is for void*
-//                free(*node);
-//                (*parent)->right = tmp;
-//            }
-//            else if ((*parent)->left == (*node)) {
-//                free(*node);
-//                (*parent)->left = tmp;
-//            }
-//            return;
-//        }
-//        else if ((*node)->right != NULL && (*node)->left == NULL) {
-//            NODE* tmp = (*node)->right;
-//            if ((*parent)->right == (*node)) {
-////                free((*node)->data); this is for void*
-//                free(*node);
-//                (*parent)->right = tmp;
-//            }
-//            else if ((*parent)->left == (*node)) {
-//                free(*node);
-//                (*parent)->left = tmp;
-//            }
-//            return;
-//        }
-//        else if ((*node)->right != NULL && (*node)->left != NULL) {
-//            //get inorder successor
-//            NODE* tmp = get_right_min((*node)->right);
-//            (*node)->data = tmp->data;
-//            delete(&(*node)->right, &(*node), tmp->data);
-//            return;
-//        }
-//    }
-//
-//    //update height for node after insert
-//    (*node)->height = max(height((*node)->left), height((*node)->right)) + 1;
-//
-//    //get balance
-//    int balance = balance_factor(&(*node));
-//
-//    //consider 4 cases of rotation
-//    //left left
-//    if (balance > 1 && balance_factor(&(*node)->left) >= 0)
-//        rotate_right(&(*node));
-//    //left right
-//    if (balance > 1 && balance_factor(&(*node)->left) < 0) {
-//        rotate_left(&(*node)->left);
-//        rotate_right(&(*node));
-//    }
-//    //right right
-//    if (balance < -1 && balance_factor(&(*node)->right) <= 0)
-//        rotate_left(&(*node));
-//    //right left
-//    if (balance < -1 && balance_factor(&(*node)->right) > 0) {
-//        rotate_right(&(*node)->right);
-//        rotate_left(&(*node));
-//    }
-//}
+
+NODE* get_right_min(NODE* node) {
+    NODE* current = node;
+    while (current->left != NULL) {
+        current = current->left;
+    }
+    return current;
+}
+void delete(avl_tree* tree, void* key) {
+    delete_helper(&tree->root, &tree->root, key, tree->cmp, tree->del);
+}
+
+void delete_helper(NODE** node, NODE** parent, void* key, compare_f cmp, delete_f del) {
+    if (*node == NULL)
+        return;
+
+    if (cmp(key, (*node)->data) == 0)
+        delete_helper(&(*node)->left, &(*node), key, cmp, del);
+    else if (cmp(key, (*node)->data))
+        delete_helper(&(*node)->right, &(*node), key, cmp, del);
+    //add explicit condition here?
+    else {
+        if ((*node)->left == NULL && (*node)->right == NULL) {
+            del((*node)->data);
+            free(*node);
+            *node = NULL;
+            return;
+        }
+        //parent's pointer to child that we want to delete reallocate to childes of our child
+        else if ((*node)->left != NULL && (*node)->right == NULL) {
+            NODE* tmp = (*node)->left;
+            del((*node)->data); //this is for void*
+            if ((*parent)->right == (*node)) {
+                free(*node);
+                (*parent)->right = tmp;
+            }
+            else if ((*parent)->left == (*node)) {
+                free(*node);
+                (*parent)->left = tmp;
+            }
+            return;
+        }
+        else if ((*node)->right != NULL && (*node)->left == NULL) {
+            NODE* tmp = (*node)->right;
+            del((*node)->data); //this is for void*
+            if ((*parent)->right == (*node)) {
+                free(*node);
+                (*parent)->right = tmp;
+            }
+            else if ((*parent)->left == (*node)) {
+                free(*node);
+                (*parent)->left = tmp;
+            }
+            return;
+        }
+        else if ((*node)->right != NULL && (*node)->left != NULL) {
+            //get inorder successor
+            NODE* tmp = get_right_min((*node)->right);
+            (*node)->data = tmp->data;
+            delete_helper(&(*node)->right, &(*node), tmp->data, cmp, del);
+            return;
+        }
+    }
+
+    //update height for node after insert
+    (*node)->height = max(height((*node)->left), height((*node)->right)) + 1;
+
+    //get balance
+    int balance = balance_factor(&(*node));
+
+    //consider 4 cases of rotation
+    //left left
+    if (balance > 1 && balance_factor(&(*node)->left) >= 0)
+        rotate_right(&(*node));
+    //left right
+    if (balance > 1 && balance_factor(&(*node)->left) < 0) {
+        rotate_left(&(*node)->left);
+        rotate_right(&(*node));
+    }
+    //right right
+    if (balance < -1 && balance_factor(&(*node)->right) <= 0)
+        rotate_left(&(*node));
+    //right left
+    if (balance < -1 && balance_factor(&(*node)->right) > 0) {
+        rotate_right(&(*node)->right);
+        rotate_left(&(*node));
+    }
+}
 //
 //NODE* search(NODE* node, int key) {
 //    if (node == NULL || node->data == key)
@@ -213,9 +218,9 @@ void traversal_helper(NODE* node, print_f prnt) {
     if (node != NULL) {
         prnt(node->data);
         traversal_helper(node->left, prnt);
-//        printf("%d ", node->data);
+//        prnt(node->data);
         traversal_helper(node->right, prnt);
-//        printf("%d ", node->data);
+//        prnt(node->data);
     }
 }
 

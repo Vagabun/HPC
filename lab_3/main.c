@@ -27,6 +27,7 @@ int main() {
     init_tree(&a, compare_int, print_tree);
 
     //difference between (int*) and *(int*)???
+    //insert and rotate test
     insert(&a, (int*)10);
     insert(&a, (int*)20);
     insert(&a, (int*)30);
