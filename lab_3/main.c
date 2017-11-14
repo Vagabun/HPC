@@ -8,12 +8,15 @@ int compare_int(void* a, void* b) {
 //    int i_b = (intptr_t)b;
     int i_a = *(int*)(&a);
     int i_b = *(int*)(&b);
+    if (i_a == i_b)
+        return -1;
     if (i_a > i_b)
         return 1;
-    return 0;
+    else
+        return 0;
 }
 
-void cast_to_int(void* data) {
+void print_tree(void* data) {
     int a = *(int*)(&data);
     printf("%d ", a);
 }
@@ -21,7 +24,7 @@ void cast_to_int(void* data) {
 int main() {
 
     avl_tree a;
-    init_tree(&a, compare_int, cast_to_int);
+    init_tree(&a, compare_int, print_tree);
 
     //difference between (int*) and *(int*)???
     insert(&a, (int*)10);

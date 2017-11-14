@@ -2,10 +2,10 @@
 #include <stdlib.h>
 #include "avl_tree.h"
 
-void init_tree(avl_tree* tree, compare_f cmp, casting_f cst) {
+void init_tree(avl_tree* tree, compare_f cmp, print_f prnt) {
     tree->root = NULL;
     tree->cmp = cmp;
-    tree->cst = cst;
+    tree->prnt = prnt;
 }
 
 void new_node(NODE** tmp, void* data) {
@@ -42,7 +42,7 @@ void insert_helper(NODE** node, void* key, compare_f cmp) {
 
     //consider 4 cases of rotation
     //left left
-    if (balance > 1 && !cmp(key, (*node)->left->data))
+    if (balance > 1 && cmp(key, (*node)->left->data) == 0)
         rotate_right(&(*node));
     //left right
     if (balance > 1 && cmp(key, (*node)->left->data)) {
@@ -53,7 +53,7 @@ void insert_helper(NODE** node, void* key, compare_f cmp) {
     if (balance < -1 && cmp(key, (*node)->right->data))
         rotate_left(&(*node));
     //right left
-    if (balance < -1 && !cmp(key, (*node)->right->data)) {
+    if (balance < -1 && cmp(key, (*node)->right->data) == 0) {
         rotate_right(&(*node)->right);
         rotate_left(&(*node));
     }
@@ -209,16 +209,16 @@ int balance_factor(NODE** node) {
 //        return search(node->left, key);
 //}
 //
-void traversal_helper(NODE* node, casting_f cst) {
+void traversal_helper(NODE* node, print_f prnt) {
     if (node != NULL) {
-        cst(node->data);
-        traversal_helper(node->left, cst);
+        prnt(node->data);
+        traversal_helper(node->left, prnt);
 //        printf("%d ", node->data);
-        traversal_helper(node->right, cst);
+        traversal_helper(node->right, prnt);
 //        printf("%d ", node->data);
     }
 }
 
 void traversal(avl_tree* tree) {
-    traversal_helper(tree->root, tree->cst);
+    traversal_helper(tree->root, tree->prnt);
 }
