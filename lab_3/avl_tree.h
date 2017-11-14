@@ -19,7 +19,7 @@ typedef struct {
     delete_f del;
 } avl_tree;
 
-void init_tree(avl_tree* tree, compare_f cmp, print_f prnt);
+void init_tree(avl_tree* tree, compare_f cmp, print_f prnt, delete_f del);
 void new_node(NODE** tmp, void* data);
 void insert_helper(NODE** node, void* key, compare_f cmp);
 void insert(avl_tree* tree, void* key);

@@ -2,15 +2,16 @@
 #include <stdlib.h>
 #include "avl_tree.h"
 
-void init_tree(avl_tree* tree, compare_f cmp, print_f prnt) {
+void init_tree(avl_tree* tree, compare_f cmp, print_f prnt, delete_f del) {
     tree->root = NULL;
     tree->cmp = cmp;
     tree->prnt = prnt;
+    tree->del = del;
 }
 
 void new_node(NODE** tmp, void* data) {
     //is it right malloc?
-    *tmp = malloc(sizeof(NODE));
+    *tmp = (NODE*)malloc(sizeof(NODE));
     (*tmp)->data = malloc(sizeof(void*));
 
     (*tmp)->data = data;
@@ -25,7 +26,7 @@ void insert_helper(NODE** node, void* key, compare_f cmp) {
         new_node(node, key);
         return;
     }
-    if (cmp(key, (*node)->data))
+    if (cmp(key, (*node)->data) == 1)
         insert_helper(&(*node)->right, key, cmp);
     else if (cmp(key, (*node)->data) == 0)
         insert_helper(&(*node)->left, key, cmp);
@@ -45,12 +46,12 @@ void insert_helper(NODE** node, void* key, compare_f cmp) {
     if (balance > 1 && cmp(key, (*node)->left->data) == 0)
         rotate_right(&(*node));
     //left right
-    if (balance > 1 && cmp(key, (*node)->left->data)) {
+    if (balance > 1 && cmp(key, (*node)->left->data) == 1) {
         rotate_left(&(*node)->left);
         rotate_right(&(*node));
     }
     //right right
-    if (balance < -1 && cmp(key, (*node)->right->data))
+    if (balance < -1 && cmp(key, (*node)->right->data) == 1)
         rotate_left(&(*node));
     //right left
     if (balance < -1 && cmp(key, (*node)->right->data) == 0) {
@@ -126,7 +127,7 @@ void delete_helper(NODE** node, NODE** parent, void* key, compare_f cmp, delete_
 
     if (cmp(key, (*node)->data) == 0)
         delete_helper(&(*node)->left, &(*node), key, cmp, del);
-    else if (cmp(key, (*node)->data))
+    else if (cmp(key, (*node)->data) == 1)
         delete_helper(&(*node)->right, &(*node), key, cmp, del);
     //add explicit condition here?
     else {
