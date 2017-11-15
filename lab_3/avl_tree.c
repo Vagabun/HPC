@@ -10,10 +10,7 @@ void init_tree(avl_tree* tree, compare_f cmp, print_f prnt, delete_f del) {
 }
 
 void new_node(NODE** tmp, void* data) {
-    //is it right malloc?
-    *tmp = (NODE*)malloc(sizeof(NODE));
-    (*tmp)->data = malloc(sizeof(void*));
-
+    *tmp = malloc(sizeof(NODE));
     (*tmp)->data = data;
     (*tmp)->height = 1;
     (*tmp)->left = NULL;
@@ -30,11 +27,6 @@ void insert_helper(NODE** node, void* key, compare_f cmp) {
         insert_helper(&(*node)->right, key, cmp);
     else if (cmp(key, (*node)->data) == 0)
         insert_helper(&(*node)->left, key, cmp);
-                    //    if (key < (*node)->data)
-                    //        insert_helper(&(*node)->left, key);
-                    //    else if (key > (*node)->data)
-                    //        insert_helper(&(*node)->right, key);
-
     //update height for node after insert
     (*node)->height = max(height((*node)->left), height((*node)->right)) + 1;
 
@@ -75,7 +67,6 @@ int height(NODE* tmp) {
 }
 
 void rotate_right(NODE** node) {
-    //malloc for temp NODE inside function?
     NODE* x = (*node)->left;
     NODE* t2 = x->right;
 
@@ -94,9 +85,11 @@ void rotate_left(NODE** node) {
     NODE* y = (*node)->right;
     NODE* t2 = y->left;
 
+    //rotate
     (*node)->right = t2;
     y->left = *node;
 
+    //new heights
     (*node)->height = max(height((*node)->left), height((*node)->right)) + 1;
     y->height = max(height(y->left), height(y->right)) + 1;
 
@@ -111,6 +104,7 @@ int balance_factor(NODE** node) {
 }
 
 NODE* get_right_min(NODE* node) {
+    //get minimum in a right subtree
     NODE* current = node;
     while (current->left != NULL) {
         current = current->left;
@@ -129,7 +123,6 @@ void delete_helper(NODE** node, NODE** parent, void* key, compare_f cmp, delete_
         delete_helper(&(*node)->left, &(*node), key, cmp, del);
     else if (cmp(key, (*node)->data) == 1)
         delete_helper(&(*node)->right, &(*node), key, cmp, del);
-    //add explicit condition here?
     else {
         if ((*node)->left == NULL && (*node)->right == NULL) {
             del((*node)->data);

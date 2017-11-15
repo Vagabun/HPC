@@ -4,11 +4,10 @@
 
 //long long (or intptr_t) because on a lot of systems sizeof(long long) == sizeof(void*)
 //if int -> warning: cast from pointer to integer of different size
+
 int compare_int(void* a, void* b) {
-//    int i_a = (intptr_t*)a;
-//    int i_b = (intptr_t)b;
-    int i_a = *(int*)(&a);
-    int i_b = *(int*)(&b);
+    int i_a = *(int*)a;
+    int i_b = *(int*)b;
     if (i_a == i_b)
         return -1;
     if (i_a > i_b)
@@ -18,67 +17,66 @@ int compare_int(void* a, void* b) {
 }
 
 void print_tree(void* data) {
-    int a = *(int*)(&data);
+    int a = *(int*)data;
     printf("%d ", a);
 }
 
+//any need of this type?
+//void* mem_int(void* data) {
+//    int* mem = malloc(sizeof(int));
+//    *mem = *(int*)data;
+//
+//    free(mem);
+//    return mem;
+//}
+
+int* copy(int data) {
+    int* mem = malloc(sizeof(int));
+    *mem = data;
+//    free(mem);
+    return mem;
+}
+
 void del_int(void* data) {
-    int i = 1;
     free(data);
 }
 
 int main() {
-
-//    int* a = (int*)6;
-//    void* m = malloc(sizeof())
 
     avl_tree a;
     init_tree(&a, compare_int, print_tree, del_int);
 
     //difference between (int*) and *(int*)???
     //insert and rotate test
-    insert(&a, (int*)10);
-    insert(&a, (int*)20);
-    insert(&a, (int*)30);
-//    insert(&a, (int*)40);
-//    insert(&a, (int*)50);
-//    insert(&a, (int*)25);
 
-    delete(&a, (int*)30);
+    insert(&a, copy(10));
+    insert(&a, copy(20));
+    insert(&a, copy(10));
+    insert(&a, copy(30));
+    insert(&a, copy(30));
+    insert(&a, copy(40));
+    insert(&a, copy(50));
+    insert(&a, copy(25));
+
+
+    //delete test
+    insert(&a, copy(9));
+    insert(&a, copy(5));
+    insert(&a, copy(10));
+    insert(&a, copy(0));
+    insert(&a, copy(6));
+    insert(&a, copy(11));
+    insert(&a, copy(-1));
+    insert(&a, copy(1));
+    insert(&a, copy(2));
 
     traversal(&a);
     printf("\n");
 
+    delete(&a, copy(10));
 
-    // rotate and delete test
-
-//    NODE* root = NULL;
-//    insert(&root, 30);
-//    insert(&root, 10);
-//    insert(&root, 20);
-//    insert(&root, 28);
-//    insert(&root, 40);
-//    insert(&root, 50);
-//    insert(&root, 60);
-//    insert(&root, 70);
-//    printf("\n");
-//    delete(&root, &root, 60);
-
-    //delete test
-//    insert(&root, 9);
-//    insert(&root, 5);
-//    insert(&root, 10);
-//    insert(&root, 0);
-//    insert(&root, 6);
-//    insert(&root, 11);
-//    insert(&root, -1);
-//    insert(&root, 1);
-//    insert(&root, 2);
-//    inorder(root);
-//    printf("\n");
-//    delete(&root, &root, 10);
-//    inorder(root);
-//    printf("\n");
+    traversal(&a);
+    printf("\n");
 
     return 0;
 }
