@@ -1,5 +1,3 @@
-#include <stdio.h>
-#include <stdlib.h>
 #include "avl_tree.h"
 
 void init_tree(avl_tree* tree, compare_f cmp, print_f prnt, delete_f del) {
@@ -190,34 +188,52 @@ void delete_helper(NODE** node, NODE** parent, void* key, compare_f cmp, delete_
         rotate_left(&(*node));
     }
 }
-//
-//NODE* search(NODE* node, int key) {
-//    if (node == NULL || node->data == key)
-//        return node;
-////    if (node == NULL) {
-////        printf("%d is not found\n", key);
-////        return;
-////    }
-////    else if (node->data == key) {
-////        printf("found %d\n", key);
-////        return;
-////    }
-//    if (key > node->data)
-//        return search(node->right, key);
-//    else
-//        return search(node->left, key);
-//}
-//
-void traversal_helper(NODE* node, print_f prnt) {
+
+NODE* search_helper(NODE* node, void* key) {
+    if (node == NULL || node->data == key)
+        return node;
+    if (key > node->data)
+        return search_helper(node->right, key);
+    else
+        return search_helper(node->left, key);
+}
+
+void search(avl_tree* tree, void* data) {
+    search_helper(tree->root, data);
+}
+
+void preorder_traversal_helper(NODE* node, print_f prnt) {
     if (node != NULL) {
         prnt(node->data);
-        traversal_helper(node->left, prnt);
-//        prnt(node->data);
-        traversal_helper(node->right, prnt);
-//        prnt(node->data);
+        preorder_traversal_helper(node->left, prnt);
+        preorder_traversal_helper(node->right, prnt);
     }
 }
 
-void traversal(avl_tree* tree) {
-    traversal_helper(tree->root, tree->prnt);
+void inorder_traversal_helper(NODE* node, print_f prnt) {
+    if (node != NULL) {
+        inorder_traversal_helper(node->left, prnt);
+        prnt(node->data);
+        inorder_traversal_helper(node->right, prnt);
+    }
+}
+
+void postorder_traversal_helper(NODE* node, print_f prnt) {
+    if (node != NULL) {
+        postorder_traversal_helper(node->left, prnt);
+        postorder_traversal_helper(node->right, prnt);
+        prnt(node->data);
+    }
+}
+
+void preorder_traversal(avl_tree* tree) {
+    preorder_traversal_helper(tree->root, tree->prnt);
+}
+
+void inorder_traversal(avl_tree* tree) {
+    inorder_traversal_helper(tree->root, tree->prnt);
+}
+
+void postorder_traversal(avl_tree* tree) {
+    postorder_traversal_helper(tree->root, tree->prnt);
 }

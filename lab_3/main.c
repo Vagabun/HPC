@@ -1,6 +1,4 @@
 #include "avl_tree.h"
-#include <stdio.h>
-#include <stdlib.h>
 
 //long long (or intptr_t) because on a lot of systems sizeof(long long) == sizeof(void*)
 //if int -> warning: cast from pointer to integer of different size
@@ -21,7 +19,7 @@ void print_tree(void* data) {
     printf("%d ", a);
 }
 
-//any need of this type?
+//any need of function like?
 //void* mem_int(void* data) {
 //    int* mem = malloc(sizeof(int));
 //    *mem = *(int*)data;
@@ -58,7 +56,6 @@ int main() {
     insert(&a, copy(50));
     insert(&a, copy(25));
 
-
     //delete test
     insert(&a, copy(9));
     insert(&a, copy(5));
@@ -70,13 +67,17 @@ int main() {
     insert(&a, copy(1));
     insert(&a, copy(2));
 
-    traversal(&a);
+    preorder_traversal(&a);
     printf("\n");
 
     delete(&a, copy(10));
 
-    traversal(&a);
+    preorder_traversal(&a);
     printf("\n");
 
+    inorder_traversal(&a);
+    printf("\n");
+    postorder_traversal(&a);
+    printf("\n");
     return 0;
 }

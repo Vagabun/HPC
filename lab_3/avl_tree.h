@@ -1,5 +1,7 @@
 #ifndef LAB_3_AVL_TREE_H
 #define LAB_3_AVL_TREE_H
+#include <stdio.h>
+#include <stdlib.h>
 
 //ifndef?
 
@@ -43,8 +45,13 @@ void delete(avl_tree* tree, void* key);
 //service function for delete
 NODE* get_right_min(NODE* node);
 //traversal functions and search in tree
-NODE* search(NODE* node, void* key);
-void traversal_helper(NODE* node, print_f prnt);
-void traversal(avl_tree* tree);
+void search(avl_tree* tree, void* data);
+NODE* search_helper(NODE* node, void* key);
+void preorder_traversal_helper(NODE* node, print_f prnt);
+void inorder_traversal_helper(NODE* node, print_f prnt);
+void postorder_traversal_helper(NODE* node, print_f prnt);
+void preorder_traversal(avl_tree* tree);
+void inorder_traversal(avl_tree* tree);
+void postorder_traversal(avl_tree* tree);
 
 #endif //LAB_3_AVL_TREE_H
