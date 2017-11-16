@@ -3,11 +3,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-//ifndef?
-
 typedef int (*compare_f)(void* a, void* b);
 typedef void (*print_f)(void* data);
 typedef void (*delete_f)(void* data);
+typedef void* (*copy_f)(void* data);
 
 typedef struct node {
     void* data;
@@ -21,10 +20,11 @@ typedef struct {
     compare_f cmp;
     print_f prnt;
     delete_f del;
+    copy_f cp;
 } avl_tree;
 
 //initialization
-void init_tree(avl_tree* tree, compare_f cmp, print_f prnt, delete_f del);
+void init_tree(avl_tree* tree, compare_f cmp, print_f prnt, delete_f del, copy_f cp);
 //creating new node
 void new_node(NODE** tmp, void* data);
 //insert data into tree
@@ -38,8 +38,8 @@ int balance_factor(NODE** node);
 //rotate functions
 void rotate_right(NODE** node);
 void rotate_left(NODE** node);
-//delete data from tree
-void delete_helper(NODE** node, NODE** parent, void* key, compare_f cmp, delete_f del);
+//delete selected data from tree
+void delete_helper(NODE** node, NODE** parent, void* key, compare_f cmp, delete_f del, copy_f cp);
 //wrapping function for delete
 void delete(avl_tree* tree, void* key);
 //service function for delete

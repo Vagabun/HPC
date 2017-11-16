@@ -1,10 +1,11 @@
 #include "avl_tree.h"
 
-void init_tree(avl_tree* tree, compare_f cmp, print_f prnt, delete_f del) {
+void init_tree(avl_tree* tree, compare_f cmp, print_f prnt, delete_f del, copy_f cp) {
     tree->root = NULL;
     tree->cmp = cmp;
     tree->prnt = prnt;
     tree->del = del;
+    tree->cp = cp;
 }
 
 void new_node(NODE** tmp, void* data) {
@@ -110,17 +111,17 @@ NODE* get_right_min(NODE* node) {
     return current;
 }
 void delete(avl_tree* tree, void* key) {
-    delete_helper(&tree->root, &tree->root, key, tree->cmp, tree->del);
+    delete_helper(&tree->root, &tree->root, key, tree->cmp, tree->del, tree->cp);
 }
 
-void delete_helper(NODE** node, NODE** parent, void* key, compare_f cmp, delete_f del) {
+void delete_helper(NODE** node, NODE** parent, void* key, compare_f cmp, delete_f del, copy_f cp) {
     if (*node == NULL)
         return;
 
     if (cmp(key, (*node)->data) == 0)
-        delete_helper(&(*node)->left, &(*node), key, cmp, del);
+        delete_helper(&(*node)->left, &(*node), key, cmp, del, cp);
     else if (cmp(key, (*node)->data) == 1)
-        delete_helper(&(*node)->right, &(*node), key, cmp, del);
+        delete_helper(&(*node)->right, &(*node), key, cmp, del, cp);
     else {
         if ((*node)->left == NULL && (*node)->right == NULL) {
             del((*node)->data);
@@ -140,6 +141,12 @@ void delete_helper(NODE** node, NODE** parent, void* key, compare_f cmp, delete_
                 free(*node);
                 (*parent)->left = tmp;
             }
+            //if we delete root
+            else {
+                rotate_right(&(*node));
+                free((*node)->right);
+                (*node)->right = NULL;
+            }
             return;
         }
         else if ((*node)->right != NULL && (*node)->left == NULL) {
@@ -153,14 +160,19 @@ void delete_helper(NODE** node, NODE** parent, void* key, compare_f cmp, delete_
                 free(*node);
                 (*parent)->left = tmp;
             }
+            //if we delete root
+            else {
+                rotate_right(&(*node));
+                free((*node)->left);
+                (*node)->left = NULL;
+            }
             return;
         }
         else if ((*node)->right != NULL && (*node)->left != NULL) {
             //get inorder successor
             NODE* tmp = get_right_min((*node)->right);
-            (*node)->data = tmp->data;
-            delete_helper(&(*node)->right, &(*node), tmp->data, cmp, del);
-            return;
+            (*node)->data = cp(tmp->data);
+            delete_helper(&(*node)->right, &(*node), tmp->data, cmp, del, cp);
         }
     }
 

@@ -1,8 +1,5 @@
 #include "avl_tree.h"
 
-//long long (or intptr_t) because on a lot of systems sizeof(long long) == sizeof(void*)
-//if int -> warning: cast from pointer to integer of different size
-
 int compare_int(void* a, void* b) {
     int i_a = *(int*)a;
     int i_b = *(int*)b;
@@ -15,23 +12,21 @@ int compare_int(void* a, void* b) {
 }
 
 void print_tree(void* data) {
-    int a = *(int*)data;
-    printf("%d ", a);
+    if (data != NULL) {
+        int a = *(int*)data;
+        printf("%d ", a);
+    }
 }
 
-//any need of function like?
-//void* mem_int(void* data) {
-//    int* mem = malloc(sizeof(int));
-//    *mem = *(int*)data;
-//
-//    free(mem);
-//    return mem;
-//}
-
-int* copy(int data) {
+void* copy(int data) {
     int* mem = malloc(sizeof(int));
     *mem = data;
-//    free(mem);
+    return mem;
+}
+
+void* copy_int(void* data) {
+    int* mem = malloc(sizeof(int));
+    *mem = *(int*)data;
     return mem;
 }
 
@@ -42,42 +37,29 @@ void del_int(void* data) {
 int main() {
 
     avl_tree a;
-    init_tree(&a, compare_int, print_tree, del_int);
+    init_tree(&a, compare_int, print_tree, del_int, copy_int);
 
-    //difference between (int*) and *(int*)???
     //insert and rotate test
-
     insert(&a, copy(10));
     insert(&a, copy(20));
-    insert(&a, copy(10));
-    insert(&a, copy(30));
     insert(&a, copy(30));
     insert(&a, copy(40));
     insert(&a, copy(50));
     insert(&a, copy(25));
 
+    inorder_traversal(&a);
+    printf("\n");
+
     //delete test
-    insert(&a, copy(9));
-    insert(&a, copy(5));
-    insert(&a, copy(10));
-    insert(&a, copy(0));
-    insert(&a, copy(6));
-    insert(&a, copy(11));
-    insert(&a, copy(-1));
-    insert(&a, copy(1));
-    insert(&a, copy(2));
-
-    preorder_traversal(&a);
-    printf("\n");
-
     delete(&a, copy(10));
-
-    preorder_traversal(&a);
-    printf("\n");
+    delete(&a, copy(20));
+    delete(&a, copy(30));
+    delete(&a, copy(40));
+    delete(&a, copy(50));
+    delete(&a, copy(25));
 
     inorder_traversal(&a);
     printf("\n");
-    postorder_traversal(&a);
-    printf("\n");
+
     return 0;
 }
