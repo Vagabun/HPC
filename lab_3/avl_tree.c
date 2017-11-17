@@ -112,6 +112,7 @@ NODE* get_right_min(NODE* node) {
 }
 void delete(avl_tree* tree, void* key) {
     delete_helper(&tree->root, &tree->root, key, tree->cmp, tree->del, tree->cp);
+    tree->del(key);
 }
 
 void delete_helper(NODE** node, NODE** parent, void* key, compare_f cmp, delete_f del, copy_f cp) {
@@ -162,7 +163,7 @@ void delete_helper(NODE** node, NODE** parent, void* key, compare_f cmp, delete_
             }
             //if we delete root
             else {
-                rotate_right(&(*node));
+                rotate_left(&(*node));
                 free((*node)->left);
                 (*node)->left = NULL;
             }
@@ -171,6 +172,7 @@ void delete_helper(NODE** node, NODE** parent, void* key, compare_f cmp, delete_
         else if ((*node)->right != NULL && (*node)->left != NULL) {
             //get inorder successor
             NODE* tmp = get_right_min((*node)->right);
+            del((*node)->data);
             (*node)->data = cp(tmp->data);
             delete_helper(&(*node)->right, &(*node), tmp->data, cmp, del, cp);
         }
