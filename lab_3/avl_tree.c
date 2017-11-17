@@ -8,7 +8,7 @@ void init_tree(avl_tree* tree, compare_f cmp, print_f prnt, delete_f del, copy_f
     tree->cp = cp;
 }
 
-void new_node(NODE** tmp, void* data) {
+static void new_node(NODE** tmp, void* data) {
     *tmp = malloc(sizeof(NODE));
     (*tmp)->data = data;
     (*tmp)->height = 1;
@@ -16,7 +16,7 @@ void new_node(NODE** tmp, void* data) {
     (*tmp)->right = NULL;
 }
 
-void insert_helper(NODE** node, void* key, compare_f cmp) {
+static void insert_helper(NODE** node, void* key, compare_f cmp) {
     //typical bst insert
     if (*node == NULL) {
         new_node(node, key);
@@ -55,17 +55,17 @@ void insert(avl_tree* tree, void* key) {
     insert_helper(&tree->root, key, tree->cmp);
 }
 
-int max(int a, int b) {
+static int max(int a, int b) {
     return (a > b) ? a : b;
 }
 
-int height(NODE* tmp) {
+static int height(NODE* tmp) {
     if (tmp == NULL)
         return 0;
     return tmp->height;
 }
 
-void rotate_right(NODE** node) {
+static void rotate_right(NODE** node) {
     NODE* x = (*node)->left;
     NODE* t2 = x->right;
 
@@ -80,7 +80,7 @@ void rotate_right(NODE** node) {
     *node = x;
 }
 
-void rotate_left(NODE** node) {
+static void rotate_left(NODE** node) {
     NODE* y = (*node)->right;
     NODE* t2 = y->left;
 
@@ -95,14 +95,14 @@ void rotate_left(NODE** node) {
     *node = y;
 }
 
-int balance_factor(NODE** node) {
+static int balance_factor(NODE** node) {
     //return balance factor between left and right subtree
     if (*node == NULL)
         return 0;
     return height((*node)->left) - height((*node)->right);
 }
 
-NODE* get_right_min(NODE* node) {
+static NODE* get_right_min(NODE* node) {
     //get minimum in a right subtree
     NODE* current = node;
     while (current->left != NULL) {
@@ -110,12 +110,13 @@ NODE* get_right_min(NODE* node) {
     }
     return current;
 }
+
 void delete(avl_tree* tree, void* key) {
     delete_helper(&tree->root, &tree->root, key, tree->cmp, tree->del, tree->cp);
     tree->del(key);
 }
 
-void delete_helper(NODE** node, NODE** parent, void* key, compare_f cmp, delete_f del, copy_f cp) {
+static void delete_helper(NODE** node, NODE** parent, void* key, compare_f cmp, delete_f del, copy_f cp) {
     if (*node == NULL)
         return;
 
@@ -203,7 +204,7 @@ void delete_helper(NODE** node, NODE** parent, void* key, compare_f cmp, delete_
     }
 }
 
-NODE* search_helper(NODE* node, void* key) {
+static NODE* search_helper(NODE* node, void* key) {
     if (node == NULL || node->data == key)
         return node;
     if (key > node->data)
@@ -216,7 +217,7 @@ void search(avl_tree* tree, void* data) {
     search_helper(tree->root, data);
 }
 
-void preorder_traversal_helper(NODE* node, print_f prnt) {
+static void preorder_traversal_helper(NODE* node, print_f prnt) {
     if (node != NULL) {
         prnt(node->data);
         preorder_traversal_helper(node->left, prnt);
@@ -224,7 +225,7 @@ void preorder_traversal_helper(NODE* node, print_f prnt) {
     }
 }
 
-void inorder_traversal_helper(NODE* node, print_f prnt) {
+static void inorder_traversal_helper(NODE* node, print_f prnt) {
     if (node != NULL) {
         inorder_traversal_helper(node->left, prnt);
         prnt(node->data);
@@ -232,7 +233,7 @@ void inorder_traversal_helper(NODE* node, print_f prnt) {
     }
 }
 
-void postorder_traversal_helper(NODE* node, print_f prnt) {
+static void postorder_traversal_helper(NODE* node, print_f prnt) {
     if (node != NULL) {
         postorder_traversal_helper(node->left, prnt);
         postorder_traversal_helper(node->right, prnt);
