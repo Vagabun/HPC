@@ -1,89 +1,65 @@
-#include <stdio.h>
-#include <stdlib.h>
+#include "avl_tree.h"
 
-typedef struct node {
-    int data;
-    struct node *left;
-    struct node *right;
-} NODE;
-
-NODE* new_node(int data) {
-    NODE* temp = malloc(sizeof(*temp)); // why explicit conversion (struct node*)?
-    /* NODE* tmp = (NODE*)malloc(sizeof(NODE)); */
-    temp->data = data;
-    temp->left = NULL;
-    temp->right = NULL;
-    return temp;
-}
-
-NODE* insert(NODE* node, int key) {
-    if (node == NULL)
-        return new_node(key);
-    if (key < node->data)
-        node->left = insert(node->left, key);
-    else if (key > node->data)
-        node->right = insert(node->right, key);
-
-    return node;
-}
-
-NODE* search(NODE* node, int key) {
-    if (node == NULL || node->data == key)
-        return node;
-//    if (node == NULL) {
-//        printf("%d is not found\n", key);
-//        return;
-//    }
-//    else if (node->data == key) {
-//        printf("found %d\n", key);
-//        return;
-//    }
-    if (key > node->data)
-        return search(node->right, key);
+int compare_int(void* a, void* b) {
+    int i_a = *(int*)a;
+    int i_b = *(int*)b;
+    if (i_a == i_b)
+        return -1;
+    if (i_a > i_b)
+        return 1;
     else
-        return search(node->left, key);
+        return 0;
 }
 
-void delete(NODE* node, int key) {
-    NODE* temp = search(node, key);
-
-    if (temp == NULL)
-        return;
-
-
-    if (temp->right == NULL && temp->left == NULL)
-        free(temp);
-
-    if (temp->right != NULL || temp->left != NULL) {}
-}
-
-void inorder(NODE* node) {
-    if (node != NULL) {
-        inorder(node->left);
-        printf("%d ", node->data);
-        inorder(node->right);
+void print_tree(void* data) {
+    if (data != NULL) {
+        int a = *(int*)data;
+        printf("%d ", a);
     }
+}
+
+void* copy(int data) {
+    int* mem = malloc(sizeof(int));
+    *mem = data;
+    return mem;
+}
+
+void* copy_int(void* data) {
+    int* mem = malloc(sizeof(int));
+    *mem = *(int*)data;
+    return mem;
+}
+
+void del_int(void* data) {
+    free(data);
 }
 
 int main() {
 
-    NODE* root = NULL;
+    avl_tree a;
+    init_tree(&a, compare_int, print_tree, del_int, copy_int);
 
-    root = insert(root, 50);
-    insert(root, 25);
-    insert(root, 45);
-    insert(root, 15);
+    //insert and rotate test
+    insert(&a, copy(10));
+    insert(&a, copy(20));
+    insert(&a, copy(30));
+    insert(&a, copy(40));
+    insert(&a, copy(50));
+    insert(&a, copy(25));
 
-    insert(root, 30);
-    insert(root, 20);
-    insert(root, 40);
-    insert(root, 70);
-    insert(root, 60);
-    insert(root, 80);
+    inorder_traversal(&a);
+    printf("\n");
 
-    inorder(root);
-//    search(root, 98);
-//    search(root, 15);
+    //delete test
+    delete(&a, copy(10));
+    delete(&a, copy(20));
+    delete(&a, copy(30));
+    delete(&a, copy(40));
+    delete(&a, copy(50));
+    delete(&a, copy(25));
+
+    inorder_traversal(&a);
+    printf("\n");
 
     return 0;
 }
