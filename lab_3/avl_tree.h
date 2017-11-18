@@ -26,30 +26,30 @@ typedef struct {
 //initialization
 void init_tree(avl_tree* tree, compare_f cmp, print_f prnt, delete_f del, copy_f cp);
 //creating new node
-void new_node(NODE** tmp, void* data);
+static void new_node(NODE** tmp, void* data);
 //insert data into tree
-void insert_helper(NODE** node, void* key, compare_f cmp);
+static void insert_helper(NODE** node, void* key, compare_f cmp);
 //wrapping function for insert
 void insert(avl_tree* tree, void* key);
 //service functions for tree rotations
-int max(int a, int b);
-int height(NODE* tmp);
-int balance_factor(NODE** node);
+static int max(int a, int b);
+static int height(NODE* tmp);
+static int balance_factor(NODE** node);
 //rotate functions
-void rotate_right(NODE** node);
-void rotate_left(NODE** node);
+static void rotate_right(NODE** node);
+static void rotate_left(NODE** node);
 //delete selected data from tree
-void delete_helper(NODE** node, NODE** parent, void* key, compare_f cmp, delete_f del, copy_f cp);
+static void delete_helper(NODE** node, NODE** parent, void* key, compare_f cmp, delete_f del, copy_f cp);
 //wrapping function for delete
 void delete(avl_tree* tree, void* key);
 //service function for delete
-NODE* get_right_min(NODE* node);
+static NODE* get_right_min(NODE* node);
 //traversal functions and search in tree
 void search(avl_tree* tree, void* data);
-NODE* search_helper(NODE* node, void* key);
-void preorder_traversal_helper(NODE* node, print_f prnt);
-void inorder_traversal_helper(NODE* node, print_f prnt);
-void postorder_traversal_helper(NODE* node, print_f prnt);
+static NODE* search_helper(NODE* node, void* key);
+static void preorder_traversal_helper(NODE* node, print_f prnt);
+static void inorder_traversal_helper(NODE* node, print_f prnt);
+static void postorder_traversal_helper(NODE* node, print_f prnt);
 void preorder_traversal(avl_tree* tree);
 void inorder_traversal(avl_tree* tree);
 void postorder_traversal(avl_tree* tree);
