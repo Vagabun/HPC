@@ -4,13 +4,24 @@
 #include <iostream>
 #include <fstream>
 
-void revert(const char *obj, char *buffer);
-bool equal(const char *obj, const char *buffer);
-int get_max(const char *obj);
-char get_max(const char *obj, bool flag);
-bool grows_evenly(const char *obj);
-bool grows_evenly(const char *obj, bool flag);
-int get_mid(const char *obj);
-char get_mid(const char *obj, bool flag);
+using std::ifstream;
+using std::cout;
+
+struct word {
+    char buffer[100], reverted_buffer[100];
+    int size, sequence[100], seq_size;
+};
+
+void get_size(word &obj);
+bool if_number(const word &obj);
+void get_sequence(word &obj);
+void revert(word &obj);
+bool palindrome(const word &obj);
+int get_max(const word &obj);
+char get_max(const word &obj, bool flag);
+bool grows_evenly(const word &obj);
+bool grows_evenly(const word &obj, bool flag);
+int get_mid(const word &obj);
+char get_mid(const word &obj, bool flag);
 
 #endif //TASK_1_TEXT_FUNC_H

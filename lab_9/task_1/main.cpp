@@ -1,26 +1,31 @@
 #include "text_func.h"
 
 int main() {
-
-    std::ifstream in("input.txt");
-    char buffer[100], reverted_buffer[100]; //move char to struct?
+    ifstream in("input.txt");
     while (true) {
+        word w = word(); // constructor
         if (in.eof())
             break;
-        in >> buffer;
-        revert(buffer, reverted_buffer);
-        if (equal(buffer, reverted_buffer)) {
-            if (buffer[0] >= '0' && buffer[0] <= '9')
-                std::cout << get_max(buffer) << " ";
+        in >> w.buffer;
+        get_size(w);
+        revert(w);
+        if (if_number(w)) {
+            get_sequence(w);
+            if (palindrome(w))
+                cout << get_max(w) << " ";
+            else if (grows_evenly(w))
+                cout << get_mid(w) << " ";
             else
-                std::cout << get_max(buffer, false) << " ";
+                cout << w.buffer << " ";
         }
-        else if (buffer[0] >= '0' && buffer[0] <= '9' && grows_evenly(buffer))
-            std::cout << get_mid(buffer) << " ";
-        else if (grows_evenly(buffer, false))
-            std::cout << get_mid(buffer, false) << " ";
-        else
-            std::cout << buffer << " ";
+        else {
+            if (palindrome(w))
+                cout << get_max(w, false) << " ";
+            else if (grows_evenly(w, false))
+                cout << get_mid(w, false) << " ";
+            else
+                cout << w.buffer << " ";
+        }
     }
     in.close();
     return 0;
