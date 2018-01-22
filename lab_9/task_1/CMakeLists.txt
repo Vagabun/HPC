@@ -3,4 +3,4 @@ project(task_1)
 
 set(CMAKE_CXX_STANDARD 11)
 
-add_executable(task_1 main.cpp text_func.h text_func.cpp)
+add_executable(task_1 main.cpp text_func.h text_func.cpp headers.h)

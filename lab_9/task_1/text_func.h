@@ -3,25 +3,20 @@
 
 #include <iostream>
 #include <fstream>
+#include <cstring>
 
 using std::ifstream;
 using std::cout;
 
-struct word {
-    char buffer[100], reverted_buffer[100];
-    int size, sequence[100], seq_size;
-};
-
-void get_size(word &obj);
-bool if_number(const word &obj);
-void get_sequence(word &obj);
-void revert(word &obj);
-bool palindrome(const word &obj);
-int get_max(const word &obj);
-char get_max(const word &obj, bool flag);
-bool grows_evenly(const word &obj);
-bool grows_evenly(const word &obj, bool flag);
-int get_mid(const word &obj);
-char get_mid(const word &obj, bool flag);
+void get_size(const char *buf);
+bool if_number(const char *obj);
+void get_sequence(const char *buf, int *obj);
+bool palindrome(const char *obj);
+int get_max(const int *obj);
+char get_max(const char *obj);
+bool grows_evenly(const char *obj);
+bool grows_evenly(const int *obj);
+int get_mid(const int *obj);
+char get_mid(const char *obj);
 
 #endif //TASK_1_TEXT_FUNC_H

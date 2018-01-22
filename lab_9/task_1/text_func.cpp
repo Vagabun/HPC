@@ -1,25 +1,20 @@
+#include "headers.h"
 #include "text_func.h"
 
-void revert(word &obj) {
-    int i = 0;
-    for (int j = obj.size - 1; j >= 0; --j) {
-        obj.reverted_buffer[i++] = obj.buffer[j];
-    }
-}
-
-bool palindrome(const word &obj) {
-    for (int i = 0; i < obj.size; ++i) {
-        if (obj.buffer[i] != obj.reverted_buffer[i])
+bool palindrome(const char *obj) {
+    int j = _size - 1;
+    for (int i = 0; i < _size; ++i) {
+        if (obj[i] != obj[j--])
             return false;
     }
     return true;
 }
 
 //for words in numeric representation
-int get_max(const word &obj) {
+int get_max(const int *obj) {
     int max = -1;
-    for (int i = 0; i < obj.seq_size; i++) {
-        int number = obj.sequence[i];
+    for (int i = 0; i < _seq_size; i++) {
+        int number = obj[i];
         if (number > max)
             max = number;
     }
@@ -27,63 +22,58 @@ int get_max(const word &obj) {
 }
 
 //for words in usual representation
-char get_max(const word &obj, bool flag) {
+char get_max(const char *obj) {
     char max = '0';
-    if (!flag) {
-        for (int i = 0; i < obj.size; ++i) {
-            if (obj.buffer[i] > max)
-                max = obj.buffer[i];
+        for (int i = 0; i < _size; ++i) {
+            if (obj[i] > max)
+                max = obj[i];
         }
-    }
     return max;
 }
 
-bool grows_evenly(const word &obj) {
-    for (int i = 0; i < obj.seq_size - 1; ++i) {
-        if (obj.sequence[i] != obj.sequence[i+1] - 1)
-            return false;
-    }
-    return true;
-}
-
-bool grows_evenly(const word &obj, bool flag) {
-    if (!flag) {
-        char letter = obj.buffer[0];
-        for (int i = 1; i < obj.size; ++i) {
-            if (obj.buffer[i] != letter + 1)
+bool grows_evenly(const int *obj) {
+    if (_seq_size > 1) {
+        int gap = obj[1] - obj[0];
+        for (int i = 0; i < _seq_size - 1; ++i) {
+            if (obj[i] != obj[i + 1] - gap)
                 return false;
-            ++letter;
         }
     }
     return true;
 }
 
-int get_mid(const word &obj) {
+bool grows_evenly(const char *obj) {
+        char letter = obj[0];
+        for (int i = 1; i < _size; ++i) {
+            if (obj[i] != letter + 1)
+                return false;
+            ++letter;
+        }
+    return true;
+}
+
+int get_mid(const int *obj) {
     int sum = 0;
-    for (int i = 0; i < obj.seq_size; ++i)
-        sum += obj.sequence[i];
-    return sum/(obj.seq_size);
+    for (int i = 0; i < _seq_size; ++i)
+        sum += obj[i];
+    return sum/(_seq_size);
 }
 
-char get_mid(const word &obj, bool flag) {
-    if (!flag)
-        return obj.buffer[obj.size/2];
+char get_mid(const char *obj) {
+    return obj[_size/2];
 }
 
-void get_size(word &obj) {
-    int i = 0;
-    while (obj.buffer[i] != '\0')
-        ++i;
-    obj.size = i;
+void get_size(const char *buf) {
+    _size = (int)strlen(buf);
 }
 
-bool if_number(const word &obj) {
-    return ((obj.buffer[0] >= '0') && (obj.buffer[0] <= '9')) ? true : false;
+bool if_number(const char *obj) {
+    return ((obj[0] - '0') >= 0 && (obj[0] - '0' <= 9)) ? true : false;
 }
 
-void get_sequence(word &obj) {
+void get_sequence(const char *buf, int *obj) {
     int j = 0;
-    for (int i = 0; i < obj.size; i += 2)
-        obj.sequence[j++] =  (obj.buffer[i] - '0') * 10 + (obj.buffer[i+1] - '0');
-    obj.seq_size = j;
+    for (int i = 0; i < _size; i += 2)
+        obj[j++] = (buf[i] - '0') * 10 + (buf[i+1] - '0');
+    _seq_size = j;
 }

@@ -2,29 +2,30 @@
 
 int main() {
     ifstream in("input.txt");
+    char buffer[100], w_c_data[100];
+    int w_i_data[100];
     while (true) {
-        word w = word(); // constructor
         if (in.eof())
             break;
-        in >> w.buffer;
-        get_size(w);
-        revert(w);
-        if (if_number(w)) {
-            get_sequence(w);
-            if (palindrome(w))
-                cout << get_max(w) << " ";
-            else if (grows_evenly(w))
-                cout << get_mid(w) << " ";
+        in >> buffer;
+        get_size(buffer);
+        if (if_number(buffer)) {
+            get_sequence(buffer, w_i_data);
+            if (palindrome(buffer))
+                cout << get_max(w_i_data) << " ";
+            else if (grows_evenly(w_i_data))
+                cout << get_mid(w_i_data) << " ";
             else
-                cout << w.buffer << " ";
+                cout << buffer << " ";
         }
         else {
-            if (palindrome(w))
-                cout << get_max(w, false) << " ";
-            else if (grows_evenly(w, false))
-                cout << get_mid(w, false) << " ";
+            strcpy(w_c_data, buffer);
+            if (palindrome(buffer))
+                cout << get_max(w_c_data) << " ";
+            else if (grows_evenly(w_c_data))
+                cout << get_mid(w_c_data) << " ";
             else
-                cout << w.buffer << " ";
+                cout << buffer << " ";
         }
     }
     in.close();
