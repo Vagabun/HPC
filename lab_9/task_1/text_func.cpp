@@ -68,7 +68,7 @@ void get_size(const char *buf) {
 }
 
 bool if_number(const char *obj) {
-    return ((obj[0] - '0') >= 0 && (obj[0] - '0' <= 9)) ? true : false;
+    return ((obj[0] - '0') >= 0 && (obj[0] - '0' <= 9));
 }
 
 void get_sequence(const char *buf, int *obj) {
