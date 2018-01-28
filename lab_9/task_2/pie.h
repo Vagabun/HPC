@@ -1,6 +1,6 @@
-#pragma once
-//#ifndef TASK_2_PIE_H
-//#define TASK_2_PIE_H
+//#pragma once
+#ifndef TASK_2_PIE_H
+#define TASK_2_PIE_H
 
 #include <iostream>
 #include <random>
@@ -32,4 +32,4 @@ private:
     int generate_rand(std::uniform_int_distribution<int> obj);
 };
 
-//#endif TASK_2_PIE_H
+#endif //TASK_2_PIE_H

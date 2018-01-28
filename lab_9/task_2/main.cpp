@@ -16,6 +16,7 @@ int main() {
 //    std::cout << Pie::quantity << std::endl;
 
     Baker b;
+    std::cout << Pie::quantity << std::endl;
 
     return 0;
 }

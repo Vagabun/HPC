@@ -1,12 +1,15 @@
-#pragma once
-//#ifndef TASK_2_BAKER_H
-//#define TASK_2_BAKER_H
+//#pragma once
+#ifndef TASK_2_BAKER_H
+#define TASK_2_BAKER_H
 #include "pie.h"
 
 class Baker {
 public:
     Baker();
     ~Baker();
+    Baker(const Baker &obj);
+    explicit Baker(int pies_quantity);
+    Baker& operator= (const Baker &obj);
 
 private:
     int professionality;
@@ -17,4 +20,4 @@ private:
 };
 
 
-//#endif //TASK_2_BAKER_H
+#endif //TASK_2_BAKER_H
