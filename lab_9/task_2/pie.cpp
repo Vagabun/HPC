@@ -25,6 +25,7 @@ Pie::Pie(const Pie &obj) {
 
 Pie::Pie(string &new_title, int new_tasty) : title(new_title), tasty(new_tasty) { //how use std::move?
     ++quantity;
+    cout << "baked (constructor) " << title << endl;
 }
 
 Pie::Pie(int new_tasty) {

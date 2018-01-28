@@ -24,6 +24,7 @@ public:
     static int quantity;
     static void tastier(const Pie &obj1, const Pie &obj2);
     Pie& operator= (const Pie& obj);
+    //friend class Baker; how to access private function of Pie class?
 private:
     string title;
     int tasty;
