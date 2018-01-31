@@ -61,7 +61,7 @@ Pie& Pie::operator= (const Pie& obj) {
 }
 
 int Pie::generate_rand(std::uniform_int_distribution<int> obj) {
-    long long seed = std::chrono::system_clock::now().time_since_epoch().count();
-    std::default_random_engine generator(seed);
+    std::random_device rd;
+    std::mt19937 generator(rd());
     return obj(generator);
 }

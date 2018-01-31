@@ -1,5 +1,4 @@
 #include "baker.h"
-
 int main() {
 
 //    Pie p1;
@@ -17,6 +16,12 @@ int main() {
 
     Baker b;
     std::cout << Pie::quantity << std::endl;
+//    std::random_device rd;
+//    std::mt19937 gen(rd());
+//    std::uniform_int_distribution<int> dis(0, 5);
+//    cout << dis(gen) << endl;
+//    cout << dis(gen) << endl;
+//    cout << dis(gen) << endl;
 
     return 0;
 }
