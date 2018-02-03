@@ -1,9 +1,14 @@
 //#pragma once
 #ifndef TASK_2_BAKER_H
 #define TASK_2_BAKER_H
+
+#include "headers.h"
 #include "pie.h"
 
+class Pie; //forward declaration?
+
 class Baker {
+    friend class Pie;
 public:
     Baker();
     ~Baker();

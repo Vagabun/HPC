@@ -13,7 +13,7 @@ Pie::Pie() {
 }
 
 Pie::~Pie() {
-    cout << title << " eaten(destructor)" << endl;
+//    cout << title << " eaten(destructor)" << endl;
 }
 
 Pie::Pie(const Pie &obj) {

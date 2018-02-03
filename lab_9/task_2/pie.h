@@ -2,20 +2,13 @@
 #ifndef TASK_2_PIE_H
 #define TASK_2_PIE_H
 
-#include <iostream>
-#include <random>
-#include <string>
-#include <vector>
-#include <chrono>
-#include <utility>
-#include <array>
+#include "headers.h"
 #include "baker.h"
 
-using std::cout;
-using std::endl;
-using std::string;
+//class Baker; // why i shouldn't make forward declaration here?
 
 class Pie {
+    friend class Baker;
 public:
     Pie();
     ~Pie();
@@ -32,7 +25,7 @@ private:
     int tasty;
     const std::array<string, 6> pie_types = {"meat pie", "potato pie", "cheese and mushrooms pie", "banana pie", "strawberry pie", "chicken pie"};
     int generate_rand(std::uniform_int_distribution<int> obj);
-    friend void Baker::bake_pie();
+//    friend void Baker::bake_pie(); //redundant declaration?
 };
 
 #endif //TASK_2_PIE_H

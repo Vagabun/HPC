@@ -1,9 +1,7 @@
 #include "baker.h"
 
 Baker::Baker() {
-//    std::uniform_int_distribution<int> pie_distribution(1, 10);
     std::uniform_int_distribution<int> characteristics(1, 100);
-//    int pies_quantity = generate_rand(pie_distribution);
     pies_array = new Pie[100];
     pies_quantity = 0;
     professionality = generate_rand(characteristics);
