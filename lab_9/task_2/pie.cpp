@@ -1,15 +1,15 @@
 #include "pie.h"
 
-int Pie::quantity = 0;
+int Pie::all_time_quantity = 0;
 
 Pie::Pie() {
     std::uniform_int_distribution<int> pie_distribution(0, 2);
     std::uniform_int_distribution<int> tastiness(1, 100);
     title = pie_types[generate_rand(pie_distribution)];
-    tasty = generate_rand(tastiness);
+    tasty = 0;
     // int value = distribution(generate_rand());  called object (distribution) is not a function?
-    ++quantity;
-    cout << "baked (constructor) " << title << endl;
+    //++all_time_quantity;
+    //cout << "baked (constructor) " << title << endl;
 }
 
 Pie::~Pie() {
@@ -19,12 +19,12 @@ Pie::~Pie() {
 Pie::Pie(const Pie &obj) {
     title = obj.title;
     tasty = obj.tasty;
-    ++quantity;
+    ++all_time_quantity;
     cout << "baked another(copy) " << title << endl;
 }
 
 Pie::Pie(string &new_title, int new_tasty) : title(new_title), tasty(new_tasty) { //how use std::move?
-    ++quantity;
+    ++all_time_quantity;
     cout << "baked (constructor) " << title << endl;
 }
 
@@ -32,7 +32,7 @@ Pie::Pie(int new_tasty) {
     tasty = new_tasty;
     std::uniform_int_distribution<int> pie_distribution(0, 5);
     title = pie_types[generate_rand(pie_distribution)];
-    ++quantity;
+    ++all_time_quantity;
     cout << "baked (constructor) " << title << endl;
 }
 
@@ -40,7 +40,7 @@ Pie::Pie(string &&new_title) { //rvalue?
     title = new_title;
     std::uniform_int_distribution<int> tastiness(1, 100);
     tasty = generate_rand(tastiness);
-    ++quantity;
+    ++all_time_quantity;
     cout << "baked (constructor) " << title << endl;
 }
 

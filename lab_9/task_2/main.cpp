@@ -12,10 +12,14 @@ int main() {
 //    Pie p4(67);
 //    Pie p5("chocolate pie");
 //
-//    std::cout << Pie::quantity << std::endl;
+//    std::cout << Pie::all_time_quantity << std::endl;
 
     Baker b;
-    std::cout << Pie::quantity << std::endl;
+    Baker c;
+    b.bake_pie();
+    c.bake_pie();
+    std::cout << Pie::all_time_quantity << std::endl;
+    Pie::
 //    std::random_device rd;
 //    std::mt19937 gen(rd());
 //    std::uniform_int_distribution<int> dis(0, 5);
