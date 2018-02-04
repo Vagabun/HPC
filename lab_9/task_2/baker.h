@@ -18,6 +18,9 @@ public:
     void bake_pie();
     void eat_pie();
     void return_pie(Baker &obj);
+    int get_tasty() const;
+    void set_new_exp(int exp);
+
 
 private:
     int professionality;

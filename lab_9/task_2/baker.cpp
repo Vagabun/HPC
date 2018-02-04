@@ -24,6 +24,7 @@ Baker::Baker(const Baker &obj) {
     professionality = obj.professionality;
     bellyful = obj.bellyful;
     experience = obj.experience;
+    pies_quantity = obj.pies_quantity;
     cout << "new baker (copy)" << endl;
 }
 
@@ -69,8 +70,15 @@ void Baker::eat_pie() {
 
 void Baker::return_pie(Baker &obj) {
     if (this->pies_quantity > 0) {
-        --this->pies_quantity;
+        obj.pies_array[++obj.pies_quantity-1] = this->pies_array[--this->pies_quantity];
         this->bellyful = (this->bellyful - 25 > 0) ? this->bellyful - 25 : 0;
-        ++obj.pies_quantity;
     }
+}
+
+int Baker::get_tasty() const {
+    return this->pies_array[this->pies_quantity-1].tasty;
+}
+
+void Baker::set_new_exp(int exp) {
+    this->experience = exp;
 }
