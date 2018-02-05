@@ -7,8 +7,6 @@ Pie::Pie() {
     std::uniform_int_distribution<int> tastiness(1, 100);
     title = pie_types[generate_rand(pie_distribution)];
     tasty = 0;
-    // int value = distribution(generate_rand());  called object (distribution) is not a function?
-    //++all_time_quantity;
     //cout << "baked (constructor) " << title << endl;
 }
 

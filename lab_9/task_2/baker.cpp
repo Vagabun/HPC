@@ -20,7 +20,10 @@ int Baker::generate_rand(std::uniform_int_distribution<int> obj) {
 }
 
 Baker::Baker(const Baker &obj) {
-    pies_array = obj.pies_array;
+    pies_array = new Pie[100];
+    for (int i = 0; i < 100; ++i) {
+        pies_array[i] = obj.pies_array[i];
+    }
     professionality = obj.professionality;
     bellyful = obj.bellyful;
     experience = obj.experience;
@@ -38,13 +41,10 @@ Baker &Baker::operator= (const Baker &obj) {
     return *this;
 }
 
-Baker::Baker(int new_pies_quantity) {
-    pies_array = new Pie[new_pies_quantity];
+//delegate constructor?
+Baker::Baker(int new_pies_quantity) : Baker() {
     pies_quantity = new_pies_quantity;
-    std::uniform_int_distribution<int> characteristics(1, 100);
-    professionality = generate_rand(characteristics);
-    bellyful = generate_rand(characteristics);
-    experience = generate_rand(characteristics);
+    Pie::all_time_quantity += new_pies_quantity;
 }
 
 void Baker::bake_pie() {
@@ -81,4 +81,8 @@ int Baker::get_tasty() const {
 
 void Baker::set_new_exp(int exp) {
     this->experience = exp;
+}
+
+void Baker::set_new_prof(int prof) {
+    this->professionality = prof;
 }

@@ -20,7 +20,7 @@ public:
     void return_pie(Baker &obj);
     int get_tasty() const;
     void set_new_exp(int exp);
-
+    void set_new_prof(int prof);
 
 private:
     int professionality;
