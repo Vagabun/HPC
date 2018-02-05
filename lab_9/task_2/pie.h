@@ -23,7 +23,7 @@ public:
 private:
     string title;
     int tasty;
-    const std::array<string, 6> pie_types = {"meat pie", "potato pie", "cheese and mushrooms pie", "banana pie", "strawberry pie", "chicken pie"};
+    const std::array<string, 6> pie_types = { {"meat pie", "potato pie", "cheese and mushrooms pie", "banana pie", "strawberry pie", "chicken pie"} };
     int generate_rand(std::uniform_int_distribution<int> obj);
 //    friend void Baker::bake_pie(); //redundant declaration?
 };
