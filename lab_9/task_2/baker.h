@@ -5,24 +5,21 @@
 #include "headers.h"
 #include "pie.h"
 
-class Pie; //forward declaration?
-
 class Baker {
-    friend class Pie;
 public:
     Baker();
     ~Baker();
     Baker(const Baker &obj);
-    explicit Baker(int new_pies_quantity);
+    Baker(int new_pies_quantity);
     Baker& operator= (const Baker &obj);
     void bake_pie();
     void eat_pie();
     void return_pie(Baker &obj);
-    int get_tasty() const;
+    int get_bake_tasty() const;
     void set_new_exp(int exp);
     void set_new_prof(int prof);
 
-private:
+private: //refactor
     int professionality;
     int bellyful;
     int experience;

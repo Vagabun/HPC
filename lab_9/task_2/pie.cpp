@@ -18,12 +18,12 @@ Pie::Pie(const Pie &obj) {
     title = obj.title;
     tasty = obj.tasty;
     ++all_time_quantity;
-    cout << "baked another(copy) " << title << endl;
+    cout << "copy: baked another pie" << title << endl;
 }
 
-Pie::Pie(string &new_title, int new_tasty) : title(new_title), tasty(new_tasty) { //how use std::move?
+Pie::Pie(string &new_title, int new_tasty) : title(new_title), tasty(new_tasty) { //how to use std::move?
     ++all_time_quantity;
-    cout << "baked (constructor) " << title << endl;
+    cout << "constructor: baked " << title << " pie with that tastiness - " << tasty << endl;
 }
 
 Pie::Pie(int new_tasty) {
@@ -42,7 +42,7 @@ Pie::Pie(string &&new_title) { //rvalue?
     cout << "baked (constructor) " << title << endl;
 }
 
-void Pie::tastier(const Pie &obj1, const Pie &obj2) {
+void Pie::tastier(const Pie &obj1, const Pie &obj2) { //rewrite
     if (obj1.tasty > obj2.tasty) {
         cout << obj1.title << " tastier than " << obj2.title << endl;
         return;
@@ -62,4 +62,15 @@ int Pie::generate_rand(std::uniform_int_distribution<int> obj) {
     std::random_device rd;
     std::mt19937 generator(rd());
     return obj(generator);
+}
+
+int Pie::get_tasty() const {
+    return this->tasty;
+}
+
+void Pie::set_tasty(int new_tasty) {
+    if (new_tasty >= 0)
+        this->tasty = new_tasty;
+    else
+        cout << "set tasty: can't be such pie in the world, check your input" << endl;
 }

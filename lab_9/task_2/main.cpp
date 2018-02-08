@@ -18,7 +18,7 @@ int bake(Baker b1, Baker b2, int win_counter) {
 //                switch (distribution(generator)) {
                     case 0 :
                         b.bake_pie();
-                        bake_quality += b.get_tasty();
+                        bake_quality += b.get_bake_tasty();
                         break;
                     case 1 :
                         b.eat_pie();
@@ -50,13 +50,17 @@ int bake(Baker b1, Baker b2, int win_counter) {
 
 int main() {
 
-    Baker b(10);
-    Baker c(10);
-    bake(b, c, 15);
-    b.set_new_exp(75);
-    b.set_new_prof(55);
-    c.set_new_exp(75);
-    c.set_new_prof(55);
+//    Baker b(10);
+//    Baker c(10);
+//    bake(b, c, 15);
+//    b.set_new_exp(75);
+//    b.set_new_prof(55);
+//    c.set_new_exp(75);
+//    c.set_new_prof(55);
+
+//    Pie a;
+//    Pie b;
+//    cout << a.get_tasty();
 
     return 0;
 }
