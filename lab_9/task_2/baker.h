@@ -20,10 +20,11 @@ public:
     void set_new_prof(int prof);
 
 private: //refactor
-    int professionality;
-    int bellyful;
-    int experience;
-    int pies_quantity;
+    int _professionality;
+    int _bellyful;
+    int _experience;
+    int _pies_quantity;
+    const int _max_pies_quantity = 100;
     int generate_rand(std::uniform_int_distribution<int> obj);
     Pie *pies_array;
 };

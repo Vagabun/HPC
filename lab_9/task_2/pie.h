@@ -17,9 +17,10 @@ public:
     Pie& operator= (const Pie& obj);
     int get_tasty() const;
     void set_tasty(int new_tasty);
+    string get_title() const;
 private:
-    string title;
-    int tasty;
+    string _title;
+    int _tasty;
     const std::array<string, 6> pie_types = { {"meat pie", "potato pie", "cheese and mushrooms pie", "banana pie", "strawberry pie", "chicken pie"} };
     int generate_rand(std::uniform_int_distribution<int> obj);
 };

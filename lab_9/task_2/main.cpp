@@ -14,8 +14,8 @@ int bake(Baker b1, Baker b2, int win_counter) {
                 std::random_device rd;
                 std::mt19937 generator(rd());
                 std::uniform_int_distribution<int> distribution(0, 2);
-                switch (0) { //for win mingw because of a bug in random
-//                switch (distribution(generator)) {
+//                switch (0) { //for win mingw because of a bug in random
+                switch (distribution(generator)) {
                     case 0 :
                         b.bake_pie();
                         bake_quality += b.get_bake_tasty();
@@ -50,17 +50,9 @@ int bake(Baker b1, Baker b2, int win_counter) {
 
 int main() {
 
-//    Baker b(10);
-//    Baker c(10);
-//    bake(b, c, 15);
-//    b.set_new_exp(75);
-//    b.set_new_prof(55);
-//    c.set_new_exp(75);
-//    c.set_new_prof(55);
-
-//    Pie a;
-//    Pie b;
-//    cout << a.get_tasty();
+    Baker a(10);
+    Baker b(10);
+    bake(a, b, 15);
 
     return 0;
 }
