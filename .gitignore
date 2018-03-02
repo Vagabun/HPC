@@ -1,4 +1,5 @@
 # User-specific files
+*.out
 *.suo
 *.user
 *.userosscache

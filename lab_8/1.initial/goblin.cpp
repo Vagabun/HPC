@@ -1,4 +1,3 @@
-#include "common.h"
 #include "goblin.h"
 
 int goblin::call_counter = 0;
@@ -20,24 +19,41 @@ void goblin::bomb() {
     }
     case 1: {
         cout << "BOOM!" << endl;
-        //call hp getter of enemy, pass it-1 to hp setter of enemy
-
-        //call hp getter of me, pass it-1 to hp setter of me
-        set_hp(get_hp() - (get_hp() - 1));
+        _health -= _health - 1;
         call_counter = 0;
         break;
+        //change hp of enemy likewise
     }
     default:
         break;
     }
 }
 
-int goblin::get_hp() {
-    return _health;
-}
+//int goblin::get_hp() {
+//    return _health;
+//}
+//
+//void goblin::set_hp(int data) {
+//    if (data > _health) {
+//        cout << "goblin is dead" << endl;
+//        return;
+//    }
+//    _health -= data;
+//}
 
-void goblin::set_hp(int data) {
-    _health = data;
+void goblin::coward(int damage) {
+    if (damage > 0) {
+        if (_health >= 50) {
+            cout << "attacked himself" << endl;
+            damage *= 2;
+        }   
+        else {
+            cout << "dodged from attack!";
+            damage = 0;
+        }
+            
+    }
+    _health -= damage;
 }
 
 int goblin::rand_generator() {

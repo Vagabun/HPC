@@ -120,10 +120,12 @@
   <ItemGroup>
     <ClInclude Include="goblin.h" />
     <ClInclude Include="common.h" />
+    <ClInclude Include="wizard.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="goblin.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="wizard.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
