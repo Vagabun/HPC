@@ -118,15 +118,19 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="game.h" />
     <ClInclude Include="goblin.h" />
     <ClInclude Include="common.h" />
     <ClInclude Include="knight.h" />
+    <ClInclude Include="player.h" />
     <ClInclude Include="wizard.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="game.cpp" />
     <ClCompile Include="goblin.cpp" />
     <ClCompile Include="knight.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="player.cpp" />
     <ClCompile Include="wizard.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
