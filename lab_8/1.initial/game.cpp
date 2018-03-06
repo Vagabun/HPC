@@ -10,7 +10,18 @@ game::game(player p1, player p2) {
 game::~game() {}
 
 void game::attack(int who) {
-
+    switch (who) {
+    case 1: {
+        this->_b.take_damage(this->_a.get_damage());
+        break;
+    }
+    case 2: {
+        this->_a.take_damage(this->_b.get_damage());
+        break;
+    }
+    default:
+        break;
+    }
 }
 
 void game::trigger(int who) {

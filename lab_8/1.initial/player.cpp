@@ -18,3 +18,21 @@ player::player(string choice) {
 }
 
 player::~player() {}
+
+int player::get_damage() {
+    if (this->current_class == "knight")
+        return this->k.damage();
+    else if (this->current_class == "goblin")
+        return this->g.damage();
+    else if (this->current_class == "wizard")
+        return this->w.damage();
+}
+
+void player::take_damage(int damage) {
+    if (this->current_class == "knight")
+        this->k.take_damage(damage);
+    else if (this->current_class == "goblin")
+        this->g.take_damage(damage);
+    else if (this->current_class == "wizard")
+        this->w.take_damage(damage);
+}

@@ -6,7 +6,8 @@ class knight {
 public:
     knight();
     ~knight();
-    void get_damage(int damage);
+    int damage();
+    void take_damage(int damage);
     void eating();
     void naked_knight();
 private:

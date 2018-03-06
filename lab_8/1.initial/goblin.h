@@ -7,6 +7,8 @@ class goblin {
 public:
     goblin();
 	~goblin();
+    int damage();
+    void take_damage(int damage);
     void bomb();
     void coward(int damage);
     /*int get_hp();

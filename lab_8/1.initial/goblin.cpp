@@ -10,6 +10,19 @@ goblin::goblin() {
 
 goblin::~goblin() {}
 
+int goblin::damage() {
+    return _attack;
+}
+
+void goblin::take_damage(int damage) {
+    if (damage > _health) {
+        _health = 0;
+        cout << "goblin killed" << endl;
+        return;
+    }
+    _health -= damage;
+}
+
 void goblin::bomb() {
     switch (call_counter) {
     case 0: {

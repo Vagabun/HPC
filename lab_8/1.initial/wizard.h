@@ -6,6 +6,8 @@ class wizard {
 public:
     wizard();
     ~wizard();
+    void take_damage(int damage);
+    int damage();
     void improvement();
     int magic_shield(int damage);
 

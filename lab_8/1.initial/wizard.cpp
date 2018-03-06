@@ -10,6 +10,19 @@ wizard::wizard() {
 
 wizard::~wizard() {}
 
+void wizard::take_damage(int damage) {
+    if (damage > _health) {
+        _health = 0;
+        cout << "wizard killed" << endl;
+        return;
+    }
+    _health -= damage;
+}
+
+int wizard::damage() {
+    return _attack;
+}
+
 void wizard::improvement() {
     cout << "selecting one of four improvements..." << endl;
     switch (rand_generator("active")) {

@@ -9,6 +9,8 @@ public:
     player();
     player(string choice);
     ~player();
+    int get_damage();
+    void take_damage(int damage);
     string current_class;
 private:
     knight k; 

@@ -11,7 +11,11 @@ knight::knight() {
 knight::~knight() {
 }
 
-void knight::get_damage(int damage) {
+int knight::damage() {
+    return _attack;
+}
+
+void knight::take_damage(int damage) {
     damage -= _armor;
     if (damage < 0)
         damage = 0;
