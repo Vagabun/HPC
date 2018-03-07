@@ -7,39 +7,43 @@ knight::knight() {
     _armor = 100;
 }
 
-
-knight::~knight() {
-}
+knight::~knight() {}
 
 int knight::damage() {
-    return _attack;
+    return this->_attack;
+}
+
+int knight::get_hp() {
+    return this->_health;
 }
 
 void knight::take_damage(int damage) {
-    damage -= _armor;
+    this->naked_knight();
+    damage -= this->_armor;
     if (damage < 0)
         damage = 0;
-    _health -= damage;
-    _armor /= 2;
+    this->_health -= damage;
+    this->_armor /= 2;
 }
 
 void knight::eating() {
     cout << "eating armor..." << endl;
     int armor_slice = 10;
-    if (_armor <= 10) {
+    if (this->_armor <= 10) {
         cout << "knight can't eat all of his armor" << endl;
         return;
     }
-    _armor -= armor_slice;
-    _attack += armor_slice;
+    this->_armor -= armor_slice;
+    this->_attack += armor_slice;
 }
 
 void knight::naked_knight() {
     int chance = rand_generator("default");
-    if (chance <= 30 && _armor > 0) {
+    if (chance <= 30 && this->_armor > 0) {
         cout << "time for blood..." << endl;
-        _armor = 0;
-        _attack *= 2;
+        cout << "attack increased by two times" << endl;
+        this->_armor = 0;
+        this->_attack *= 2;
     }
 }
 

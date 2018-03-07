@@ -11,62 +11,57 @@ goblin::goblin() {
 goblin::~goblin() {}
 
 int goblin::damage() {
-    return _attack;
+    return this->_attack;
+}
+
+int goblin::get_hp() {
+    return this->_health;
 }
 
 void goblin::take_damage(int damage) {
-    if (damage > _health) {
-        _health = 0;
+    damage = this->coward(damage);
+    if (damage > this->_health) {
+        this->_health = 0;
         cout << "goblin killed" << endl;
         return;
     }
-    _health -= damage;
+    this->_health -= damage;
 }
 
-void goblin::bomb() {
-    switch (call_counter) {
+int goblin::bomb(int enemy_health) {
+    int damage;
+    switch (this->call_counter) {
     case 0: {
         cout << "constructing bomb..." << endl;
-        ++call_counter;
+        damage = 0;
+        ++this->call_counter;
         break;
     }
     case 1: {
         cout << "BOOM!" << endl;
-        _health -= _health - 1;
-        call_counter = 0;
+        this->_health -= this->_health - 1;
+        damage = enemy_health - 1;
+        this->call_counter = 0;
         break;
-        //change hp of enemy likewise
     }
     default:
         break;
     }
+    return damage;
 }
 
-//int goblin::get_hp() {
-//    return _health;
-//}
-//
-//void goblin::set_hp(int data) {
-//    if (data > _health) {
-//        cout << "goblin is dead" << endl;
-//        return;
-//    }
-//    _health -= data;
-//}
-
-void goblin::coward(int damage) {
+int goblin::coward(int damage) {
     if (damage > 0) {
-        if (_health >= 50) {
-            cout << "attacked himself" << endl;
+        if (this->_health >= 50) {
+            cout << "goblin attacked himself" << endl;
             damage *= 2;
         }   
         else {
-            cout << "dodged from attack!";
+            cout << "goblin dodged from attack!";
             damage = 0;
         }
-            
     }
-    _health -= damage;
+    return damage;
 }
 
 int goblin::rand_generator() {

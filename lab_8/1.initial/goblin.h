@@ -8,15 +8,14 @@ public:
     goblin();
 	~goblin();
     int damage();
+    int get_hp();
     void take_damage(int damage);
-    void bomb();
-    void coward(int damage);
-    /*int get_hp();
-    void set_hp(int data);*/
-
+    int bomb(int enemy_health);
+    
 private:
     int _health, _attack, _attack_dist;
     static int call_counter;
+    int coward(int damage);
     int rand_generator();
 };
 

@@ -24,5 +24,17 @@ void game::attack(int who) {
     }
 }
 
-void game::trigger(int who) {
+void game::ability(int who) {
+    switch (who) {
+    case 1: {
+        this->_a.ability(this->_b);
+        break;
+    }
+    case 2: {
+        this->_b.ability(this->_a);
+        break;
+    }
+    default:
+        break;
+    }
 }

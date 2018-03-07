@@ -10,13 +10,18 @@ wizard::wizard() {
 
 wizard::~wizard() {}
 
+int wizard::get_hp() {
+    return this->_health;
+}
+
 void wizard::take_damage(int damage) {
-    if (damage > _health) {
-        _health = 0;
+    damage = this->magic_shield(damage);
+    if (damage > this->_health) {
+        this->_health = 0;
         cout << "wizard killed" << endl;
         return;
     }
-    _health -= damage;
+    this->_health -= damage;
 }
 
 int wizard::damage() {
@@ -27,36 +32,35 @@ void wizard::improvement() {
     cout << "selecting one of four improvements..." << endl;
     switch (rand_generator("active")) {
     case 1: {
-        _mana *= 2;
-        cout << "increase mana by 2 times" << endl;
+        this->_mana *= 2;
+        cout << "mana increased by 2 times" << endl;
         break;
     }
     case 2: {
-        _health *= 2;
-        cout << "increase health by 2 times" << endl;
+        this->_health *= 2;
+        cout << "health increased by 2 times" << endl;
         break;
     }
     case 3: {
-        _health = 0;
+        this->_health = 0;
         cout << "oohps, looks like suicide" << endl;
         break;
     }
     case 4: {
-        _armor = rand_generator("default");
+        this->_armor = rand_generator("default");
         cout << "create armor" << endl;
         break;
     }
     default:
         break;
     }
-
-    _mana = 0;
+    this->_mana = 0;
 }
 
 int wizard::magic_shield(int damage) {
     if (rand_generator("default") < 30) {
-        if (_mana > damage * 2) {
-            _mana -= damage * 2;
+        if (this->_mana > damage * 2) {
+            this->_mana -= damage * 2;
             cout << "magic shield reflected damage" << endl;
             return 0;
         }

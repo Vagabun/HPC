@@ -28,6 +28,15 @@ int player::get_damage() {
         return this->w.damage();
 }
 
+int player::get_hp() {
+    if (this->current_class == "knight")
+        return this->k.get_hp();
+    else if (this->current_class == "goblin")
+        return this->g.get_hp();
+    else if (this->current_class == "wizard")
+        return this->w.get_hp();
+}
+
 void player::take_damage(int damage) {
     if (this->current_class == "knight")
         this->k.take_damage(damage);
@@ -35,4 +44,13 @@ void player::take_damage(int damage) {
         this->g.take_damage(damage);
     else if (this->current_class == "wizard")
         this->w.take_damage(damage);
+}
+
+void player::ability(player &enemy) {
+    if (this->current_class == "knight")
+        this->k.eating();
+    else if (this->current_class == "goblin")
+        enemy.take_damage(this->g.bomb(enemy.get_hp()));
+    else if (this->current_class == "wizard")
+        this->w.improvement();
 }

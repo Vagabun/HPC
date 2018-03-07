@@ -13,7 +13,8 @@ void start() {
     player player2(choice);
 
     game g(player1, player2);
-    g.attack(1);
+    //g.attack(1);
+    player1.take_damage(25);
     cout << "hello";
 }
 
