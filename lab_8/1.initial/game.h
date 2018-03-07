@@ -9,6 +9,7 @@ public:
     ~game();
     void attack(int who);
     void ability(int who);
+    bool is_dead(int who);
 
 private:
     player _a, _b;

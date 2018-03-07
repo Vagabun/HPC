@@ -38,3 +38,20 @@ void game::ability(int who) {
         break;
     }
 }
+
+bool game::is_dead(int who) {
+    bool status;
+    switch (who) {
+    case 1: {
+        status = this->_a.is_dead();
+        break;
+    }
+    case 2: {
+        status = this->_b.is_dead();
+        break;
+    }
+    default:
+        break;
+    }
+    return status;
+}

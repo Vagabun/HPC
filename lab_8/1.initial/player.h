@@ -13,10 +13,11 @@ public:
     int get_hp();
     void take_damage(int damage);
     void ability(player &enemy);
-    string current_class;
+    bool is_dead();
 private:
     knight k; 
     goblin g; 
     wizard w;
+    string current_class;
 };
 

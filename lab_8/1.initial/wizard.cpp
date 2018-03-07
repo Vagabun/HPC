@@ -3,7 +3,7 @@
 wizard::wizard() {
     _health = 100;
     _attack = rand_generator("default");
-    _attack_dist = rand_generator("default");
+    _attack_dist = rand_generator("distance");
     _mana = rand_generator("default");
     _armor = 0;
 }
@@ -30,7 +30,7 @@ int wizard::damage() {
 
 void wizard::improvement() {
     cout << "selecting one of four improvements..." << endl;
-    switch (rand_generator("active")) {
+    switch (rand_generator("ability")) {
     case 1: {
         this->_mana *= 2;
         cout << "mana increased by 2 times" << endl;
@@ -77,8 +77,12 @@ int wizard::rand_generator(string choice) {
         uniform_int_distribution<> dist(1, 100);
         return dist(gen);
     }
-    else if (choice == "active") {
+    else if (choice == "ability") {
         uniform_int_distribution<> dist(1, 4);
+        return dist(gen);
+    }
+    else if (choice == "distance") {
+        uniform_int_distribution<> dist(1, 7);
         return dist(gen);
     }
 }

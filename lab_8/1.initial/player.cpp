@@ -54,3 +54,12 @@ void player::ability(player &enemy) {
     else if (this->current_class == "wizard")
         this->w.improvement();
 }
+
+bool player::is_dead() {
+    if (this->current_class == "knight")
+        return ((this->k.get_hp() == 0) ? true : false);
+    else if (this->current_class == "goblin")
+        return ((this->g.get_hp() == 0) ? true : false);
+    else if (this->current_class == "wizard")
+        return ((this->w.get_hp() == 0) ? true : false);
+}

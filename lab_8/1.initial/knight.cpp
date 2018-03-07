@@ -3,7 +3,7 @@
 knight::knight() {
     _health = 100;
     _attack = rand_generator("default");
-    _attack_dist = rand_generator("default");
+    _attack_dist = rand_generator("distance");
     _armor = 100;
 }
 
@@ -54,8 +54,8 @@ int knight::rand_generator(string choice) {
         uniform_int_distribution<> dist(1, 100);
         return dist(gen);
     }
-    else if (choice == "active") {
-        uniform_int_distribution<> dist(1, 4);
+    else if (choice == "distance") {
+        uniform_int_distribution<> dist(1, 7);
         return dist(gen);
     }
 }

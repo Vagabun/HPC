@@ -4,8 +4,8 @@ int goblin::call_counter = 0;
 
 goblin::goblin() {
     _health = 100;
-    _attack = rand_generator();
-    _attack_dist = rand_generator();
+    _attack = rand_generator("default");
+    _attack_dist = rand_generator("distance");
 }
 
 goblin::~goblin() {}
@@ -64,9 +64,15 @@ int goblin::coward(int damage) {
     return damage;
 }
 
-int goblin::rand_generator() {
+int goblin::rand_generator(string choice) {
     random_device rd;
     mt19937 gen(rd());
-    uniform_int_distribution<> dist(1, 100);
-    return dist(gen);
+    if (choice == "default") {
+        uniform_int_distribution<> dist(1, 100);
+        return dist(gen);
+    }
+    else if (choice == "distance") {
+        uniform_int_distribution<> dist(1, 7);
+        return dist(gen);
+    }
 }
