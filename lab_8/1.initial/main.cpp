@@ -1,32 +1,59 @@
 #include "game.h"
 
-void start() {
+int main() {
+
     string choice;
+    int current_player = 1, current_choice;
     cout << "player 1 - choose your hero" << endl;
     cout << "type 1 for Knight class, type 2 for Wizard class, type 3 for Goblin class" << endl;
     cin >> choice;
-
-    //write handler for incorrect input
-    
     player player1(choice);
-
-
     cout << "player 2 - choose your hero" << endl;
     cout << "type 1 for Knight class, type 2 for Wizard class, type 3 for Goblin class" << endl;
     cin >> choice;
     player player2(choice);
+
     game g(player1, player2);
-    g.attack(1);
-    //g.movement(2);
-    //g.attack(1);
-    //bool t = player1.is_dead();
-
-
-    cout << "hello";
-}
-
-int main() {
-
-    start();
+    cout << "game starting..." << endl;
+    while (1) {
+        cout << "player " << current_player << ", choose your next move" << endl;
+        cout << "type 1 for attack, type 2 to use ability of your character, type 3 for movement" << endl;
+        cin >> current_choice;
+        switch (current_choice) {
+        case 1: {
+            g.attack(current_player);
+            break;
+        }
+        case 2: {
+            g.ability(current_player);
+            break;
+        }
+        case 3: {
+            g.movement(current_player);
+            break;
+        }
+        default: {
+            cout << "wrong input, try again" << endl;
+            break;
+        }
+        }
+        if (g.is_dead(1) && g.is_dead(2)) {
+            cout << "STANDOFF!" << endl;
+            break;
+        }
+        else if (g.is_dead(1)) {
+            cout << "player 2 won!" << endl;
+            break;
+        }
+        else if (g.is_dead(2)) {
+            cout << "player 1 won!" << endl;
+            break;
+        }
+        if (current_player == 1)
+            current_player = 2;
+        else if (current_player == 2)
+            current_player = 1;
+    }
+    
     return 0;
 }
