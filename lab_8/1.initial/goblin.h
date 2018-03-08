@@ -14,7 +14,7 @@ public:
     
 private:
     int _health, _attack, _attack_dist;
-    static int call_counter;
+    int call_counter = 0;
     int coward(int damage);
     int rand_generator(string choice);
 };

@@ -14,6 +14,7 @@ public:
     void take_damage(int damage);
     void ability(player &enemy);
     bool is_dead();
+    int current_position;
 private:
     knight k; 
     goblin g; 

@@ -1,6 +1,6 @@
 #include "goblin.h"
 
-int goblin::call_counter = 0;
+//int goblin::call_counter = 0;
 
 goblin::goblin() {
     _health = 100;
