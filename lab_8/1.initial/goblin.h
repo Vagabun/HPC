@@ -9,6 +9,7 @@ public:
 	~goblin();
     int damage();
     int get_hp();
+    int get_attack_distance();
     void take_damage(int damage);
     int bomb(int enemy_health);
     

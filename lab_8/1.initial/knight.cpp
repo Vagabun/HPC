@@ -17,6 +17,10 @@ int knight::get_hp() {
     return this->_health;
 }
 
+int knight::get_attack_distance() {
+    return this->_attack_dist;
+}
+
 void knight::take_damage(int damage) {
     this->naked_knight();
     damage -= this->_armor;

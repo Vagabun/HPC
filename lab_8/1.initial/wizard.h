@@ -7,6 +7,7 @@ public:
     wizard();
     ~wizard();
     int get_hp();
+    int get_attack_distance();
     void take_damage(int damage);
     int damage();
     void improvement();

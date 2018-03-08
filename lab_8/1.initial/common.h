@@ -3,6 +3,7 @@
 #include <iostream>
 #include <random>
 #include <string>
+#include <cstdlib>
 
 using std::cin;
 using std::cout;

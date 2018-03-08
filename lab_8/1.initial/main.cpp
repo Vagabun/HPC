@@ -16,7 +16,7 @@ void start() {
     cin >> choice;
     player player2(choice);
     game g(player1, player2);
-    g.movement(1);
+    g.attack(1);
     //g.movement(2);
     //g.attack(1);
     //bool t = player1.is_dead();

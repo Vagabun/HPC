@@ -18,6 +18,10 @@ int goblin::get_hp() {
     return this->_health;
 }
 
+int goblin::get_attack_distance() {
+    return this->_attack_dist;
+}
+
 void goblin::take_damage(int damage) {
     damage = this->coward(damage);
     if (damage > this->_health) {

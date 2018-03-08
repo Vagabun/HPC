@@ -14,11 +14,17 @@ game::~game() {}
 void game::attack(int who) {
     switch (who) {
     case 1: {
-        this->_b.take_damage(this->_a.get_damage());
+        if (distance_handler(this->_a))
+            this->_b.take_damage(this->_a.get_damage());
+        else
+            cout << "enemy is too far for attack" << endl;
         break;
     }
     case 2: {
-        this->_a.take_damage(this->_b.get_damage());
+        if (distance_handler(this->_b))
+            this->_a.take_damage(this->_b.get_damage());
+        else
+            cout << "enemy is too far for attack" << endl;
         break;
     }
     default:
@@ -147,4 +153,11 @@ bool game::move_backward(int who) {
         break;
     }
     return result;
+}
+
+bool game::distance_handler(player &p) {
+    if (p.get_attack_distance() >= abs(this->_a.get_position() - this->_b.get_position()))
+        return true;
+    else 
+        return false;
 }

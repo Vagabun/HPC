@@ -8,6 +8,7 @@ public:
     ~knight();
     int damage();
     int get_hp();
+    int get_attack_distance();
     void take_damage(int damage);
     void eating();
 private:

@@ -41,6 +41,15 @@ int player::get_position() {
     return _current_position;
 }
 
+int player::get_attack_distance() {
+    if (this->current_class == "knight")
+        return this->k.get_attack_distance();
+    else if (this->current_class == "goblin")
+        return this->g.get_attack_distance();
+    else if (this->current_class == "wizard")
+        return this->w.get_attack_distance();
+}
+
 void player::set_position(int position) {
     _current_position = position;
 }

@@ -14,6 +14,10 @@ int wizard::get_hp() {
     return this->_health;
 }
 
+int wizard::get_attack_distance() {
+    return this->_attack_dist;
+}
+
 void wizard::take_damage(int damage) {
     damage = this->magic_shield(damage);
     if (damage > this->_health) {

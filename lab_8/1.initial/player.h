@@ -12,6 +12,7 @@ public:
     int get_damage();
     int get_hp();
     int get_position();
+    int get_attack_distance();
     void set_position(int position);
     void take_damage(int damage);
     void ability(player &enemy);

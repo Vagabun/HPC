@@ -17,5 +17,6 @@ private:
     const int left_border = 1, right_border = 7;
     bool move_forward(int who);
     bool move_backward(int who);
+    bool distance_handler(player &p);
 };
 
