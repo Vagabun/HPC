@@ -4,9 +4,9 @@ game::game() {}
 
 game::game(player p1, player p2) {
     _a = p1;
-    _a.current_position = 1;
+    _a.set_position(1);
     _b = p2;
-    _b.current_position = 7;
+    _b.set_position(7);
 }
 
 game::~game() {}
@@ -87,8 +87,8 @@ bool game::move_forward(int who) {
     bool result;
     switch (who) {
     case 1: {
-        if (this->_a.current_position + 1 <= right_border) {
-            this->_a.current_position += 1;
+        if (this->_a.get_position() + 1 <= right_border) {
+            this->_a.set_position(this->_a.get_position() + 1);
             result = true;
             cout << "your character moved forward" << endl;
         }
@@ -99,8 +99,8 @@ bool game::move_forward(int who) {
         break;
     }
     case 2: {
-        if (this->_b.current_position - 1 >= left_border) {
-            this->_b.current_position -= 1;
+        if (this->_b.get_position() - 1 >= left_border) {
+            this->_b.set_position(this->_b.get_position() - 1);
             result = true;
             cout << "your character moved forward" << endl;
         }
@@ -120,8 +120,8 @@ bool game::move_backward(int who) {
     bool result;
     switch (who) {
     case 1: {
-        if (this->_a.current_position - 1 >= left_border) {
-            this->_a.current_position -= 1;
+        if (this->_a.get_position() - 1 >= left_border) {
+            this->_a.set_position(this->_a.get_position() - 1);
             cout << "your character successfully moved backward" << endl;
             result = true;
         }
@@ -132,8 +132,8 @@ bool game::move_backward(int who) {
         break;
     }
     case 2: {
-        if (this->_b.current_position + 1 <= right_border) {
-            this->_b.current_position += 1;
+        if (this->_b.get_position() + 1 <= right_border) {
+            this->_b.set_position(this->_b.get_position() + 1);
             result = true;
             cout << "your character successfully moved backward" << endl;
         }

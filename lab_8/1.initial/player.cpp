@@ -37,6 +37,14 @@ int player::get_hp() {
         return this->w.get_hp();
 }
 
+int player::get_position() {
+    return _current_position;
+}
+
+void player::set_position(int position) {
+    _current_position = position;
+}
+
 void player::take_damage(int damage) {
     if (this->current_class == "knight")
         this->k.take_damage(damage);
