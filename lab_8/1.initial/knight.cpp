@@ -35,7 +35,7 @@ void knight::take_damage(int damage) {
     }
     this->_health -= damage;
     this->_armor /= 2;
-    cout << "enemy knight took " << damage << " damage" << endl;
+    cout << "knight took " << damage << " damage" << endl;
     cout << "his current health is " << this->_health << " points" << endl;
 }
 
@@ -53,8 +53,10 @@ void knight::eating() {
 void knight::naked_knight() {
     int chance = rand_generator("default");
     if (chance <= 30 && this->_armor > 0) {
+        cout << endl;
         cout << "time for blood..." << endl;
         cout << "attack increased by two times" << endl;
+        cout << endl;
         this->_armor = 0;
         this->_attack *= 2;
     }

@@ -1,5 +1,7 @@
 #include "game.h"
 
+
+
 int main() {
 
     string choice;
@@ -38,15 +40,15 @@ int main() {
         }
         }
         if (g.is_dead(1) && g.is_dead(2)) {
-            cout << "STANDOFF!" << endl;
+            cout << endl << "STANDOFF!" << endl;
             break;
         }
         else if (g.is_dead(1)) {
-            cout << "player 2 won!" << endl;
+            cout << endl << "player 2 won!" << endl;
             break;
         }
         else if (g.is_dead(2)) {
-            cout << "player 1 won!" << endl;
+            cout << endl << "player 1 won!" << endl;
             break;
         }
         if (current_player == 1)

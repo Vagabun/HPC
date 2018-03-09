@@ -20,13 +20,20 @@ int wizard::get_attack_distance() {
 
 void wizard::take_damage(int damage) {
     damage = this->magic_shield(damage);
+    if (this->_armor) {
+        damage -= this->_armor;
+        if (damage < 0) {
+            damage = 0;
+            cout << "all of the damage was consumed by enemy armor" << endl;
+        }
+    }
     if (damage >= this->_health) {
         this->_health = 0;
         cout << "wizard killed!" << endl;
         return;
     }
     this->_health -= damage;
-    cout << "enemy wizard took " << damage << " damage" << endl;
+    cout << "wizard took " << damage << " damage" << endl;
     cout << "his current health is " << this->_health << " points" << endl;
 }
 
@@ -53,8 +60,8 @@ void wizard::improvement() {
         break;
     }
     case 4: {
-        this->_armor = rand_generator("default");
-        cout << "create armor" << endl;
+        this->_armor = 100;
+        cout << "created armor" << endl;
         break;
     }
     default:
@@ -67,11 +74,17 @@ int wizard::magic_shield(int damage) {
     if (rand_generator("default") < 30) {
         if (this->_mana > damage * 2) {
             this->_mana -= damage * 2;
+            cout << endl;
             cout << "magic shield reflected damage" << endl;
+            cout << endl;
             return 0;
         }
-        else
-            cout << "not enough mana" << endl;
+        else {
+            cout << endl;
+            cout << "not enough mana for magic shield" << endl;
+            cout << endl;
+        }
+            
     }
     return damage;
 }

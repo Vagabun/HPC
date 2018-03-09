@@ -93,25 +93,25 @@ bool game::move_forward(int who) {
     bool result;
     switch (who) {
     case 1: {
-        if (this->_a.get_position() + 1 <= right_border) {
+        if (this->_a.get_position() + 1 <= right_border && this->_a.get_position() + 1 != this->_b.get_position()) {
             this->_a.set_position(this->_a.get_position() + 1);
             result = true;
             cout << "your character moved forward" << endl;
         }
         else {
-            cout << "your character can't move forward, reached the right border of arena, try again" << endl;
+            cout << "your character can't move forward, reached the right border of arena or position was already taken by your enemy, try again" << endl;
             result = false;
         } 
         break;
     }
     case 2: {
-        if (this->_b.get_position() - 1 >= left_border) {
+        if (this->_b.get_position() - 1 >= left_border && this->_b.get_position() - 1 != this->_a.get_position()) {
             this->_b.set_position(this->_b.get_position() - 1);
             result = true;
             cout << "your character moved forward" << endl;
         }
         else {
-            cout << "your character can't move forward, reached the left border of arena, try again" << endl;
+            cout << "your character can't move forward, reached the left border of arena or position was already taken by your enemy, try again" << endl;
             result = false;
         }
         break;
@@ -126,25 +126,25 @@ bool game::move_backward(int who) {
     bool result;
     switch (who) {
     case 1: {
-        if (this->_a.get_position() - 1 >= left_border) {
+        if (this->_a.get_position() - 1 >= left_border && this->_a.get_position() - 1 != this->_b.get_position()) {
             this->_a.set_position(this->_a.get_position() - 1);
-            cout << "your character successfully moved backward" << endl;
+            cout << "your character moved backward" << endl;
             result = true;
         }
         else {
-            cout << "your character can't move backward, reached the left border of arena, try again" << endl;
+            cout << "your character can't move backward, reached the left border of arena or position was already taken by your enemy, try again" << endl;
             result = false;
         }
         break;
     }
     case 2: {
-        if (this->_b.get_position() + 1 <= right_border) {
+        if (this->_b.get_position() + 1 <= right_border && this->_b.get_position() + 1 != this->_a.get_position()) {
             this->_b.set_position(this->_b.get_position() + 1);
             result = true;
-            cout << "your character successfully moved backward" << endl;
+            cout << "your character moved backward" << endl;
         }
         else {
-            cout << "your character can't move backward, reached the right border of arena, try again" << endl;
+            cout << "your character can't move backward, reached the right border of arena or position was already taken by your enemy, try again" << endl;
             result = false;
         }
         break;

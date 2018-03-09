@@ -30,7 +30,7 @@ void goblin::take_damage(int damage) {
         return;
     }
     this->_health -= damage;
-    cout << "enemy goblin took " << damage << " damage" << endl;
+    cout << "goblin took " << damage << " damage" << endl;
     cout << "his current health is " << this->_health << " points" << endl;
 }
 
@@ -59,11 +59,15 @@ int goblin::bomb(int enemy_health) {
 int goblin::coward(int damage) {
     if (damage > 0) {
         if (this->_health >= 50) {
+            cout << endl;
             cout << "goblin attacked himself" << endl;
+            cout << endl;
             damage *= 2;
         }   
         else {
+            cout << endl;
             cout << "goblin dodged from attack!";
+            cout << endl;
             damage = 0;
         }
     }
