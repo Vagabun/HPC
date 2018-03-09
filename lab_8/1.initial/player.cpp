@@ -57,6 +57,10 @@ int player::get_attack_distance() {
         return this->w.get_attack_distance();
 }
 
+string player::get_type() {
+    return this->current_class;
+}
+
 void player::set_position(int position) {
     _current_position = position;
 }

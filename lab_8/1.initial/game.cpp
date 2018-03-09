@@ -89,6 +89,33 @@ void game::movement(int who) {
     }
 }
 
+void game::check_status(int who) {
+    switch (who) {
+    case 1: {
+        cout << endl;
+        cout << "current class: " << this->_a.get_type() << endl;
+        cout << "current health: " << this->_a.get_hp() << endl;
+        cout << "current position: " << this->_a.get_position() << endl;
+        cout << "attack: " << this->_a.get_damage() << endl;
+        cout << "attack distance: " << this->_a.get_attack_distance() << endl;
+        cout << endl;
+        break;
+    }
+    case 2: {
+        cout << endl;
+        cout << "current class: " << this->_b.get_type() << endl;
+        cout << "current health: " << this->_b.get_hp() << endl;
+        cout << "current position: " << this->_b.get_position() << endl;
+        cout << "attack: " << this->_b.get_damage() << endl;
+        cout << "attack distance: " << this->_b.get_attack_distance() << endl;
+        cout << endl;
+        break;
+    }
+    default:
+        break;
+    }
+}
+
 bool game::move_forward(int who) {
     bool result;
     switch (who) {

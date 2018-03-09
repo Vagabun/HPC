@@ -11,6 +11,7 @@ public:
     void ability(int who);
     bool is_dead(int who);
     void movement(int who);
+    void check_status(int who);
 
 private:
     player _a, _b;

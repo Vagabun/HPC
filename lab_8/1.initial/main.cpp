@@ -1,16 +1,13 @@
 #include "game.h"
 
-
-
-int main() {
-
+void start() {
     string choice;
     int current_player = 1, current_choice;
-    cout << "player 1 - choose your hero" << endl;
+    cout << "player 1 - choose your hero:" << endl;
     cout << "type 1 for Knight class, type 2 for Wizard class, type 3 for Goblin class" << endl;
     cin >> choice;
     player player1(choice);
-    cout << "player 2 - choose your hero" << endl;
+    cout << "player 2 - choose your hero:" << endl;
     cout << "type 1 for Knight class, type 2 for Wizard class, type 3 for Goblin class" << endl;
     cin >> choice;
     player player2(choice);
@@ -19,7 +16,7 @@ int main() {
     cout << "game starting..." << endl << endl;
     while (1) {
         cout << "player " << current_player << ", choose your next move:" << endl;
-        cout << "type 1 for attack, type 2 to use ability of your character, type 3 for movement" << endl;
+        cout << "type 1 for attack, type 2 to use ability of your character, type 3 for movement, type 4 to check status of your character" << endl;
         cin >> current_choice;
         switch (current_choice) {
         case 1: {
@@ -33,6 +30,10 @@ int main() {
         case 3: {
             g.movement(current_player);
             break;
+        }
+        case 4: {
+            g.check_status(current_player);
+            continue;
         }
         default: {
             cout << "wrong input, try again" << endl;
@@ -57,6 +58,10 @@ int main() {
             current_player = 1;
         cout << endl;
     }
+}
+
+int main() {
     
+    start();
     return 0;
 }
