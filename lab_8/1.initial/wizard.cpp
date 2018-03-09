@@ -20,12 +20,14 @@ int wizard::get_attack_distance() {
 
 void wizard::take_damage(int damage) {
     damage = this->magic_shield(damage);
-    if (damage > this->_health) {
+    if (damage >= this->_health) {
         this->_health = 0;
-        cout << "wizard killed" << endl;
+        cout << "wizard killed!" << endl;
         return;
     }
     this->_health -= damage;
+    cout << "enemy wizard took " << damage << " damage" << endl;
+    cout << "his current health is " << this->_health << " points" << endl;
 }
 
 int wizard::damage() {

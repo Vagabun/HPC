@@ -24,12 +24,14 @@ int goblin::get_attack_distance() {
 
 void goblin::take_damage(int damage) {
     damage = this->coward(damage);
-    if (damage > this->_health) {
+    if (damage >= this->_health) {
         this->_health = 0;
-        cout << "goblin killed" << endl;
+        cout << "goblin killed!" << endl;
         return;
     }
     this->_health -= damage;
+    cout << "enemy goblin took " << damage << " damage" << endl;
+    cout << "his current health is " << this->_health << " points" << endl;
 }
 
 int goblin::bomb(int enemy_health) {

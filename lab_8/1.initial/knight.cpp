@@ -24,10 +24,19 @@ int knight::get_attack_distance() {
 void knight::take_damage(int damage) {
     this->naked_knight();
     damage -= this->_armor;
-    if (damage < 0)
-        damage = 0;
+    if (damage < 0) {
+        cout << "all of the damage was consumed by enemy armor" << endl;
+        return;
+    }
+    else if (damage >= this->_health) {
+        this->_health = 0;
+        cout << "knight killed!" << endl;
+        return;
+    }
     this->_health -= damage;
     this->_armor /= 2;
+    cout << "enemy knight took " << damage << " damage" << endl;
+    cout << "his current health is " << this->_health << " points" << endl;
 }
 
 void knight::eating() {

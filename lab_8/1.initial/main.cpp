@@ -14,9 +14,9 @@ int main() {
     player player2(choice);
 
     game g(player1, player2);
-    cout << "game starting..." << endl;
+    cout << "game starting..." << endl << endl;
     while (1) {
-        cout << "player " << current_player << ", choose your next move" << endl;
+        cout << "player " << current_player << ", choose your next move:" << endl;
         cout << "type 1 for attack, type 2 to use ability of your character, type 3 for movement" << endl;
         cin >> current_choice;
         switch (current_choice) {
@@ -53,6 +53,7 @@ int main() {
             current_player = 2;
         else if (current_player == 2)
             current_player = 1;
+        cout << endl;
     }
     
     return 0;
