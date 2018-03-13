@@ -1,4 +1,4 @@
-#include "game.h"
+#include "controllers/game.h"
 
 void init() {
     string choice;

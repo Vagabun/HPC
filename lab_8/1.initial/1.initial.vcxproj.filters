@@ -27,43 +27,43 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="common.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="goblin.h">
-      <Filter>Header Files\characters</Filter>
-    </ClInclude>
-    <ClInclude Include="knight.h">
-      <Filter>Header Files\characters</Filter>
-    </ClInclude>
-    <ClInclude Include="wizard.h">
-      <Filter>Header Files\characters</Filter>
-    </ClInclude>
-    <ClInclude Include="game.h">
-      <Filter>Header Files\controllers</Filter>
-    </ClInclude>
-    <ClInclude Include="player.h">
-      <Filter>Header Files\controllers</Filter>
-    </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="goblin.cpp">
-      <Filter>Source Files\characters</Filter>
-    </ClCompile>
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="wizard.cpp">
-      <Filter>Source Files\characters</Filter>
-    </ClCompile>
-    <ClCompile Include="knight.cpp">
-      <Filter>Source Files\characters</Filter>
-    </ClCompile>
-    <ClCompile Include="game.cpp">
+    <ClCompile Include="controllers\game.cpp">
       <Filter>Source Files\controllers</Filter>
     </ClCompile>
-    <ClCompile Include="player.cpp">
+    <ClCompile Include="controllers\player.cpp">
       <Filter>Source Files\controllers</Filter>
     </ClCompile>
+    <ClCompile Include="characters\goblin.cpp">
+      <Filter>Source Files\characters</Filter>
+    </ClCompile>
+    <ClCompile Include="characters\knight.cpp">
+      <Filter>Source Files\characters</Filter>
+    </ClCompile>
+    <ClCompile Include="characters\wizard.cpp">
+      <Filter>Source Files\characters</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="characters\goblin.h">
+      <Filter>Header Files\characters</Filter>
+    </ClInclude>
+    <ClInclude Include="characters\knight.h">
+      <Filter>Header Files\characters</Filter>
+    </ClInclude>
+    <ClInclude Include="characters\wizard.h">
+      <Filter>Header Files\characters</Filter>
+    </ClInclude>
+    <ClInclude Include="characters\common.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="controllers\game.h">
+      <Filter>Header Files\controllers</Filter>
+    </ClInclude>
+    <ClInclude Include="controllers\player.h">
+      <Filter>Header Files\controllers</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

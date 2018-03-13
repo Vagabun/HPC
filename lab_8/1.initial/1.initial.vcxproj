@@ -118,20 +118,20 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="game.h" />
-    <ClInclude Include="goblin.h" />
-    <ClInclude Include="common.h" />
-    <ClInclude Include="knight.h" />
-    <ClInclude Include="player.h" />
-    <ClInclude Include="wizard.h" />
+    <ClCompile Include="characters\goblin.cpp" />
+    <ClCompile Include="characters\knight.cpp" />
+    <ClCompile Include="characters\wizard.cpp" />
+    <ClCompile Include="controllers\game.cpp" />
+    <ClCompile Include="controllers\player.cpp" />
+    <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="game.cpp" />
-    <ClCompile Include="goblin.cpp" />
-    <ClCompile Include="knight.cpp" />
-    <ClCompile Include="main.cpp" />
-    <ClCompile Include="player.cpp" />
-    <ClCompile Include="wizard.cpp" />
+    <ClInclude Include="characters\common.h" />
+    <ClInclude Include="characters\goblin.h" />
+    <ClInclude Include="characters\knight.h" />
+    <ClInclude Include="characters\wizard.h" />
+    <ClInclude Include="controllers\game.h" />
+    <ClInclude Include="controllers\player.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

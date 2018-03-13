@@ -1,8 +1,8 @@
 #pragma once
 
-#include "knight.h"
-#include "goblin.h"
-#include "wizard.h"
+#include "../characters/knight.h"
+#include "../characters/goblin.h"
+#include "../characters/wizard.h"
 
 class player {
 public:
