@@ -9,6 +9,7 @@ public:
     int get_hp() const;
     int damage() const;
     int get_attack_distance() const;
+    int get_armor() const;
     void take_damage(int damage);
     void improvement();
 private:

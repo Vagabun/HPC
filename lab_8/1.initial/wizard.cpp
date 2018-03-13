@@ -18,6 +18,10 @@ int wizard::get_attack_distance() const {
     return this->_attack_dist;
 }
 
+int wizard::get_armor() const {
+    return this->_armor;
+}
+
 int wizard::damage() const {
     return _attack;
 }

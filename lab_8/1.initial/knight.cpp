@@ -21,12 +21,16 @@ int knight::get_attack_distance() const {
     return this->_attack_dist;
 }
 
+int knight::get_armor() const {
+    return this->_armor;
+}
+
 void knight::take_damage(int damage) {
     this->naked_knight();
     damage -= this->_armor;
     if (damage < 0) {
         cout << "all of the damage was consumed by enemy armor" << endl;
-        return;
+        damage = 0;
     }
     else if (damage >= this->_health) {
         this->_health = 0;

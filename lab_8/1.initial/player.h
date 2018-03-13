@@ -13,6 +13,7 @@ public:
     int get_hp() const;
     int get_position() const;
     int get_attack_distance() const;
+    int get_armor() const;
     string get_type() const;
     void set_position(int position);
     void take_damage(int damage);

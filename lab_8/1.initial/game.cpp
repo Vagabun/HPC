@@ -65,7 +65,7 @@ bool game::is_dead(int who) {
 void game::movement(int who) {
     int choice;
     bool result;
-    while (1) {
+    while (true) {
         cout << "choose direction:\ntype 1 to move forward, type 2 to move backward" << endl;
         cin >> choice;
         switch (choice) {
@@ -96,6 +96,7 @@ void game::check_status(int who) {
         cout << "current position: " << this->_a.get_position() << endl;
         cout << "attack: " << this->_a.get_damage() << endl;
         cout << "attack distance: " << this->_a.get_attack_distance() << endl;
+        cout << "armor: " << this->_a.get_armor() << endl;
         cout << endl;
         break;
     }
@@ -106,11 +107,56 @@ void game::check_status(int who) {
         cout << "current position: " << this->_b.get_position() << endl;
         cout << "attack: " << this->_b.get_damage() << endl;
         cout << "attack distance: " << this->_b.get_attack_distance() << endl;
+        cout << "armor: " << this->_b.get_armor() << endl;
         cout << endl;
         break;
     }
     default:
         break;
+    }
+}
+
+void game::start_game() {
+    int current_choice;
+    while (true) {
+        cout << "player " << this->_current_player << ", choose your next move:" << endl;
+        cout << "type 1 for attack, type 2 to use ability of your character, type 3 for movement, type 4 to check status of your character" << endl;
+        cin >> current_choice;
+        switch (current_choice) {
+        case 1: {
+            this->attack(this->_current_player);
+            break;
+        }
+        case 2: {
+            this->ability(this->_current_player);
+            break;
+        }
+        case 3: {
+            this->movement(this->_current_player);
+            break;
+        }
+        case 4: {
+            this->check_status(this->_current_player);
+            continue;
+        }
+        default: {
+            cout << "wrong input, try again" << endl;
+            break;
+        }
+        }
+        if (this->is_dead(1) && this->is_dead(2)) {
+            cout << endl << "STANDOFF!" << endl;
+            break;
+        }
+        else if (this->is_dead(1)) {
+            cout << endl << "player 2 won!" << endl;
+            break;
+        }
+        else if (this->is_dead(2)) {
+            cout << endl << "player 1 won!" << endl;
+            break;
+        }
+        this->switch_player();
     }
 }
 
@@ -182,4 +228,11 @@ bool game::move_backward(int who) {
 
 bool game::distance_handler(player &p) {
     return p.get_attack_distance() >= abs(this->_a.get_position() - this->_b.get_position());
+}
+
+void game::switch_player() {
+    if (this->_current_player == 1)
+        this->_current_player = 2;
+    else
+        this->_current_player = 1;
 }

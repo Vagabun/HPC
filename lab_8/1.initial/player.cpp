@@ -3,7 +3,7 @@
 player::player() = default;
 
 player::player(string choice) {
-    while (1) {
+    while (true) {
         if (choice == "1") {
             cout << "you have chosen Knight class" << endl << endl;
             current_class = "knight";
@@ -55,6 +55,15 @@ int player::get_attack_distance() const {
         return this->g.get_attack_distance();
     else if (this->current_class == "wizard")
         return this->w.get_attack_distance();
+}
+
+int player::get_armor() const {
+    if (this->current_class == "knight")
+        return this->k.get_armor();
+    else if (this->current_class == "wizard")
+        return this->w.get_armor();
+    else
+        return 0;
 }
 
 string player::get_type() const {
