@@ -16,25 +16,34 @@
     <Filter Include="Source Files\characters">
       <UniqueIdentifier>{07fd0cd8-5139-4bdf-b045-69bb64d2fc3c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\characters">
+      <UniqueIdentifier>{0bff5df8-1fb0-4428-bf3e-70360c3637e7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\controllers">
+      <UniqueIdentifier>{280a2269-dd4a-452c-b03c-3224a0dd00e2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\controllers">
+      <UniqueIdentifier>{a4d023b6-0cb7-4286-868c-553d31e9d7c4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="goblin.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="common.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="wizard.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="goblin.h">
+      <Filter>Header Files\characters</Filter>
     </ClInclude>
     <ClInclude Include="knight.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\characters</Filter>
     </ClInclude>
-    <ClInclude Include="player.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="wizard.h">
+      <Filter>Header Files\characters</Filter>
     </ClInclude>
     <ClInclude Include="game.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\controllers</Filter>
+    </ClInclude>
+    <ClInclude Include="player.h">
+      <Filter>Header Files\controllers</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -50,11 +59,11 @@
     <ClCompile Include="knight.cpp">
       <Filter>Source Files\characters</Filter>
     </ClCompile>
-    <ClCompile Include="player.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="game.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\controllers</Filter>
+    </ClCompile>
+    <ClCompile Include="player.cpp">
+      <Filter>Source Files\controllers</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

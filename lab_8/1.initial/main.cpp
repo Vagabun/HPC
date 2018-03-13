@@ -14,7 +14,7 @@ void start() {
 
     game g(player1, player2);
     cout << "game starting..." << endl << endl;
-    while (1) {
+    while (true) {
         cout << "player " << current_player << ", choose your next move:" << endl;
         cout << "type 1 for attack, type 2 to use ability of your character, type 3 for movement, type 4 to check status of your character" << endl;
         cin >> current_choice;

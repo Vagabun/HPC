@@ -1,15 +1,13 @@
 #include "game.h"
 
-game::game() {}
-
-game::game(player p1, player p2) {
+game::game(player &p1, player &p2) {
     _a = p1;
     _a.set_position(1);
     _b = p2;
     _b.set_position(7);
 }
 
-game::~game() {}
+game::~game() = default;
 
 void game::attack(int who) {
     switch (who) {
@@ -183,8 +181,5 @@ bool game::move_backward(int who) {
 }
 
 bool game::distance_handler(player &p) {
-    if (p.get_attack_distance() >= abs(this->_a.get_position() - this->_b.get_position()))
-        return true;
-    else 
-        return false;
+    return p.get_attack_distance() >= abs(this->_a.get_position() - this->_b.get_position());
 }

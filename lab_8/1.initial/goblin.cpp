@@ -8,17 +8,17 @@ goblin::goblin() {
     _attack_dist = rand_generator("distance");
 }
 
-goblin::~goblin() {}
+goblin::~goblin() = default;
 
-int goblin::damage() {
+int goblin::damage() const {
     return this->_attack;
 }
 
-int goblin::get_hp() {
+int goblin::get_hp() const {
     return this->_health;
 }
 
-int goblin::get_attack_distance() {
+int goblin::get_attack_distance() const {
     return this->_attack_dist;
 }
 

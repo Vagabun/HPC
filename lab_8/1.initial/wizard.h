@@ -6,10 +6,10 @@ class wizard {
 public:
     wizard();
     ~wizard();
-    int get_hp();
-    int get_attack_distance();
+    int get_hp() const;
+    int damage() const;
+    int get_attack_distance() const;
     void take_damage(int damage);
-    int damage();
     void improvement();
 private:
     int _health, _attack, _attack_dist, _armor, _mana;

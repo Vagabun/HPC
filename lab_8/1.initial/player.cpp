@@ -1,6 +1,6 @@
 #include "player.h"
 
-player::player() {}
+player::player() = default;
 
 player::player(string choice) {
     while (1) {
@@ -24,9 +24,9 @@ player::player(string choice) {
     }
 }
 
-player::~player() {}
+player::~player() = default;
 
-int player::get_damage() {
+int player::get_damage() const {
     if (this->current_class == "knight")
         return this->k.damage();
     else if (this->current_class == "goblin")
@@ -35,7 +35,7 @@ int player::get_damage() {
         return this->w.damage();
 }
 
-int player::get_hp() {
+int player::get_hp() const {
     if (this->current_class == "knight")
         return this->k.get_hp();
     else if (this->current_class == "goblin")
@@ -44,11 +44,11 @@ int player::get_hp() {
         return this->w.get_hp();
 }
 
-int player::get_position() {
+int player::get_position() const {
     return _current_position;
 }
 
-int player::get_attack_distance() {
+int player::get_attack_distance() const {
     if (this->current_class == "knight")
         return this->k.get_attack_distance();
     else if (this->current_class == "goblin")
@@ -57,7 +57,7 @@ int player::get_attack_distance() {
         return this->w.get_attack_distance();
 }
 
-string player::get_type() {
+string player::get_type() const {
     return this->current_class;
 }
 
@@ -83,11 +83,11 @@ void player::ability(player &enemy) {
         this->w.improvement();
 }
 
-bool player::is_dead() {
+bool player::is_dead() const {
     if (this->current_class == "knight")
-        return ((this->k.get_hp() == 0) ? true : false);
+        return (this->k.get_hp() == 0);
     else if (this->current_class == "goblin")
-        return ((this->g.get_hp() == 0) ? true : false);
+        return (this->g.get_hp() == 0);
     else if (this->current_class == "wizard")
-        return ((this->w.get_hp() == 0) ? true : false);
+        return (this->w.get_hp() == 0);
 }

@@ -8,14 +8,18 @@ wizard::wizard() {
     _armor = 0;
 }
 
-wizard::~wizard() {}
+wizard::~wizard() = default;
 
-int wizard::get_hp() {
+int wizard::get_hp() const {
     return this->_health;
 }
 
-int wizard::get_attack_distance() {
+int wizard::get_attack_distance() const {
     return this->_attack_dist;
+}
+
+int wizard::damage() const {
+    return _attack;
 }
 
 void wizard::take_damage(int damage) {
@@ -35,10 +39,6 @@ void wizard::take_damage(int damage) {
     this->_health -= damage;
     cout << "wizard took " << damage << " damage" << endl;
     cout << "his current health is " << this->_health << " points" << endl;
-}
-
-int wizard::damage() {
-    return _attack;
 }
 
 void wizard::improvement() {

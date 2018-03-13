@@ -9,15 +9,15 @@ public:
     player();
     player(string choice);
     ~player();
-    int get_damage();
-    int get_hp();
-    int get_position();
-    int get_attack_distance();
-    string get_type();
+    int get_damage() const;
+    int get_hp() const;
+    int get_position() const;
+    int get_attack_distance() const;
+    string get_type() const;
     void set_position(int position);
     void take_damage(int damage);
     void ability(player &enemy);
-    bool is_dead();
+    bool is_dead() const;
 private:
     knight k; 
     goblin g; 

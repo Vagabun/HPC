@@ -7,9 +7,9 @@ class goblin {
 public:
     goblin();
 	~goblin();
-    int damage();
-    int get_hp();
-    int get_attack_distance();
+    int damage() const;
+    int get_hp() const;
+    int get_attack_distance() const;
     void take_damage(int damage);
     int bomb(int enemy_health);
     

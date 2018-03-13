@@ -6,9 +6,9 @@ class knight {
 public:
     knight();
     ~knight();
-    int damage();
-    int get_hp();
-    int get_attack_distance();
+    int damage() const;
+    int get_hp() const;
+    int get_attack_distance() const;
     void take_damage(int damage);
     void eating();
 private:

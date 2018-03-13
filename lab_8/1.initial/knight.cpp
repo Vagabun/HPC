@@ -7,17 +7,17 @@ knight::knight() {
     _armor = 100;
 }
 
-knight::~knight() {}
+knight::~knight() = default;
 
-int knight::damage() {
+int knight::damage() const {
     return this->_attack;
 }
 
-int knight::get_hp() {
+int knight::get_hp() const {
     return this->_health;
 }
 
-int knight::get_attack_distance() {
+int knight::get_attack_distance() const {
     return this->_attack_dist;
 }
 
