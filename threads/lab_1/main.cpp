@@ -31,8 +31,8 @@ public:
         int gap = dsize / nthreads, a = 0, b = a + gap;
         for (int i = 0; i < nthreads; i++) {
             workers.push_back(thread([&source1, &source2, &result, a, b]() {
-                for (int i = a; i < b; ++i)
-                    result[a] = source1[a] * source2[a];
+                for (int j = a; j < b; ++j)
+                    result[j] = source1[j] * source2[j];
             }));
             a = b, b += gap;
         }
@@ -50,49 +50,43 @@ private:
     vector<thread> workers;
 };
 
-void sum(int a, int b) {
-    cout << a + b << endl;
-    return;
+int threads(int nthreads, int dsize) {
+    for (int i = nthreads; i >= 2; i--) {
+        if (dsize % i == 0)
+            return i;
+    }
+    return 0;
 }
 
-void multiply(vector<int> &source1, vector<int> &source2, vector<int> &result, int a, int b) {
-    for (int i = a; i < b; ++i)
-        result[a] = source1[a] * source2[a];
+void change_capacity(int &dsize, vector<int> &a, vector<int> &b, vector<int> &result) {
+    dsize += 1;
+    a.push_back(0);
+    b.push_back(0);
+    result.push_back(0);
 }
 
 int main() {
-    /*int a = 0;
-    thread t(sum, std::ref(a), 25);*/
-    //t.join();
-    
-    /*thread_guard g(move(t));
-    cout << a << endl;*/
-    //int a = 0, b = 0, c = 0;
-    //thread_guard g(thread([&a]() { a += 25; }));
-    
-    /*thread_guard g(thread([&a]() { a += 25; }));
-    thread_guard c(thread([&a]() { a += 25; }));
-    thread_guard d(thread([&a]() { a += 25; }));
-    thread_guard e(thread([&a]() { a += 25; }));
-    thread_guard f(thread([&a]() { a += 25; }));*/
+
+    /*int size = 7;
+    vector<int> a = { 1, 2, 3, 1, 2, 3, 4 };
+    vector<int> b = { 2, 2, 3, 2, 2, 3, 4 };
+    vector<int> result(size);*/
 
     int size = 3;
     vector<int> a = { 1, 2, 3 };
     vector<int> b = { 2, 2, 3 };
-    vector<int> result(3);
+    vector<int> result(size);
 
-    //int ntreads = thread::hardware_concurrency();
-    new_thread_guard(3, 3, a, b, result);
+    if (threads(thread::hardware_concurrency(), size))
+        new_thread_guard(threads(thread::hardware_concurrency(), size), size, a, b, result);
+    else {
+        change_capacity(size, a, b, result);
+        new_thread_guard(threads(thread::hardware_concurrency(), size), size, a, b, result);
+    }
 
     int sum = 0;
     for (auto &i : result)
         sum += i;
-
-    /*thread t1(multiply, ref(a), ref(b), ref(result), 0, 1), t2(multiply, ref(a), ref(b), ref(result), 1, 2), t3(multiply, ref(a), ref(b), ref(result), 2, 3);
-    cout << "hello" << endl;
-    t1.join();
-    t2.join();
-    t3.join();*/
 
     cout << sum << endl;
 
