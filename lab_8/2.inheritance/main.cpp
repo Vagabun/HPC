@@ -1,4 +1,5 @@
-#include "characters/character.h"
+#include "characters\character.h"
+#include "characters\fresh_knight.h"
 
 void init() {
     /*string choice;
@@ -20,6 +21,7 @@ int main() {
     
     //init();
 
-    character a;
+    character *hero;
+    hero = new fresh_knight;
     return 0;
 }
