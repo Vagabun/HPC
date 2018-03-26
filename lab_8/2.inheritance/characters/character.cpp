@@ -1,10 +1,32 @@
 #include "character.h"
 
-character::character() : _health(100), _attack(rand_gen("default")), _attack_distance(rand_gen("distance")) {}
+character::character() : _health(100), _attack(rand("default")), _attack_distance(rand("distance")) {}
 
 character::~character() = default;
 
-int character::rand_gen(const string &&choice) const {
+int character::get_attack() const {
+    return _attack;
+}
+
+int character::get_attack_distance() const {
+    return _attack_distance;
+}
+
+int character::get_health() const {
+    return _health;
+}
+
+void character::take_damage(int damage) {
+    cout << "character took " << damage << endl;
+    if (damage > _health) {
+        _health = 0;
+        return;
+    }
+    _health -= damage;
+    cout << "current health is " << _health << " points" << endl;
+}
+
+int character::rand(const string &&choice) const {
     random_device rd;
     mt19937 gen(rd());
     if (choice == "default") {

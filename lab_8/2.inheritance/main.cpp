@@ -23,5 +23,8 @@ int main() {
 
     character *hero;
     hero = new fresh_knight;
+    hero->active_ability();
+
+    //fresh_knight b;
     return 0;
 }
