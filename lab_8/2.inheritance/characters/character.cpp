@@ -2,7 +2,10 @@
 
 character::character() : _health(100), _attack(rand("default")), _attack_distance(rand("distance")) {}
 
-character::~character() = default;
+character::~character() {
+    /*if (this != nullptr)
+        delete this;*/
+};
 
 int character::get_attack() const {
     return _attack;
@@ -14,6 +17,18 @@ int character::get_attack_distance() const {
 
 int character::get_health() const {
     return _health;
+}
+
+int character::get_armor() const {
+    return 0;
+}
+
+void character::active_ability() {
+    return;
+}
+
+int character::active_ability(int enemy_health) {
+    return 0;
 }
 
 void character::take_damage(int damage) {

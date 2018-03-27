@@ -1,5 +1,6 @@
 #include "characters\character.h"
 #include "characters\fresh_knight.h"
+#include "characters\fresh_goblin.h"
 
 void init() {
     /*string choice;
@@ -21,10 +22,14 @@ int main() {
     
     //init();
 
-    character *hero;
-    hero = new fresh_knight;
-    hero->active_ability();
+    character *hero1 = nullptr;
+    character *hero2 = nullptr;
 
+    hero1 = new fresh_knight;
+    hero2 = new fresh_goblin;
+    //hero = new fresh_goblin;
+    hero1->take_damage(hero2->active_ability(hero1->get_health()));
+    hero1->take_damage(hero2->active_ability(hero1->get_health()));
     //fresh_knight b;
     return 0;
 }

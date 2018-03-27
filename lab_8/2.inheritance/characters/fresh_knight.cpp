@@ -28,10 +28,10 @@ void fresh_knight::naked_knight() {
 
 void fresh_knight::take_damage(int damage) {
     naked_knight();
-    damage -= _armor;
-    _armor /= 2;
-    if (damage < 0) {
+    //rewrite
+    if (damage != 0 && damage - _armor < 0) {
         cout << "all of the damage was consumed by knight armor" << endl;
+        _armor /= 2;
         damage = 0;
     }
     character::take_damage(damage);

@@ -39,6 +39,9 @@
     <ClCompile Include="characters\fresh_knight.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="characters\fresh_goblin.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="controllers\game.h">
@@ -63,6 +66,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="characters\fresh_knight.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="characters\fresh_goblin.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
