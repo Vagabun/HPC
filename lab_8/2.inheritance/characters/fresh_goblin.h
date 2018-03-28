@@ -7,8 +7,9 @@ public:
     fresh_goblin();
     ~fresh_goblin();
 private:
-    int ability_counter = 0;
+    int _ability_counter;
     int cowardice(int damage);
     int active_ability(int enemy_health) override;
+    void take_damage(int damage) override;
 };
 

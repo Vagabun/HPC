@@ -1,6 +1,6 @@
 #include "fresh_goblin.h"
 
-fresh_goblin::fresh_goblin() : character() {}
+fresh_goblin::fresh_goblin() : character(), _ability_counter(0) {}
 
 fresh_goblin::~fresh_goblin() {}
 
@@ -24,22 +24,27 @@ int fresh_goblin::cowardice(int damage) {
 
 int fresh_goblin::active_ability(int enemy_health) {
     int damage;
-    switch (ability_counter) {
+    switch (_ability_counter) {
     case 0: {
         cout << "constructing bomb..." << endl;
         damage = 0;
-        ability_counter = 1;
+        _ability_counter = 1;
         break;
     }
     case 1: {
         cout << "BOOM!" << endl;
         _health -= _health - 1;
         damage = enemy_health - 1;
-        ability_counter = 0;
+        _ability_counter = 0;
         break;
     }
     default:
         break;
     }
     return damage;
+}
+
+void fresh_goblin::take_damage(int damage) {
+    damage = cowardice(damage);
+    character::take_damage(damage);
 }

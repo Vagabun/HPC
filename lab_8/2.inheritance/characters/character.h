@@ -10,6 +10,7 @@ public:
     int get_attack_distance() const;
     int get_health() const;
     virtual int get_armor() const;
+    virtual int get_mana() const;
     virtual void active_ability();
     virtual int active_ability(int enemy_health);
     virtual void take_damage(int damage);

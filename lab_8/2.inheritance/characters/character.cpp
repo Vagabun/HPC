@@ -23,6 +23,10 @@ int character::get_armor() const {
     return 0;
 }
 
+int character::get_mana() const {
+    return 0;
+}
+
 void character::active_ability() {
     return;
 }
@@ -42,6 +46,7 @@ void character::take_damage(int damage) {
 }
 
 int character::rand(const string &&choice) const {
+    //move variants to enum
     random_device rd;
     mt19937 gen(rd());
     if (choice == "default") {
@@ -50,6 +55,10 @@ int character::rand(const string &&choice) const {
     }
     else if (choice == "distance") {
         uniform_int_distribution<> r(1, 7);
+        return r(gen);
+    }
+    else if (choice == "ability") {
+        uniform_int_distribution<> r(1, 4);
         return r(gen);
     }
 }
