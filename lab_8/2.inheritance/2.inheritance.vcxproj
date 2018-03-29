@@ -122,6 +122,7 @@
     <ClCompile Include="characters\goblin.cpp" />
     <ClCompile Include="characters\knight.cpp" />
     <ClCompile Include="characters\wizard.cpp" />
+    <ClCompile Include="controllers\fresh_player.cpp" />
     <ClCompile Include="controllers\game.cpp" />
     <ClCompile Include="controllers\player.cpp" />
     <ClCompile Include="main.cpp" />
@@ -135,6 +136,7 @@
     <ClInclude Include="characters\goblin.h" />
     <ClInclude Include="characters\knight.h" />
     <ClInclude Include="characters\wizard.h" />
+    <ClInclude Include="controllers\fresh_player.h" />
     <ClInclude Include="controllers\game.h" />
     <ClInclude Include="controllers\player.h" />
   </ItemGroup>

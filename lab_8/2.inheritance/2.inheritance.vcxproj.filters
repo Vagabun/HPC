@@ -13,6 +13,18 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Header Files\characters">
+      <UniqueIdentifier>{797df46e-757a-4f87-bd29-0f08e4bd0d09}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\controllers">
+      <UniqueIdentifier>{0afe347f-eec0-477c-bec9-95c9db3d283b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\characters">
+      <UniqueIdentifier>{00531074-a229-49d2-91eb-804265685466}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\controllers">
+      <UniqueIdentifier>{1d2f5089-7bb3-4ed3-98c8-11adcdfc7c8b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -34,16 +46,19 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="characters\character.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="characters\fresh_knight.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\characters</Filter>
     </ClCompile>
     <ClCompile Include="characters\fresh_goblin.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\characters</Filter>
+    </ClCompile>
+    <ClCompile Include="characters\fresh_knight.cpp">
+      <Filter>Source Files\characters</Filter>
     </ClCompile>
     <ClCompile Include="characters\fresh_wizard.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\characters</Filter>
+    </ClCompile>
+    <ClCompile Include="controllers\fresh_player.cpp">
+      <Filter>Source Files\controllers</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -65,17 +80,20 @@
     <ClInclude Include="characters\wizard.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="characters\character.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="characters\fresh_wizard.h">
+      <Filter>Header Files\characters</Filter>
     </ClInclude>
     <ClInclude Include="characters\fresh_knight.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\characters</Filter>
     </ClInclude>
     <ClInclude Include="characters\fresh_goblin.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\characters</Filter>
     </ClInclude>
-    <ClInclude Include="characters\fresh_wizard.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="controllers\fresh_player.h">
+      <Filter>Header Files\controllers</Filter>
+    </ClInclude>
+    <ClInclude Include="characters\character.h">
+      <Filter>Header Files\characters</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

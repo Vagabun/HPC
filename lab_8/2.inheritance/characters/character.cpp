@@ -3,6 +3,7 @@
 character::character() : _health(100), _attack(rand("default")), _attack_distance(rand("distance")) {}
 
 character::~character() {
+    //?
     /*if (this != nullptr)
         delete this;*/
 };
@@ -54,7 +55,7 @@ int character::rand(const string &&choice) const {
         return r(gen);
     }
     else if (choice == "distance") {
-        uniform_int_distribution<> r(1, 7);
+        uniform_int_distribution<> r(1, 6);
         return r(gen);
     }
     else if (choice == "ability") {

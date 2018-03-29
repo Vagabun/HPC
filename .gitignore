@@ -320,7 +320,6 @@ ASALocalRun/
 # Folders
 cmake-build-debug/
 .idea/
-/lab_8/2.inheritance/controllers
 /lab_8/2.inheritance/characters/wizard.h
 /lab_8/2.inheritance/characters/wizard.cpp
 /lab_8/2.inheritance/characters/knight.h
@@ -328,3 +327,7 @@ cmake-build-debug/
 /lab_8/2.inheritance/characters/goblin.h
 /lab_8/2.inheritance/characters/goblin.cpp
 /lab_8/2.inheritance/makefile
+/lab_8/2.inheritance/controllers/player.h
+/lab_8/2.inheritance/controllers/player.cpp
+/lab_8/2.inheritance/controllers/game.h
+/lab_8/2.inheritance/controllers/game.cpp
