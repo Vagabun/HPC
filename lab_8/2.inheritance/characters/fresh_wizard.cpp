@@ -13,7 +13,7 @@ int fresh_wizard::get_armor() const {
 }
 
 int fresh_wizard::magic_shield(int damage) {
-    if (character::rand("default") < 30) {
+    if (character::rand(0) < 30) {
         if (_mana > damage * 2) {
             _mana -= damage * 2;
             damage = 0;
@@ -33,9 +33,9 @@ int fresh_wizard::magic_shield(int damage) {
 void fresh_wizard::take_damage(int damage) {
     damage = magic_shield(damage);
     if (_armor) {
-        if (damage - _armor < 0) {
+        if (damage - _armor <= 0) {
             damage = 0;
-            cout << "all of the damage was consumed by enemy armor" << endl;
+            cout << "all of the damage was consumed by wizard armor" << endl;
         }
         else
             damage -= _armor;
@@ -45,25 +45,24 @@ void fresh_wizard::take_damage(int damage) {
 }
 
 void fresh_wizard::active_ability() {
-    //use enum
     cout << "selecting one of four improvements..." << endl;
-    switch (character::rand("ability")) {
-    case 1: {
+    switch (character::rand(2)) {
+    case improvements::mana : {
         _mana *= 2;
         cout << "wizard mana increased by 2 times" << endl;
         break;
     }
-    case 2: {
+    case improvements::health : {
         _health *= 2;
         cout << "wizard health increased by 2 times" << endl;
         break;
     }
-    case 3: {
+    case improvements::suicide : {
         _health = 0;
         cout << "oohps, looks like wizard suicide" << endl;
         break;
     }
-    case 4: {
+    case improvements::armor : {
         _armor = 100;
         cout << "wizard created armor" << endl;
         break;

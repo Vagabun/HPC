@@ -15,7 +15,7 @@ void fresh_knight::active_ability() {
 }
 
 void fresh_knight::naked_knight() {
-    int chance = character::rand("default");
+    int chance = character::rand(0);
     if (chance <= 30 && _armor > 0) {
         cout << endl;
         cout << "time for blood..." << endl;

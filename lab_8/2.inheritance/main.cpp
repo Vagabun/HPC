@@ -36,7 +36,10 @@ int main() {
     //hero1->take_damage(hero2->active_ability(hero1->get_health()));
     //fresh_knight b;
 
-    fresh_player a;
+    fresh_player a(1);
+    fresh_player b(3);
+
+    a.take_damage(25);
 
     return 0;
 }

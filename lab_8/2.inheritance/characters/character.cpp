@@ -1,11 +1,9 @@
 #include "character.h"
 
-character::character() : _health(100), _attack(rand("default")), _attack_distance(rand("distance")) {}
+character::character() : _health(100), _attack(rand(0)), _attack_distance(rand(1)) {}
 
 character::~character() {
-    //?
-    /*if (this != nullptr)
-        delete this;*/
+    cout << "character destructor" << endl;
 };
 
 int character::get_attack() const {
@@ -46,20 +44,23 @@ void character::take_damage(int damage) {
     cout << "current health is " << _health << " points" << endl;
 }
 
-int character::rand(const string &&choice) const {
-    //move variants to enum
+int character::rand(int choice) const {
     random_device rd;
     mt19937 gen(rd());
-    if (choice == "default") {
+    switch (choice) {
+    case rand_variants::standard : {
         uniform_int_distribution<> r(1, 100);
         return r(gen);
     }
-    else if (choice == "distance") {
+    case rand_variants::distance : {
         uniform_int_distribution<> r(1, 6);
         return r(gen);
     }
-    else if (choice == "ability") {
+    case rand_variants::wizard_ability : {
         uniform_int_distribution<> r(1, 4);
         return r(gen);
+    }
+    default:
+        break;
     }
 }

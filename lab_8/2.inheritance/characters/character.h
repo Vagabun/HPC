@@ -15,7 +15,8 @@ public:
     virtual int active_ability(int enemy_health);
     virtual void take_damage(int damage);
 protected:
-    int rand(const string &&choice) const;
+    int rand(int choice) const;
+    enum rand_variants {standard, distance, wizard_ability};
     int _health, _attack, _attack_distance;
 };
 
