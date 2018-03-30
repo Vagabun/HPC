@@ -60,6 +60,9 @@
     <ClCompile Include="controllers\fresh_player.cpp">
       <Filter>Source Files\controllers</Filter>
     </ClCompile>
+    <ClCompile Include="controllers\fresh_game.cpp">
+      <Filter>Source Files\controllers</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="controllers\game.h">
@@ -94,6 +97,9 @@
     </ClInclude>
     <ClInclude Include="characters\character.h">
       <Filter>Header Files\characters</Filter>
+    </ClInclude>
+    <ClInclude Include="controllers\fresh_game.h">
+      <Filter>Header Files\controllers</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -50,10 +50,22 @@ void fresh_player::active_ability() {
     hero->active_ability();
 }
 
-int fresh_player::active_ability(int enemy_health) const {
+int fresh_player::active_ability(int enemy_health) {
     return hero->active_ability(enemy_health);
 }
 
-void fresh_player::take_damage(int damage) const {
+void fresh_player::take_damage(int damage) {
     hero->take_damage(damage);
+}
+
+void fresh_player::set_position(int position) {
+    _current_position = position;
+}
+
+int fresh_player::get_position() const {
+    return _current_position;
+}
+
+string fresh_player::get_current_class() const {
+    return _current_class;
 }

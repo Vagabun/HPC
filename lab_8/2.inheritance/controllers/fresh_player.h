@@ -15,14 +15,16 @@ public:
     int get_armor() const;
     int get_mana() const;
     void active_ability();
-    int active_ability(int enemy_health) const;
-    void take_damage(int damage) const;
-
-
+    int active_ability(int enemy_health);
+    void take_damage(int damage);
+    void set_position(int position);
+    int get_position() const;
+    string get_current_class() const;
 private:
     //character *hero ?
     unique_ptr<character> hero;
     string _current_class;
+    int _current_position;
     enum heroes {knight = 1, wizard, goblin};
 };
 
