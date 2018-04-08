@@ -63,6 +63,9 @@
     <ClCompile Include="controllers\fresh_game.cpp">
       <Filter>Source Files\controllers</Filter>
     </ClCompile>
+    <ClCompile Include="characters\common.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="controllers\game.h">

@@ -15,3 +15,11 @@ using std::mt19937;
 using std::string;
 using std::unique_ptr;
 using std::move;
+
+enum rand_variants {
+    standard, distance, wizard_ability
+};
+
+namespace service_functions {
+    int rand(int choice);
+}

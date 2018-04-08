@@ -119,6 +119,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="characters\character.cpp" />
+    <ClCompile Include="characters\common.cpp" />
     <ClCompile Include="characters\fresh_goblin.cpp" />
     <ClCompile Include="characters\fresh_knight.cpp" />
     <ClCompile Include="characters\fresh_wizard.cpp" />

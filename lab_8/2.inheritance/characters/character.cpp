@@ -1,6 +1,7 @@
 #include "character.h"
 
-character::character() : _health(100), _attack(rand(0)), _attack_distance(rand(1)) {}
+character::character() : _health(100), _attack(service_functions::rand(rand_variants::standard)), 
+    _attack_distance(service_functions::rand(rand_variants::distance)), _armor(0), _mana(0) {}
 
 character::~character() {
     cout << "character destructor" << endl;
@@ -19,11 +20,11 @@ int character::get_health() const {
 }
 
 int character::get_armor() const {
-    return 0;
+    return _armor;
 }
 
 int character::get_mana() const {
-    return 0;
+    return _mana;
 }
 
 void character::active_ability() {
@@ -42,25 +43,4 @@ void character::take_damage(int damage) {
     }
     _health -= damage;
     cout << "current health is " << _health << " points" << endl;
-}
-
-int character::rand(int choice) const {
-    random_device rd;
-    mt19937 gen(rd());
-    switch (choice) {
-    case rand_variants::standard : {
-        uniform_int_distribution<> r(1, 100);
-        return r(gen);
-    }
-    case rand_variants::distance : {
-        uniform_int_distribution<> r(1, 6);
-        return r(gen);
-    }
-    case rand_variants::wizard_ability : {
-        uniform_int_distribution<> r(1, 4);
-        return r(gen);
-    }
-    default:
-        break;
-    }
 }

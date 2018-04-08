@@ -1,4 +1,5 @@
-#include "controllers\fresh_game.h"
+//#include "controllers\fresh_game.h"
+//#include "characters\fresh_knight.h"
 
 void init() {
     /*string choice;
@@ -32,7 +33,7 @@ int main() {
     //hero1->take_damage(hero2->active_ability(hero1->get_health()));
     //fresh_knight b;
 
-    fresh_game a;
+    //fresh_game a;
 
     return 0;
 }

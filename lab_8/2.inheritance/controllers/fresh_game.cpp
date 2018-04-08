@@ -1,6 +1,6 @@
 #include "fresh_game.h"
 
-fresh_game::fresh_game() : _current_player(1) {
+fresh_game::fresh_game() : _current_player(players::first) {
     //move to separate class (listener)
     cout << "player 1 - choose your hero" << endl;
     int choice;
