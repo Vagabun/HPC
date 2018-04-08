@@ -123,13 +123,8 @@
     <ClCompile Include="characters\fresh_goblin.cpp" />
     <ClCompile Include="characters\fresh_knight.cpp" />
     <ClCompile Include="characters\fresh_wizard.cpp" />
-    <ClCompile Include="characters\goblin.cpp" />
-    <ClCompile Include="characters\knight.cpp" />
-    <ClCompile Include="characters\wizard.cpp" />
     <ClCompile Include="controllers\fresh_game.cpp" />
     <ClCompile Include="controllers\fresh_player.cpp" />
-    <ClCompile Include="controllers\game.cpp" />
-    <ClCompile Include="controllers\player.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -138,13 +133,8 @@
     <ClInclude Include="characters\fresh_goblin.h" />
     <ClInclude Include="characters\fresh_knight.h" />
     <ClInclude Include="characters\fresh_wizard.h" />
-    <ClInclude Include="characters\goblin.h" />
-    <ClInclude Include="characters\knight.h" />
-    <ClInclude Include="characters\wizard.h" />
     <ClInclude Include="controllers\fresh_game.h" />
     <ClInclude Include="controllers\fresh_player.h" />
-    <ClInclude Include="controllers\game.h" />
-    <ClInclude Include="controllers\player.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

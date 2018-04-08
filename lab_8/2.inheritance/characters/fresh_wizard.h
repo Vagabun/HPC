@@ -10,6 +10,6 @@ private:
     enum improvements {mana = 1, health, suicide, armor};
     int magic_shield(int damage);
     void take_damage(int damage) override;
-    void active_ability() override;
+    int active_ability(int enemy_health) override;
 };
 

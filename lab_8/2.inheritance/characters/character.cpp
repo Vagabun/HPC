@@ -27,16 +27,8 @@ int character::get_mana() const {
     return _mana;
 }
 
-void character::active_ability() {
-    return;
-}
-
-int character::active_ability(int enemy_health) {
-    return 0;
-}
-
 void character::take_damage(int damage) {
-    cout << "character took " << damage << endl;
+    cout << "character took " << damage << "damage" << endl;
     if (damage > _health) {
         _health = 0;
         return;

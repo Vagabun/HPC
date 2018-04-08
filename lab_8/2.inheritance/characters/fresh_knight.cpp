@@ -6,14 +6,15 @@ fresh_knight::fresh_knight() : character() {
 
 fresh_knight::~fresh_knight() {}
 
-void fresh_knight::active_ability() {
+int fresh_knight::active_ability(int enemy_health) {
     cout << endl << "eating slice of armor..." << endl;
     if (_armor <= 10) {
         cout << endl << "knight can't eat all of his armor" << endl;
-        return;
+        return 0;
     }
     _armor -= 10;
     _attack += 10;
+    return 0;
 }
 
 void fresh_knight::naked_knight() {

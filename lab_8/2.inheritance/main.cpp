@@ -1,4 +1,4 @@
-//#include "controllers\fresh_game.h"
+#include "controllers\fresh_game.h"
 //#include "characters\fresh_knight.h"
 
 void init() {
@@ -18,6 +18,13 @@ void init() {
 }
 
 int main() {
+
+    fresh_game a;
+    a.add_player(1);
+    a.add_player(2);
+
+    a.attack();
+    a.attack();
     
     //init();
 

@@ -30,21 +30,6 @@
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="characters\goblin.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="characters\knight.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="characters\wizard.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="controllers\game.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="controllers\player.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="characters\character.cpp">
       <Filter>Source Files\characters</Filter>
     </ClCompile>
@@ -68,22 +53,7 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="controllers\game.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="controllers\player.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="characters\common.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="characters\goblin.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="characters\knight.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="characters\wizard.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="characters\fresh_wizard.h">

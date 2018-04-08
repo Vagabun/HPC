@@ -2,17 +2,17 @@
 
 fresh_player::fresh_player(int choice) {
     switch (choice) {
-    case heroes::knight : {
+    case _heroes::knight : {
         hero = move(unique_ptr<character>(new fresh_knight));
         _current_class = "knight";
         break;
     }
-    case heroes::wizard : {
+    case _heroes::wizard : {
         hero = move(unique_ptr<character>(new fresh_wizard));
         _current_class = "wizard";
         break;
     }
-    case heroes::goblin : {
+    case _heroes::goblin : {
         hero = move(unique_ptr<character>(new fresh_goblin));
         _current_class = "goblin";
         break;
@@ -44,10 +44,6 @@ int fresh_player::get_armor() const {
 
 int fresh_player::get_mana() const {
     return hero->get_mana();
-}
-
-void fresh_player::active_ability() {
-    hero->active_ability();
 }
 
 int fresh_player::active_ability(int enemy_health) {

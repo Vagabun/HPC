@@ -7,7 +7,7 @@ public:
     fresh_knight();
     ~fresh_knight();
 private:
-    void active_ability() override;
+    int active_ability(int enemy_health) override;
     void naked_knight();
     void take_damage(int damage) override;
 };

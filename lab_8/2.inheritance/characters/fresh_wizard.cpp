@@ -34,7 +34,7 @@ void fresh_wizard::take_damage(int damage) {
     character::take_damage(damage);
 }
 
-void fresh_wizard::active_ability() {
+int fresh_wizard::active_ability(int enemy_health) {
     cout << endl << "selecting one of four improvements..." << endl;
     switch (service_functions::rand(rand_variants::wizard_ability)) {
     case improvements::mana : {
@@ -61,4 +61,5 @@ void fresh_wizard::active_ability() {
         break;
     }
     _mana = 0;
+    return 0;
 }
