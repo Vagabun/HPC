@@ -7,6 +7,9 @@
 #include <memory>
 #include <vector>
 #include <algorithm>
+#include <queue>
+#include <array>
+#include <map>
 
 using std::cin;
 using std::cout;
@@ -20,6 +23,9 @@ using std::move;
 using std::vector;
 using std::iter_swap;
 using std::swap;
+using std::queue;
+using std::array;
+using std::map;
 
 enum rand_variants {
     standard, distance, wizard_ability

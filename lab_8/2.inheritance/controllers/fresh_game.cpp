@@ -6,14 +6,44 @@ fresh_game::~fresh_game() {
     cout << "game destructor" << endl;
 }
 
+//choice from listener
 void fresh_game::add_player(int choice) {
-    player.emplace_back(new fresh_player(choice));
-    (player.size() > 1) ? player.back()->set_position(_right_border) : player.back()->set_position(_left_border);
+	_players.emplace(new fresh_player(choice));
+	_players.size() > 1 ? _players.back()->set_position(_right_border) : _players.back()->set_position(_left_border);
+    //player.emplace(new fresh_player(choice));
+	/*_players.size() > 1 ? _players.back()->set_position(_positions.find("left_border")) : 
+    (player.size() > 1) ? player.back()->set_position(_right_border) : player.back()->set_position(_left_border);*/
 }
 
 void fresh_game::attack() {
-    player.back()->take_damage(player.front()->get_attack());
-    swap(player.front(), player.back());
+	_get_player();
+	if (_distance_handler()) {
+		_players.front()->take_damage(_current_player->get_attack());
+		_switch_player();
+	}
+	else
+		cout << "enemy is too far for attack" << endl;
+	
+}
+
+void fresh_game::ability() {
+	_get_player();
+	_players.front()->take_damage(_current_player->active_ability(_players.front()->get_health()));
+	_switch_player();
+
+}
+
+void fresh_game::_get_player() {
+	_current_player = move(_players.front());
+	_players.pop();
+}
+
+void fresh_game::_switch_player() {
+	_players.push(move(_current_player));
+}
+
+bool fresh_game::_distance_handler() {
+	return _current_player->get_attack_distance >= abs(_current_player->get_position() - _players.front()->get_position());
 }
 
 //void fresh_game::ability() {

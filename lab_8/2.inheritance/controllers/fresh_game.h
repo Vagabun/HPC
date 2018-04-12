@@ -8,9 +8,16 @@ public:
     ~fresh_game();
     void add_player(int choice);
     void attack();
-    //void ability();
+    void ability();
 private:
-    vector< unique_ptr<fresh_player> > player;
+	void _get_player();
+	void _switch_player();
+	bool _distance_handler();
+    queue< unique_ptr<fresh_player> > _players;
+	unique_ptr<fresh_player> _current_player;
+	//const map<string, int> _positions{ {"left_border", 1}, {"right_border", 7} };
+	//array< unique_ptr<fresh_player>, 7 > _field;
+	//array<int, 2> _positions = { {1, 7} };
     //unique_ptr<fresh_player> player1, player2;
     const int _left_border = 1, _right_border = 7;
     /*int _current_player;

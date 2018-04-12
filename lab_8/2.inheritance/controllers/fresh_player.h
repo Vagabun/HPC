@@ -21,7 +21,7 @@ public:
     string get_current_class() const;
 private:
     //character *hero ?
-    unique_ptr<character> hero;
+    unique_ptr<character> _hero;
     string _current_class;
     int _current_position;
     enum _heroes {knight = 1, wizard, goblin};

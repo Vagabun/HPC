@@ -3,17 +3,17 @@
 fresh_player::fresh_player(int choice) {
     switch (choice) {
     case _heroes::knight : {
-        hero = move(unique_ptr<character>(new fresh_knight));
+        _hero = move(unique_ptr<character>(new fresh_knight));
         _current_class = "knight";
         break;
     }
     case _heroes::wizard : {
-        hero = move(unique_ptr<character>(new fresh_wizard));
+        _hero = move(unique_ptr<character>(new fresh_wizard));
         _current_class = "wizard";
         break;
     }
     case _heroes::goblin : {
-        hero = move(unique_ptr<character>(new fresh_goblin));
+        _hero = move(unique_ptr<character>(new fresh_goblin));
         _current_class = "goblin";
         break;
     }
@@ -27,31 +27,31 @@ fresh_player::~fresh_player() {
 }
 
 int fresh_player::get_health() const {
-    return hero->get_health();
+    return _hero->get_health();
 }
 
 int fresh_player::get_attack() const {
-    return hero->get_attack();
+    return _hero->get_attack();
 }
 
 int fresh_player::get_attack_distance() const {
-    return hero->get_attack_distance();
+    return _hero->get_attack_distance();
 }
 
 int fresh_player::get_armor() const {
-    return hero->get_armor();
+    return _hero->get_armor();
 }
 
 int fresh_player::get_mana() const {
-    return hero->get_mana();
+    return _hero->get_mana();
 }
 
 int fresh_player::active_ability(int enemy_health) {
-    return hero->active_ability(enemy_health);
+    return _hero->active_ability(enemy_health);
 }
 
 void fresh_player::take_damage(int damage) {
-    hero->take_damage(damage);
+    _hero->take_damage(damage);
 }
 
 void fresh_player::set_position(int position) {

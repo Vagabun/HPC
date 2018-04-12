@@ -1,5 +1,7 @@
-#include "controllers\fresh_game.h"
+//#include "controllers\fresh_game.h"
 //#include "characters\fresh_knight.h"
+#include "characters\common.h"
+#include <queue>
 
 void init() {
     /*string choice;
@@ -19,12 +21,12 @@ void init() {
 
 int main() {
 
-    fresh_game a;
+   /* fresh_game a;
     a.add_player(1);
     a.add_player(2);
 
     a.attack();
-    a.attack();
+    a.attack();*/
     
     //init();
 
@@ -41,6 +43,25 @@ int main() {
     //fresh_knight b;
 
     //fresh_game a;
+	//std::unique_ptr<int> a;
+	int b = 1, n = 5;
+	std::queue < std::unique_ptr<int> > a;
+	a.emplace(&b);
+	a.emplace(&n);
+	//a.emplace(2);
+	auto q = std::move(a.front());
+	a.pop();
+	a.emplace(std::move(q));
+	//a.push(q);
+
+	queue<int> a = { 1, 2 };
+
+	/*auto b = std::move(a.front());
+
+	std::cout << "test";*/
+
+
+
 
     return 0;
 }
