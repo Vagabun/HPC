@@ -55,11 +55,17 @@ void fresh_player::take_damage(int damage) {
 }
 
 void fresh_player::set_position(int position) {
+	if (!_init_position)
+		_init_position = position;
     _current_position = position;
 }
 
 int fresh_player::get_position() const {
     return _current_position;
+}
+
+int fresh_player::get_init_position() const {
+	return _init_position;
 }
 
 string fresh_player::get_current_class() const {

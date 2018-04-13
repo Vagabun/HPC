@@ -9,6 +9,8 @@ public:
     void add_player(int choice);
     void attack();
     void ability();
+	void move_forward();
+	void move_backward();
 private:
 	void _get_player();
 	void _switch_player();
@@ -20,6 +22,7 @@ private:
 	//array<int, 2> _positions = { {1, 7} };
     //unique_ptr<fresh_player> player1, player2;
     const int _left_border = 1, _right_border = 7;
+	const enum borders {left = 1, right = 7};
     /*int _current_player;
     enum players {first = 1, second};
     bool distance_check(unique_ptr<fresh_player> const &p);*/

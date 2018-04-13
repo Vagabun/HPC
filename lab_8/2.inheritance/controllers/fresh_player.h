@@ -18,12 +18,13 @@ public:
     void take_damage(int damage);
     void set_position(int position);
     int get_position() const;
+	int get_init_position() const;
     string get_current_class() const;
 private:
     //character *hero ?
     unique_ptr<character> _hero;
     string _current_class;
-    int _current_position;
+    int _current_position, _init_position = 0;
     enum _heroes {knight = 1, wizard, goblin};
 };
 

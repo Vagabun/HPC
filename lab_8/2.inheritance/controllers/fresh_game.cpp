@@ -23,7 +23,6 @@ void fresh_game::attack() {
 	}
 	else
 		cout << "enemy is too far for attack" << endl;
-	
 }
 
 void fresh_game::ability() {
@@ -31,6 +30,25 @@ void fresh_game::ability() {
 	_players.front()->take_damage(_current_player->active_ability(_players.front()->get_health()));
 	_switch_player();
 
+}
+
+void fresh_game::move_forward() {
+	_get_player();
+	if (_current_player->get_init_position() == borders::left)
+		if (_current_player->get_position() + 1 != _players.front()->get_position())
+			_current_player->set_position(_current_player->get_position() + 1);
+		else
+			cout << endl << "can't move forward, another player there" << endl;
+	else if (_current_player->get_init_position() == borders::right)
+		if (_current_player->get_position() - 1 != _players.front()->get_position())
+			_current_player->set_position(_current_player->get_position() - 1);
+		else
+			cout << endl << "can't move forward, another player there" << endl;
+	_switch_player();
+}
+
+void fresh_game::move_backward() {
+	_get_player();
 }
 
 void fresh_game::_get_player() {
