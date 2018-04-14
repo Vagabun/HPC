@@ -3,16 +3,23 @@
 fresh_game::fresh_game() {}
 
 fresh_game::~fresh_game() {
-    cout << "game destructor" << endl;
+    cout << "fresh game destructor" << endl;
 }
 
 //choice from listener
-void fresh_game::add_player(int choice) {
-	_players.emplace(new fresh_player(choice));
-	_players.size() > 1 ? _players.back()->set_position(_right_border) : _players.back()->set_position(_left_border);
-    //player.emplace(new fresh_player(choice));
-	/*_players.size() > 1 ? _players.back()->set_position(_positions.find("left_border")) : 
-    (player.size() > 1) ? player.back()->set_position(_right_border) : player.back()->set_position(_left_border);*/
+void fresh_game::add_player(string name) {
+    _players.emplace(new fresh_player(name));
+    _players.size() > 1 ? _players.back()->set_position(_borders::right) : _players.back()->set_position(_borders::left);
+	/*_players.emplace(new fresh_player(choice));
+	_players.size() > 1 ? _players.back()->set_position(_borders::right) : _players.back()->set_position(_borders::left);*/
+}
+
+void fresh_game::set_class(int choice) {
+    _players.back()->set_character_class(choice);
+}
+
+string fresh_game::get_player_name() const {
+    return _players.front()->get_name();
 }
 
 void fresh_game::attack() {
@@ -21,34 +28,58 @@ void fresh_game::attack() {
 		_players.front()->take_damage(_current_player->get_attack());
 		_switch_player();
 	}
-	else
-		cout << "enemy is too far for attack" << endl;
+    else {
+        cout << "enemy is too far for the attack" << endl;
+        _switch_player();
+    }
 }
 
 void fresh_game::ability() {
 	_get_player();
 	_players.front()->take_damage(_current_player->active_ability(_players.front()->get_health()));
-	_switch_player();
-
+    _switch_player();
 }
 
 void fresh_game::move_forward() {
 	_get_player();
-	if (_current_player->get_init_position() == borders::left)
-		if (_current_player->get_position() + 1 != _players.front()->get_position())
-			_current_player->set_position(_current_player->get_position() + 1);
-		else
-			cout << endl << "can't move forward, another player there" << endl;
-	else if (_current_player->get_init_position() == borders::right)
-		if (_current_player->get_position() - 1 != _players.front()->get_position())
-			_current_player->set_position(_current_player->get_position() - 1);
-		else
-			cout << endl << "can't move forward, another player there" << endl;
+    switch (_current_player->get_init_position()) {
+        case _borders::left : {
+            if (_current_player->get_position() + 1 != _players.front()->get_position())
+                _current_player->set_position(_current_player->get_position() + 1);
+            break;
+        }
+        case _borders::right : {
+            if (_current_player->get_position() - 1 != _players.front()->get_position())
+                _current_player->set_position(_current_player->get_position() - 1);
+            break;
+        }
+        default: {
+            cout << endl << "can't move forward, another player there" << endl;
+            break;
+        }
+    }
 	_switch_player();
 }
 
 void fresh_game::move_backward() {
 	_get_player();
+    switch (_current_player->get_init_position()) {
+        case _borders::left : {
+            if (_current_player->get_position() - 1 != _borders::left)
+                _current_player->set_position(_current_player->get_position() - 1);
+            break;
+        }
+        case _borders::right : {
+            if (_current_player->get_position() + 1 != _borders::right)
+                _current_player->set_position(_current_player->get_position() + 1);
+            break;
+        }
+        default: {
+            cout << endl << "can't move backward, reached the border" << endl;
+            break;
+        }
+    }
+    _switch_player();
 }
 
 void fresh_game::_get_player() {
@@ -61,32 +92,5 @@ void fresh_game::_switch_player() {
 }
 
 bool fresh_game::_distance_handler() {
-	return _current_player->get_attack_distance >= abs(_current_player->get_position() - _players.front()->get_position());
+	return _current_player->get_attack_distance() >= abs(_current_player->get_position() - _players.front()->get_position());
 }
-
-//void fresh_game::ability() {
-//    switch (_current_player) {
-//    case players::first : {
-//        if (player1->get_current_class() == "goblin") {
-//            player2->take_damage(player1->active_ability(player2->get_health()));
-//            break;
-//        }
-//        player1->active_ability();
-//        break;
-//    }
-//    case players::second : {
-//        if (player2->get_current_class() == "goblin") {
-//            player1->take_damage(player2->active_ability(player1->get_health()));
-//            break;
-//        }
-//        player2->active_ability();
-//        break;
-//    }
-//    default:
-//        break;
-//    }
-//}
-//
-//bool fresh_game::distance_check(unique_ptr<fresh_player> const &p) {
-//    return (p->get_attack_distance() >= (player2->get_position() - player1->get_position()));
-//}

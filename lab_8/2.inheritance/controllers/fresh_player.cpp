@@ -1,18 +1,24 @@
 #include "fresh_player.h"
 
-fresh_player::fresh_player(int choice) {
+fresh_player::fresh_player(string name) : _name(name) {}
+
+fresh_player::~fresh_player() {
+    cout << "fresh player destructor" << endl;
+}
+
+void fresh_player::set_character_class(int choice) {
     switch (choice) {
-    case _heroes::knight : {
+    case heroes::knight : {
         _hero = move(unique_ptr<character>(new fresh_knight));
         _current_class = "knight";
         break;
     }
-    case _heroes::wizard : {
+    case heroes::wizard : {
         _hero = move(unique_ptr<character>(new fresh_wizard));
         _current_class = "wizard";
         break;
     }
-    case _heroes::goblin : {
+    case heroes::goblin : {
         _hero = move(unique_ptr<character>(new fresh_goblin));
         _current_class = "goblin";
         break;
@@ -20,10 +26,6 @@ fresh_player::fresh_player(int choice) {
     default:
         break;
     }
-}
-
-fresh_player::~fresh_player() {
-    cout << "player destructor" << endl;
 }
 
 int fresh_player::get_health() const {
@@ -70,4 +72,8 @@ int fresh_player::get_init_position() const {
 
 string fresh_player::get_current_class() const {
     return _current_class;
+}
+
+string fresh_player::get_name() const {
+    return _name;
 }

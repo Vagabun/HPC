@@ -5,11 +5,8 @@
 #include <string>
 #include <cstdlib>
 #include <memory>
-#include <vector>
-#include <algorithm>
 #include <queue>
-#include <array>
-#include <map>
+#include <set>
 
 using std::cin;
 using std::cout;
@@ -20,17 +17,17 @@ using std::mt19937;
 using std::string;
 using std::unique_ptr;
 using std::move;
-using std::vector;
-using std::iter_swap;
-using std::swap;
 using std::queue;
-using std::array;
-using std::map;
+using std::set;
 
-enum rand_variants {
+enum class rand_variants {
     standard, distance, wizard_ability
 };
 
+enum heroes {
+    knight = 1, wizard, goblin
+};
+
 namespace service_functions {
-    int rand(int choice);
+    int rand(rand_variants v);
 }

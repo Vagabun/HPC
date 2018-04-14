@@ -51,6 +51,9 @@
     <ClCompile Include="characters\common.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="controllers\input_controller.cpp">
+      <Filter>Source Files\controllers</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="characters\common.h">
@@ -72,6 +75,9 @@
       <Filter>Header Files\characters</Filter>
     </ClInclude>
     <ClInclude Include="controllers\fresh_game.h">
+      <Filter>Header Files\controllers</Filter>
+    </ClInclude>
+    <ClInclude Include="controllers\input_controller.h">
       <Filter>Header Files\controllers</Filter>
     </ClInclude>
   </ItemGroup>

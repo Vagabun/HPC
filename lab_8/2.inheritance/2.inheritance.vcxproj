@@ -125,6 +125,7 @@
     <ClCompile Include="characters\fresh_wizard.cpp" />
     <ClCompile Include="controllers\fresh_game.cpp" />
     <ClCompile Include="controllers\fresh_player.cpp" />
+    <ClCompile Include="controllers\input_controller.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -135,6 +136,7 @@
     <ClInclude Include="characters\fresh_wizard.h" />
     <ClInclude Include="controllers\fresh_game.h" />
     <ClInclude Include="controllers\fresh_player.h" />
+    <ClInclude Include="controllers\input_controller.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

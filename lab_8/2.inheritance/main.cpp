@@ -1,64 +1,18 @@
 //#include "controllers\fresh_game.h"
 //#include "characters\fresh_knight.h"
-#include "characters\common.h"
-#include <queue>
-
-void init() {
-    /*string choice;
-    cout << "player 1 - choose your hero:" << endl;
-    cout << "type 1 for Knight class, type 2 for Wizard class, type 3 for Goblin class" << endl;
-    cin >> choice;
-    player player1(choice);
-    cout << "player 2 - choose your hero:" << endl;
-    cout << "type 1 for Knight class, type 2 for Wizard class, type 3 for Goblin class" << endl;
-    cin >> choice;
-    player player2(choice);
-
-    game g(player1, player2);
-    cout << "game starting..." << endl << endl;
-    g.start_game();*/
-}
+#include "controllers\input_controller.h"
+#include "controllers\fresh_game.h"
 
 int main() {
 
-   /* fresh_game a;
-    a.add_player(1);
-    a.add_player(2);
-
-    a.attack();
-    a.attack();*/
-    
-    //init();
-
-    //character *hero1 = nullptr;
-    //character *hero2 = nullptr;
-    //character *hero3 = nullptr;
-
-    //hero1 = new fresh_knight;
-    //hero2 = new fresh_goblin;
-    //hero3 = new fresh_wizard;
-    //hero = new fresh_goblin;
-    //hero1->take_damage(hero2->active_ability(hero1->get_health()));
-    //hero1->take_damage(hero2->active_ability(hero1->get_health()));
-    //fresh_knight b;
-
-    //fresh_game a;
-	//std::unique_ptr<int> a;
-	int b = 1, n = 5;
-	std::queue < std::unique_ptr<int> > a;
-	a.emplace(&b);
-	a.emplace(&n);
-	//a.emplace(2);
-	auto q = std::move(a.front());
-	a.pop();
-	a.emplace(std::move(q));
-	//a.push(q);
-
-	queue<int> a = { 1, 2 };
-
-	/*auto b = std::move(a.front());
-
-	std::cout << "test";*/
+    input_controller g;
+    g.start();
+/*
+    fresh_game a;
+    a.add_player("test");
+    a.set_class(1);
+    a.add_player("test");
+    a.set_class(2);*/
 
 
 
