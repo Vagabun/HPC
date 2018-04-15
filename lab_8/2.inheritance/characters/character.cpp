@@ -28,11 +28,13 @@ int character::get_mana() const {
 }
 
 void character::take_damage(int damage) {
-    cout << "character took " << damage << "damage" << endl;
-    if (damage > _health) {
-        _health = 0;
-        return;
+    if (damage) {
+        cout << "character took " << damage << " damage" << endl;
+        if (damage > _health) {
+            _health = 0;
+            return;
+        }
+        _health -= damage;
+        cout << "current health is " << _health << " points" << endl;
     }
-    _health -= damage;
-    cout << "current health is " << _health << " points" << endl;
 }

@@ -7,7 +7,7 @@ fresh_knight::fresh_knight() : character() {
 fresh_knight::~fresh_knight() {}
 
 int fresh_knight::active_ability(int enemy_health) {
-    cout << endl << "eating slice of armor..." << endl;
+    cout << endl << "eating slice of an armor..." << endl;
     if (_armor <= 10) {
         cout << endl << "knight can't eat all of his armor" << endl;
         return 0;
@@ -21,6 +21,7 @@ void fresh_knight::naked_knight() {
     int chance = service_functions::rand(rand_variants::standard);
     if (chance <= 30 && _armor > 0) {
         cout << endl << "time for blood..." << endl;
+        cout << endl << "no armor, all man" << endl;
         cout << endl << "attack increased by two times" << endl;
         _armor = 0;
         _attack *= 2;
@@ -29,7 +30,7 @@ void fresh_knight::naked_knight() {
 
 void fresh_knight::take_damage(int damage) {
     naked_knight();
-    if (damage > 0) {
+    if (damage) {
         if (_armor - damage >= 0) {
             damage = 0;
             cout << endl << "all of the damage was consumed by knight armor" << endl;

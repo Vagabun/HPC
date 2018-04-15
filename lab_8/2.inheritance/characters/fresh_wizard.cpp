@@ -22,14 +22,16 @@ int fresh_wizard::magic_shield(int damage) {
 
 void fresh_wizard::take_damage(int damage) {
     damage = magic_shield(damage);
-    if (_armor) {
-        if (damage - _armor <= 0) {
-            damage = 0;
-            cout << endl << "all of the damage was consumed by wizard armor" << endl;
+    if (damage) {
+        if (_armor) {
+            if (damage - _armor <= 0) {
+                damage = 0;
+                cout << endl << "all of the damage was consumed by wizard armor" << endl;
+            }
+            else
+                damage -= _armor;
+            _armor /= 2;
         }
-        else
-            damage -= _armor;
-        _armor /= 2;
     }
     character::take_damage(damage);
 }

@@ -8,17 +8,17 @@ fresh_player::~fresh_player() {
 
 void fresh_player::set_character_class(int choice) {
     switch (choice) {
-    case heroes::knight : {
+    case _heroes::knight : {
         _hero = move(unique_ptr<character>(new fresh_knight));
         _current_class = "knight";
         break;
     }
-    case heroes::wizard : {
+    case _heroes::wizard : {
         _hero = move(unique_ptr<character>(new fresh_wizard));
         _current_class = "wizard";
         break;
     }
-    case heroes::goblin : {
+    case _heroes::goblin : {
         _hero = move(unique_ptr<character>(new fresh_goblin));
         _current_class = "goblin";
         break;
@@ -70,10 +70,14 @@ int fresh_player::get_init_position() const {
 	return _init_position;
 }
 
-string fresh_player::get_current_class() const {
+bool fresh_player::dead() const {
+    return _hero->get_health() == 0;
+}
+
+string fresh_player::get_current_class_name() const {
     return _current_class;
 }
 
-string fresh_player::get_name() const {
+string fresh_player::get_player_name() const {
     return _name;
 }

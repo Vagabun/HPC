@@ -9,9 +9,9 @@ public:
     void start();
 private:
     unique_ptr<fresh_game> _game;
-    const enum actions {attack = 1, ability, move_forward, move_backward, check_status};
+    enum actions {attack = 1, ability, move_forward, move_backward, check_status};
+    const set<int> character_variants{ 1, 2, 3 };
     int _players_counter;
     void create_players();
-    const set<int> character_variants{ 1, 2, 3 };
 };
 

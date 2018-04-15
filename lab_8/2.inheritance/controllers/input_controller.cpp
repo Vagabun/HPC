@@ -9,19 +9,20 @@ input_controller::~input_controller() {
 
 void input_controller::start() {
     cout << endl << "start..." << endl;
-    string temp_s;
     int action;
+    create_players();
     while (true) {
-        create_players();
         cout << endl << "player " << _game->get_player_name() << " - choose one of five actions: " << endl;
         cout << "type 1 for attack, type 2 to use ability of your character, type 3 to move forward, type 4 to move backward, type 5 to check status of your character" << endl;
         cin >> action;
         switch (action) {
             case actions::attack : {
+                cout << "attack!" << endl;
                 _game->attack();
                 break;
             }
             case actions::ability : {
+                cout << "ability!" << endl;
                 _game->ability();
                 break;
             }
@@ -33,25 +34,34 @@ void input_controller::start() {
                 _game->move_backward();
                 break;
             }
+            case actions::check_status : {
+                _game->status();
+                break;
+            }
             default: {
                 cout << "wrong input, try again" << endl;
                 break;
             } 
+        }
+        if (_game->enemy_is_dead()) {
+            cout << endl << "enemy is dead" << endl;
+            cout << endl << "player " << _game->get_player_name() << " won!" << endl;
+            break;
         }
     }
 }
 
 void input_controller::create_players() {
     string name;
-    int choice = 1;
+    int choice;
     while (_players_counter < 2) {
-        cout << endl << "write your name" << endl;
-        //cin >> name;
-        _game->add_player("hey");
+        cout << endl << "player, write your name" << endl;
+        cin >> name;
+        _game->add_player(name);
         cout << endl << "choose your class: " << endl;
         cout << "type 1 for the Knight class, type 2 for the Wizard class, type 3 for the Goblin class" << endl;
         while (true) {
-            //cin >> choice;
+            cin >> choice;
             if (character_variants.count(choice)) {
                 _game->set_class(choice);
                 break;

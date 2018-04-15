@@ -20,13 +20,13 @@ public:
     void set_position(int position);
     int get_position() const;
 	int get_init_position() const;
-    string get_current_class() const;
-    string get_name() const;
+    bool dead() const;
+    string get_current_class_name() const;
+    string get_player_name() const;
 private:
-    //character *hero ?
     unique_ptr<character> _hero;
     string _current_class, _name;
     int _current_position, _init_position = 0;
-    //enum _heroes {knight = 1, wizard, goblin};
+    enum _heroes {knight = 1, wizard, goblin};
 };
 

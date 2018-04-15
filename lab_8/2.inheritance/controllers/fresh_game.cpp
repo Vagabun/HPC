@@ -6,12 +6,9 @@ fresh_game::~fresh_game() {
     cout << "fresh game destructor" << endl;
 }
 
-//choice from listener
 void fresh_game::add_player(string name) {
     _players.emplace(new fresh_player(name));
     _players.size() > 1 ? _players.back()->set_position(_borders::right) : _players.back()->set_position(_borders::left);
-	/*_players.emplace(new fresh_player(choice));
-	_players.size() > 1 ? _players.back()->set_position(_borders::right) : _players.back()->set_position(_borders::left);*/
 }
 
 void fresh_game::set_class(int choice) {
@@ -19,7 +16,7 @@ void fresh_game::set_class(int choice) {
 }
 
 string fresh_game::get_player_name() const {
-    return _players.front()->get_name();
+    return _players.front()->get_player_name();
 }
 
 void fresh_game::attack() {
@@ -38,6 +35,27 @@ void fresh_game::ability() {
 	_get_player();
 	_players.front()->take_damage(_current_player->active_ability(_players.front()->get_health()));
     _switch_player();
+}
+
+bool fresh_game::enemy_is_dead() {
+    bool result = _players.front()->dead();
+    if (result)
+        _players.pop();
+    return result;
+}
+
+void fresh_game::status() const {
+    cout << endl;
+    cout << "player name: " << _players.front()->get_player_name() << endl;
+    cout << "current class: " << _players.front()->get_current_class_name() << endl;
+    cout << "current health: " << _players.front()->get_health() << endl;
+    cout << "attack power: " << _players.front()->get_attack() << endl;
+    cout << "attack distance: " << _players.front()->get_attack_distance() << endl;
+    cout << "armor: " << _players.front()->get_armor() << endl;
+    cout << "mana: " << _players.front()->get_mana() << endl;
+    cout << "current position: " << _players.front()->get_position() << endl;
+    cout << endl;
+
 }
 
 void fresh_game::move_forward() {
@@ -88,7 +106,7 @@ void fresh_game::_get_player() {
 }
 
 void fresh_game::_switch_player() {
-	_players.push(move(_current_player));
+    _players.push(move(_current_player));
 }
 
 bool fresh_game::_distance_handler() {

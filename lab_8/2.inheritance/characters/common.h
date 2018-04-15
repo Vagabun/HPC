@@ -24,10 +24,6 @@ enum class rand_variants {
     standard, distance, wizard_ability
 };
 
-enum heroes {
-    knight = 1, wizard, goblin
-};
-
 namespace service_functions {
     int rand(rand_variants v);
 }

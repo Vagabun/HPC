@@ -5,7 +5,7 @@ fresh_goblin::fresh_goblin() : character(), _ability_counter(0) {}
 fresh_goblin::~fresh_goblin() {}
 
 int fresh_goblin::cowardice(int damage) {
-    if (damage > 0) {
+    if (damage) {
         if (_health >= 50) {
             cout << endl << "goblin attacked himself" << endl;
             damage *= 2;
