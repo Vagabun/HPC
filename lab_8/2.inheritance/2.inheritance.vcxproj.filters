@@ -54,6 +54,9 @@
     <ClCompile Include="controllers\input_controller.cpp">
       <Filter>Source Files\controllers</Filter>
     </ClCompile>
+    <ClCompile Include="output_wrapper.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="characters\common.h">
@@ -79,6 +82,9 @@
     </ClInclude>
     <ClInclude Include="controllers\input_controller.h">
       <Filter>Header Files\controllers</Filter>
+    </ClInclude>
+    <ClInclude Include="output_wrapper.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

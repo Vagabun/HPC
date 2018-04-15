@@ -127,6 +127,7 @@
     <ClCompile Include="controllers\fresh_player.cpp" />
     <ClCompile Include="controllers\input_controller.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="output_wrapper.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="characters\character.h" />
@@ -137,6 +138,7 @@
     <ClInclude Include="controllers\fresh_game.h" />
     <ClInclude Include="controllers\fresh_player.h" />
     <ClInclude Include="controllers\input_controller.h" />
+    <ClInclude Include="output_wrapper.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
