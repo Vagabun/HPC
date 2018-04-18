@@ -88,6 +88,9 @@
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
     </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+    </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -119,26 +122,26 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="characters\character.cpp" />
-    <ClCompile Include="characters\common.cpp" />
     <ClCompile Include="characters\fresh_goblin.cpp" />
     <ClCompile Include="characters\fresh_knight.cpp" />
     <ClCompile Include="characters\fresh_wizard.cpp" />
     <ClCompile Include="controllers\fresh_game.cpp" />
     <ClCompile Include="controllers\fresh_player.cpp" />
     <ClCompile Include="controllers\input_controller.cpp" />
+    <ClCompile Include="helpers\common.cpp" />
+    <ClCompile Include="helpers\output_wrapper.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="output_wrapper.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="characters\character.h" />
-    <ClInclude Include="characters\common.h" />
     <ClInclude Include="characters\fresh_goblin.h" />
     <ClInclude Include="characters\fresh_knight.h" />
     <ClInclude Include="characters\fresh_wizard.h" />
     <ClInclude Include="controllers\fresh_game.h" />
     <ClInclude Include="controllers\fresh_player.h" />
     <ClInclude Include="controllers\input_controller.h" />
-    <ClInclude Include="output_wrapper.h" />
+    <ClInclude Include="helpers\common.h" />
+    <ClInclude Include="helpers\output_wrapper.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

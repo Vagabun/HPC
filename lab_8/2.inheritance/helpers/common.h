@@ -8,6 +8,8 @@
 #include <queue>
 #include <set>
 
+#include "output_wrapper.h"
+
 using std::cin;
 using std::cout;
 using std::endl;

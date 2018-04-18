@@ -1,6 +1,6 @@
 #pragma once
 
-#include "common.h"
+#include "../helpers/common.h"
 
 class character {
 public:
