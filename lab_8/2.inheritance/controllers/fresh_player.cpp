@@ -54,6 +54,8 @@ int fresh_player::active_ability(int enemy_health) {
 
 void fresh_player::take_damage(int damage) {
     _hero->take_damage(damage);
+	if (!_hero->get_health())
+		_dead = true;
 }
 
 void fresh_player::set_position(int position) {
@@ -71,7 +73,7 @@ int fresh_player::get_init_position() const {
 }
 
 bool fresh_player::dead() const {
-    return _hero->get_health() == 0;
+    return _dead;
 }
 
 string fresh_player::get_current_class_name() const {

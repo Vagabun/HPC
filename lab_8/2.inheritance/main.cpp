@@ -3,16 +3,13 @@
 
 int main() {
 
-    /*input_controller g;
-    g.start();*/
-
-	output_wrapper &instance1 = output_wrapper::instance();
-
-	output_wrapper &instance2 = output_wrapper::instance();
+    input_controller g;
+    g.start();
 
 	//cout << instance1 << endl;
 
-	output_wrapper::instance().print("hello");
+	//output_wrapper::instance().print("hello");
+	//output_wrapper::print("world");
 
     return 0;
 }

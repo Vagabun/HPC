@@ -38,10 +38,7 @@ void fresh_game::ability() {
 }
 
 bool fresh_game::enemy_is_dead() {
-    bool result = _players.front()->dead();
-    if (result)
-        _players.pop();
-    return result;
+	return _players.size() < 2;
 }
 
 void fresh_game::status() const {
@@ -106,6 +103,8 @@ void fresh_game::_get_player() {
 }
 
 void fresh_game::_switch_player() {
+	if (_players.front()->dead())
+		_players.pop();
     _players.push(move(_current_player));
 }
 
