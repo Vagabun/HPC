@@ -141,6 +141,7 @@
     <ClInclude Include="controllers\fresh_player.h" />
     <ClInclude Include="controllers\input_controller.h" />
     <ClInclude Include="helpers\common.h" />
+    <ClInclude Include="helpers\headers.h" />
     <ClInclude Include="helpers\output_wrapper.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

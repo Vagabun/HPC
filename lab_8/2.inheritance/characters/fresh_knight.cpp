@@ -18,7 +18,7 @@ int fresh_knight::active_ability(int enemy_health) {
 }
 
 void fresh_knight::naked_knight() {
-    int chance = service_functions::rand(rand_variants::standard);
+    int chance = helpers::rand(helpers::rand_variants::standard);
     if (chance <= 30 && _armor > 0) {
         cout << endl << "time for blood..." << endl;
         cout << endl << "no armor, all man" << endl;

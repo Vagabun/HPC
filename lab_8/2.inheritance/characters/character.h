@@ -1,6 +1,7 @@
 #pragma once
 
 #include "../helpers/common.h"
+#include "../helpers/output_wrapper.h"
 
 class character {
 public:

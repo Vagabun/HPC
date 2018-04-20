@@ -1,31 +1,10 @@
 #pragma once
 
-#include <iostream>
-#include <random>
-#include <string>
-#include <cstdlib>
-#include <memory>
-#include <queue>
-#include <set>
+#include "headers.h"
 
-#include "output_wrapper.h"
-
-using std::cin;
-using std::cout;
-using std::endl;
-using std::random_device;
-using std::uniform_int_distribution;
-using std::mt19937;
-using std::string;
-using std::unique_ptr;
-using std::move;
-using std::queue;
-using std::set;
-
-enum class rand_variants {
-    standard, distance, wizard_ability
-};
-
-namespace service_functions {
+namespace helpers {
+	enum class rand_variants {
+		standard, distance, wizard_ability
+	};
     int rand(rand_variants v);
 }

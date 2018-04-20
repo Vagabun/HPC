@@ -7,7 +7,7 @@ fresh_wizard::fresh_wizard() : character() {
 fresh_wizard::~fresh_wizard() {}
 
 int fresh_wizard::magic_shield(int damage) {
-    if (service_functions::rand(rand_variants::standard) < 30) {
+    if (helpers::rand(helpers::rand_variants::standard) < 30) {
         if (_mana > damage * 2) {
             _mana -= damage * 2;
             damage = 0;
@@ -42,7 +42,7 @@ void fresh_wizard::take_damage(int damage) {
 int fresh_wizard::active_ability(int enemy_health) {
     //cout << endl << "selecting one of four improvements..." << endl;
 	output_wrapper::instance().print("selecting one of four improvements...");
-    switch (service_functions::rand(rand_variants::wizard_ability)) {
+    switch (helpers::rand(helpers::rand_variants::wizard_ability)) {
     case improvements::mana : {
         _mana *= 2;
         //cout << endl << "wizard mana increased by 2 times" << endl;

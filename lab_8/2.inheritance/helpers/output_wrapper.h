@@ -1,12 +1,11 @@
 #pragma once
 
-#include <iostream>
-#include <string>
+#include "headers.h"
 
 class output_wrapper {
 public:
 	static output_wrapper& instance();
-	void print(const std::string &&data);
+	void print(const string &&data);
 private:
 	output_wrapper();
 	~output_wrapper();

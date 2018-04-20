@@ -92,5 +92,8 @@
     <ClInclude Include="helpers\output_wrapper.h">
       <Filter>Header Files\helpers</Filter>
     </ClInclude>
+    <ClInclude Include="helpers\headers.h">
+      <Filter>Header Files\helpers</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
