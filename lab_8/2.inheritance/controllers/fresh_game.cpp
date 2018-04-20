@@ -26,7 +26,8 @@ void fresh_game::attack() {
 		_switch_player();
 	}
     else {
-        cout << "enemy is too far for the attack" << endl;
+        //cout << "enemy is too far for the attack" << endl;
+		output_wrapper::instance().print("enemy is too far for the attack");
         _switch_player();
     }
 }
@@ -69,7 +70,8 @@ void fresh_game::move_forward() {
             break;
         }
         default: {
-            cout << endl << "can't move forward, another player there" << endl;
+            //cout << endl << "can't move forward, another player there" << endl;
+			output_wrapper::instance().print("can't move forward, another player there");
             break;
         }
     }
@@ -90,7 +92,8 @@ void fresh_game::move_backward() {
             break;
         }
         default: {
-            cout << endl << "can't move backward, reached the border" << endl;
+            //cout << endl << "can't move backward, reached the border" << endl;
+			output_wrapper::instance().print("can't move backward, reached the border");
             break;
         }
     }

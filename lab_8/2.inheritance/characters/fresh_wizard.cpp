@@ -53,7 +53,6 @@ int fresh_wizard::active_ability(int enemy_health) {
         _health *= 2;
         //cout << endl << "wizard health increased by 2 times" << endl;
 		output_wrapper::instance().print("wizard health increased by 2 times");
-
         break;
     }
     case improvements::suicide : {

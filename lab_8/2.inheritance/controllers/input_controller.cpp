@@ -8,7 +8,8 @@ input_controller::~input_controller() {
 }
 
 void input_controller::start() {
-    cout << endl << "start..." << endl;
+    //cout << endl << "start..." << endl;
+	output_wrapper::instance().print("start...");
     int action;
     create_players();
     while (true) {
@@ -17,12 +18,14 @@ void input_controller::start() {
         cin >> action;
         switch (action) {
             case actions::attack : {
-                cout << "attack!" << endl;
+                //cout << "attack!" << endl;
+				output_wrapper::instance().print("attack!");
                 _game->attack();
                 break;
             }
             case actions::ability : {
-                cout << "ability!" << endl;
+                //cout << "ability!" << endl;
+				output_wrapper::instance().print("ability!");
                 _game->ability();
                 break;
             }
@@ -39,12 +42,14 @@ void input_controller::start() {
                 break;
             }
             default: {
-                cout << "wrong input, try again" << endl;
+                //cout << "wrong input, try again" << endl;
+				output_wrapper::instance().print("wrong input, try again");
                 break;
             } 
         }
         if (_game->enemy_is_dead()) {
-            cout << endl << "enemy is dead" << endl;
+            //cout << endl << "enemy is dead" << endl;
+			output_wrapper::instance().print("enemy is dead");
             cout << endl << "player " << _game->get_player_name() << " won!" << endl;
             break;
         }
