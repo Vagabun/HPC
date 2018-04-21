@@ -1,11 +1,12 @@
 #pragma once
 
-#include "common.h"
+#include "../helpers/common.h"
+#include "../helpers/output_wrapper.h"
 
 class character {
 public:
     character();
-    virtual ~character();
+    virtual ~character() = default;
     int get_attack() const;
     int get_attack_distance() const;
     int get_health() const;

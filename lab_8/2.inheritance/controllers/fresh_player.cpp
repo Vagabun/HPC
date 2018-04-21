@@ -2,10 +2,6 @@
 
 fresh_player::fresh_player(string name) : _name(name) {}
 
-fresh_player::~fresh_player() {
-    cout << "fresh player destructor" << endl;
-}
-
 void fresh_player::set_character_class(int choice) {
     switch (choice) {
     case _heroes::knight : {
@@ -54,6 +50,8 @@ int fresh_player::active_ability(int enemy_health) {
 
 void fresh_player::take_damage(int damage) {
     _hero->take_damage(damage);
+	if (!_hero->get_health())
+		_dead = true;
 }
 
 void fresh_player::set_position(int position) {
@@ -71,7 +69,7 @@ int fresh_player::get_init_position() const {
 }
 
 bool fresh_player::dead() const {
-    return _hero->get_health() == 0;
+    return _dead;
 }
 
 string fresh_player::get_current_class_name() const {

@@ -1,11 +1,7 @@
 #include "character.h"
 
-character::character() : _health(100), _attack(service_functions::rand(rand_variants::standard)), 
-    _attack_distance(service_functions::rand(rand_variants::distance)), _armor(0), _mana(0) {}
-
-character::~character() {
-    cout << "character destructor" << endl;
-};
+character::character() : _health(100), _attack(helpers::rand(helpers::rand_variants::standard)), 
+    _attack_distance(helpers::rand(helpers::rand_variants::distance)), _armor(0), _mana(0) {}
 
 int character::get_attack() const {
     return _attack;

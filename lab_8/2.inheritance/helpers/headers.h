@@ -19,11 +19,3 @@ using std::unique_ptr;
 using std::move;
 using std::queue;
 using std::set;
-
-enum class rand_variants {
-    standard, distance, wizard_ability
-};
-
-namespace service_functions {
-    int rand(rand_variants v);
-}

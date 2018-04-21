@@ -8,7 +8,7 @@
 class fresh_player {
 public:
     fresh_player(string name);
-    ~fresh_player();
+    ~fresh_player() = default;
     void set_character_class(int choice);
     int get_health() const;
     int get_attack() const;
@@ -26,6 +26,7 @@ public:
 private:
     unique_ptr<character> _hero;
     string _current_class, _name;
+	bool _dead = false;
     int _current_position, _init_position = 0;
     enum _heroes {knight = 1, wizard, goblin};
 };

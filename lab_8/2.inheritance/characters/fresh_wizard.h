@@ -5,7 +5,7 @@
 class fresh_wizard : public character {
 public:
     fresh_wizard();
-    ~fresh_wizard();
+    ~fresh_wizard() = default;
 private:
     enum improvements {mana = 1, health, suicide, armor};
     int magic_shield(int damage);

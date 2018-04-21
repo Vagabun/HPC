@@ -25,6 +25,12 @@
     <Filter Include="Source Files\controllers">
       <UniqueIdentifier>{1d2f5089-7bb3-4ed3-98c8-11adcdfc7c8b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\helpers">
+      <UniqueIdentifier>{4af2fec8-1d8d-4fc8-bbe6-f85f91d9f3c1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\helpers">
+      <UniqueIdentifier>{c2ccb06e-4420-406c-b752-dbf8236cab7f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -48,17 +54,17 @@
     <ClCompile Include="controllers\fresh_game.cpp">
       <Filter>Source Files\controllers</Filter>
     </ClCompile>
-    <ClCompile Include="characters\common.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="controllers\input_controller.cpp">
       <Filter>Source Files\controllers</Filter>
     </ClCompile>
+    <ClCompile Include="helpers\common.cpp">
+      <Filter>Source Files\helpers</Filter>
+    </ClCompile>
+    <ClCompile Include="helpers\output_wrapper.cpp">
+      <Filter>Source Files\helpers</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="characters\common.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="characters\fresh_wizard.h">
       <Filter>Header Files\characters</Filter>
     </ClInclude>
@@ -79,6 +85,15 @@
     </ClInclude>
     <ClInclude Include="controllers\input_controller.h">
       <Filter>Header Files\controllers</Filter>
+    </ClInclude>
+    <ClInclude Include="helpers\common.h">
+      <Filter>Header Files\helpers</Filter>
+    </ClInclude>
+    <ClInclude Include="helpers\output_wrapper.h">
+      <Filter>Header Files\helpers</Filter>
+    </ClInclude>
+    <ClInclude Include="helpers\headers.h">
+      <Filter>Header Files\helpers</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
