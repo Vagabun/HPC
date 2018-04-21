@@ -7,8 +7,8 @@ public:
 	static output_wrapper& instance();
 	void print(string &&data);
 private:
-	output_wrapper();
-	~output_wrapper();
+	output_wrapper() = default;
+	~output_wrapper() = default;
 	output_wrapper(output_wrapper const&) = delete;
 	output_wrapper& operator= (output_wrapper const&) = delete;
 };
