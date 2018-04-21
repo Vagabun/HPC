@@ -4,8 +4,8 @@
 
 class fresh_game {
 public:
-    fresh_game();
-    ~fresh_game();
+    fresh_game() = default;
+    ~fresh_game() = default;
     void add_player(string name);
     void set_class(int choice);
     string get_player_name() const;

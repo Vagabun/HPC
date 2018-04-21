@@ -2,10 +2,6 @@
 
 fresh_player::fresh_player(string name) : _name(name) {}
 
-fresh_player::~fresh_player() {
-    cout << "fresh player destructor" << endl;
-}
-
 void fresh_player::set_character_class(int choice) {
     switch (choice) {
     case _heroes::knight : {

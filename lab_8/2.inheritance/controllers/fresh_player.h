@@ -8,7 +8,7 @@
 class fresh_player {
 public:
     fresh_player(string name);
-    ~fresh_player();
+    ~fresh_player() = default;
     void set_character_class(int choice);
     int get_health() const;
     int get_attack() const;

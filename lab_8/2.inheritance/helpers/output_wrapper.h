@@ -5,7 +5,7 @@
 class output_wrapper {
 public:
 	static output_wrapper& instance();
-	void print(const string &&data);
+	void print(string &&data);
 private:
 	output_wrapper();
 	~output_wrapper();

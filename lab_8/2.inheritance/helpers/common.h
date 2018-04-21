@@ -6,5 +6,5 @@ namespace helpers {
 	enum class rand_variants {
 		standard, distance, wizard_ability
 	};
-    int rand(rand_variants v);
+    int rand(rand_variants variant);
 }

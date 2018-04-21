@@ -5,7 +5,7 @@
 class fresh_goblin : public character {
 public:
     fresh_goblin();
-    ~fresh_goblin();
+    ~fresh_goblin() = default;
 private:
     int _ability_counter;
     int cowardice(int damage);

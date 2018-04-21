@@ -9,6 +9,6 @@ output_wrapper::output_wrapper() {}
 
 output_wrapper::~output_wrapper() {}
 
-void output_wrapper::print(const std::string &&data) {
+void output_wrapper::print(std::string &&data) {
 	cout << endl << data << endl << endl;
 }
