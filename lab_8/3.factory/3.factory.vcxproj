@@ -125,6 +125,9 @@
     <ClCompile Include="controllers\fresh_game.cpp" />
     <ClCompile Include="controllers\fresh_player.cpp" />
     <ClCompile Include="controllers\input_controller.cpp" />
+    <ClCompile Include="factories\goblin_factory.cpp" />
+    <ClCompile Include="factories\knight_factory.cpp" />
+    <ClCompile Include="factories\wizard_factory.cpp" />
     <ClCompile Include="helpers\common.cpp" />
     <ClCompile Include="helpers\output_wrapper.cpp" />
     <ClCompile Include="main.cpp" />
@@ -137,6 +140,10 @@
     <ClInclude Include="controllers\fresh_game.h" />
     <ClInclude Include="controllers\fresh_player.h" />
     <ClInclude Include="controllers\input_controller.h" />
+    <ClInclude Include="factories\base_factory.h" />
+    <ClInclude Include="factories\goblin_factory.h" />
+    <ClInclude Include="factories\knight_factory.h" />
+    <ClInclude Include="factories\wizard_factory.h" />
     <ClInclude Include="helpers\common.h" />
     <ClInclude Include="helpers\headers.h" />
     <ClInclude Include="helpers\output_wrapper.h" />
