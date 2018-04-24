@@ -1,6 +1,6 @@
 #pragma once
 
-#include "headers.h"
+#include "output_wrapper_interface.h"
 
 class output_wrapper {
 public:

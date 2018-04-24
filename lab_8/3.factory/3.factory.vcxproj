@@ -131,6 +131,7 @@
     <ClCompile Include="factories\wizard_factory.cpp" />
     <ClCompile Include="helpers\common.cpp" />
     <ClCompile Include="helpers\output_wrapper.cpp" />
+    <ClCompile Include="helpers\output_wrapper_interface.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -148,6 +149,7 @@
     <ClInclude Include="helpers\common.h" />
     <ClInclude Include="helpers\headers.h" />
     <ClInclude Include="helpers\output_wrapper.h" />
+    <ClInclude Include="helpers\output_wrapper_interface.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
