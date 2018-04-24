@@ -5,6 +5,6 @@
 
 class wizard_factory : public base_factory {
 public:
-	unique_ptr<character> create_character();
+	unique_ptr<character> create_character() override;
 };
 

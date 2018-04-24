@@ -1,5 +1,6 @@
-#include <iostream>
+#include "controllers\input_controller.h"
 
 int main() {
-	std::cout << "test" << std::endl;
+	input_controller a;
+	a.start();
 }

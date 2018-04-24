@@ -125,6 +125,7 @@
     <ClCompile Include="controllers\fresh_game.cpp" />
     <ClCompile Include="controllers\fresh_player.cpp" />
     <ClCompile Include="controllers\input_controller.cpp" />
+    <ClCompile Include="factories\base_factory.cpp" />
     <ClCompile Include="factories\goblin_factory.cpp" />
     <ClCompile Include="factories\knight_factory.cpp" />
     <ClCompile Include="factories\wizard_factory.cpp" />
