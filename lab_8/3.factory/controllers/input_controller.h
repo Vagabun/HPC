@@ -13,5 +13,6 @@ private:
     const set<int> _character_variants { 1, 2, 3 };
     int _players_counter;
     void _create_players();
+	output_wrapper_interface &_output;
 };
 

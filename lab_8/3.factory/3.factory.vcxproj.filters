@@ -81,9 +81,6 @@
     <ClCompile Include="factories\base_factory.cpp">
       <Filter>Source Files\factories</Filter>
     </ClCompile>
-    <ClCompile Include="helpers\output_wrapper_interface.cpp">
-      <Filter>Source Files\helpers</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="helpers\common.h">

@@ -1,6 +1,5 @@
 #pragma once
 
-#include "../characters/character.h"
 #include "../factories/knight_factory.h"
 #include "../factories/wizard_factory.h"
 #include "../factories/goblin_factory.h"

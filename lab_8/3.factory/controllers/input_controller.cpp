@@ -1,10 +1,10 @@
 #include "input_controller.h"
 
 input_controller::input_controller() : _game(move(unique_ptr<fresh_game>(new fresh_game))), 
-    _players_counter(0) {}
+    _players_counter(0), _output(output_wrapper::instance()) {}
 
 void input_controller::start() {
-	output_wrapper::instance().print("start...");
+	_output.print("start...");
     int action;
     _create_players();
     while (true) {
@@ -13,12 +13,12 @@ void input_controller::start() {
         cin >> action;
         switch (action) {
             case _actions::attack : {
-				output_wrapper::instance().print("attack!");
+				_output.print("attack!");
                 _game->attack();
                 break;
             }
             case _actions::ability : {
-				output_wrapper::instance().print("ability!");
+				_output.print("ability!");
                 _game->ability();
                 break;
             }
@@ -35,12 +35,12 @@ void input_controller::start() {
                 break;
             }
             default: {
-				output_wrapper::instance().print("wrong input, try again");
+				_output.print("wrong input, try again");
                 break;
             } 
         }
         if (_game->enemy_is_dead()) {
-			output_wrapper::instance().print("enemy is dead!");
+			_output.print("enemy is dead!");
             cout << endl << "player " << _game->get_player_name() << " won!" << endl;
             break;
         }

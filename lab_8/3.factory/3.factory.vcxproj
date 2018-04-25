@@ -131,7 +131,6 @@
     <ClCompile Include="factories\wizard_factory.cpp" />
     <ClCompile Include="helpers\common.cpp" />
     <ClCompile Include="helpers\output_wrapper.cpp" />
-    <ClCompile Include="helpers\output_wrapper_interface.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
