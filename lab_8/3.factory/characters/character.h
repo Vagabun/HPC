@@ -16,5 +16,6 @@ public:
     virtual void take_damage(int damage);
 protected:
     int _health, _attack, _attack_distance, _armor, _mana;
+	output_wrapper_interface &_output;
 };
 

@@ -4,7 +4,7 @@
 
 class fresh_game {
 public:
-    fresh_game() = default;
+    fresh_game();
     ~fresh_game() = default;
     void add_player(string name);
     void set_class(int choice);
@@ -22,5 +22,6 @@ private:
     queue< unique_ptr<fresh_player> > _players;
 	unique_ptr<fresh_player> _current_player;
 	enum _borders {left = 1, right = 7};
+	output_wrapper_interface &_output;
 };
 

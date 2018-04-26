@@ -1,7 +1,8 @@
 #include "character.h"
 
 character::character() : _health(100), _attack(helpers::rand(helpers::rand_variants::standard)), 
-    _attack_distance(helpers::rand(helpers::rand_variants::distance)), _armor(0), _mana(0) {}
+    _attack_distance(helpers::rand(helpers::rand_variants::distance)), _armor(0), _mana(0), 
+	_output(output_wrapper::instance()) {}
 
 int character::get_attack() const {
     return _attack;

@@ -31,6 +31,12 @@
     <Filter Include="Source Files\characters">
       <UniqueIdentifier>{e58bbc9b-7995-4e83-acf8-ef04849bce8e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\factories">
+      <UniqueIdentifier>{51eafdf4-ccb2-4324-a05c-e9ada35b8acb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\factories">
+      <UniqueIdentifier>{e3943f68-3c40-46a4-a9d9-4a3e5df07a16}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -63,6 +69,18 @@
     <ClCompile Include="characters\fresh_wizard.cpp">
       <Filter>Source Files\characters</Filter>
     </ClCompile>
+    <ClCompile Include="factories\knight_factory.cpp">
+      <Filter>Source Files\factories</Filter>
+    </ClCompile>
+    <ClCompile Include="factories\goblin_factory.cpp">
+      <Filter>Source Files\factories</Filter>
+    </ClCompile>
+    <ClCompile Include="factories\wizard_factory.cpp">
+      <Filter>Source Files\factories</Filter>
+    </ClCompile>
+    <ClCompile Include="factories\base_factory.cpp">
+      <Filter>Source Files\factories</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="helpers\common.h">
@@ -94,6 +112,21 @@
     </ClInclude>
     <ClInclude Include="characters\fresh_wizard.h">
       <Filter>Header Files\characters</Filter>
+    </ClInclude>
+    <ClInclude Include="factories\base_factory.h">
+      <Filter>Header Files\factories</Filter>
+    </ClInclude>
+    <ClInclude Include="factories\knight_factory.h">
+      <Filter>Header Files\factories</Filter>
+    </ClInclude>
+    <ClInclude Include="factories\goblin_factory.h">
+      <Filter>Header Files\factories</Filter>
+    </ClInclude>
+    <ClInclude Include="factories\wizard_factory.h">
+      <Filter>Header Files\factories</Filter>
+    </ClInclude>
+    <ClInclude Include="helpers\output_wrapper_interface.h">
+      <Filter>Header Files\helpers</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

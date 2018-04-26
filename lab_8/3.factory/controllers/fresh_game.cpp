@@ -1,5 +1,7 @@
 #include "fresh_game.h"
 
+fresh_game::fresh_game() : _output(_output) {}
+
 void fresh_game::add_player(string name) {
     _players.emplace(new fresh_player(name));
     _players.size() > 1 ? _players.back()->set_position(_borders::right) : _players.back()->set_position(_borders::left);
@@ -20,7 +22,8 @@ void fresh_game::attack() {
 		_switch_player();
 	}
     else {
-        output_wrapper::instance().print("enemy is too far for the attack");
+		
+        _output.print("enemy is too far for the attack");
         _switch_player();
     }
 }
@@ -56,14 +59,14 @@ void fresh_game::move_forward() {
             if (_current_player->get_position() + 1 != _players.front()->get_position())
                 _current_player->set_position(_current_player->get_position() + 1);
             else
-                output_wrapper::instance().print("can't move forward, another player there");
+                _output.print("can't move forward, another player there");
             break;
         }
         case _borders::right : {
             if (_current_player->get_position() - 1 != _players.front()->get_position())
                 _current_player->set_position(_current_player->get_position() - 1);
             else
-                output_wrapper::instance().print("can't move forward, another player there");
+                _output.print("can't move forward, another player there");
             break;
         }
     }
@@ -77,14 +80,14 @@ void fresh_game::move_backward() {
             if (_current_player->get_position() - 1 >= _borders::left)
                 _current_player->set_position(_current_player->get_position() - 1);
             else
-                output_wrapper::instance().print("can't move backward, reached the border");
+                _output.print("can't move backward, reached the border");
             break;
         }
         case _borders::right : {
             if (_current_player->get_position() + 1 <= _borders::right)
                 _current_player->set_position(_current_player->get_position() + 1);
             else
-                output_wrapper::instance().print("can't move backward, reached the border");
+                _output.print("can't move backward, reached the border");
             break;
         }
     }
@@ -99,7 +102,8 @@ void fresh_game::_get_player() {
 void fresh_game::_switch_player() {
 	if (_players.front()->dead())
 		_players.pop();
-    _players.push(move(_current_player));
+	else if (!_current_player->dead())
+		_players.push(move(_current_player));
 }
 
 bool fresh_game::_distance_handler() {

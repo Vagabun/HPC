@@ -1,27 +1,31 @@
 #include "fresh_player.h"
 
-fresh_player::fresh_player(string name) : _name(name) {}
+fresh_player::fresh_player(string name) : _name(name) {
+	_knight_f = move(unique_ptr<knight_factory>(new knight_factory));
+	_wizard_f = move(unique_ptr<wizard_factory>(new wizard_factory));
+	_goblin_f = move(unique_ptr<goblin_factory>(new goblin_factory));
+}
 
-void fresh_player::set_character_class(int choice) {
-    switch (choice) {
-    case _heroes::knight : {
-        _hero = move(unique_ptr<character>(new fresh_knight));
-        _current_class = "knight";
-        break;
-    }
-    case _heroes::wizard : {
-        _hero = move(unique_ptr<character>(new fresh_wizard));
-        _current_class = "wizard";
-        break;
-    }
-    case _heroes::goblin : {
-        _hero = move(unique_ptr<character>(new fresh_goblin));
-        _current_class = "goblin";
-        break;
-    }
-    default:
-        break;
-    }
+void fresh_player::set_character_class(int character_class) {
+	switch (character_class) {
+		case _heroes::knight : {
+			_hero = move(_knight_f->create_character());
+			_current_class = "knight";
+			break;
+		}
+		case _heroes::wizard: {
+			_hero = move(_wizard_f->create_character());
+			_current_class = "wizard";
+			break;
+		}
+		case _heroes::goblin: {
+			_hero = move(_goblin_f->create_character());
+			_current_class = "goblin";
+			break;
+		}
+		default:
+			break;
+	}
 }
 
 int fresh_player::get_health() const {
@@ -45,7 +49,10 @@ int fresh_player::get_mana() const {
 }
 
 int fresh_player::active_ability(int enemy_health) {
-    return _hero->active_ability(enemy_health);
+	int damage = _hero->active_ability(enemy_health);
+	if (!_hero->get_health())
+		_dead = true;
+    return damage;
 }
 
 void fresh_player::take_damage(int damage) {
