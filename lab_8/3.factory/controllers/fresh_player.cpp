@@ -49,7 +49,10 @@ int fresh_player::get_mana() const {
 }
 
 int fresh_player::active_ability(int enemy_health) {
-    return _hero->active_ability(enemy_health);
+	int damage = _hero->active_ability(enemy_health);
+	if (!_hero->get_health())
+		_dead = true;
+    return damage;
 }
 
 void fresh_player::take_damage(int damage) {

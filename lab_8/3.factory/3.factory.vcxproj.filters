@@ -125,5 +125,8 @@
     <ClInclude Include="factories\wizard_factory.h">
       <Filter>Header Files\factories</Filter>
     </ClInclude>
+    <ClInclude Include="helpers\output_wrapper_interface.h">
+      <Filter>Header Files\helpers</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

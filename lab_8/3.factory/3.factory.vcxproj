@@ -148,6 +148,7 @@
     <ClInclude Include="helpers\common.h" />
     <ClInclude Include="helpers\headers.h" />
     <ClInclude Include="helpers\output_wrapper.h" />
+    <ClInclude Include="helpers\output_wrapper_interface.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
