@@ -28,5 +28,14 @@
     <Text Include="src\data\3_in.txt">
       <Filter>Data Files</Filter>
     </Text>
+    <Text Include="src\data\1_out.txt">
+      <Filter>Data Files</Filter>
+    </Text>
+    <Text Include="src\data\2_out.txt">
+      <Filter>Data Files</Filter>
+    </Text>
+    <Text Include="src\data\3_out.txt">
+      <Filter>Data Files</Filter>
+    </Text>
   </ItemGroup>
 </Project>

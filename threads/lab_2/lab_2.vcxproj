@@ -122,8 +122,11 @@
   </ItemGroup>
   <ItemGroup>
     <Text Include="src\data\1_in.txt" />
+    <Text Include="src\data\1_out.txt" />
     <Text Include="src\data\2_in.txt" />
+    <Text Include="src\data\2_out.txt" />
     <Text Include="src\data\3_in.txt" />
+    <Text Include="src\data\3_out.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

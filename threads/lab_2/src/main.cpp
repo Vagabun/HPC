@@ -6,13 +6,26 @@
 #include <iostream>
 #include <fstream>
 #include <vector>
-#include <queue>
-#include <deque>
 
+void print(std::string in, std::string out) {
+	//std::cout << in << std::endl;
+	//std::cout << out << std::endl;
+	std::string data;
+	std::ifstream input(in);
+	std::ofstream output(out);
+	input >> data;
+	output << data;
+	input.close();
+	output.close();
+}
 
 class thread_guard {
 public:
-	thread_guard() {};
+	thread_guard(size_t nthreads, std::vector<std::string> in, std::vector<std::string> out) {
+		for (size_t i = 0; i < nthreads; ++i) {
+			thread_pool.push_back(std::thread(print, in[i], out[i]));
+		}
+	};
 	~thread_guard() {
 		for (auto &t : thread_pool)
 			if (t.joinable())
@@ -24,19 +37,11 @@ private:
 	std::vector<std::thread> thread_pool;
 };
 
-void test(std::string str) {
-	for (size_t i = 0; i < 100; i++) {
-		std::cout << str << std::endl;
-	}
-}
-
-void out(std::deque<std::string> &filenames) {
-	std::ifstream(filenames.front());
-}
-
 int main() {
 
-	std::deque<std::string> in { "1_in.txt", "2_in.txt", "3_in.txt" };
+	std::vector<std::string> in { "src/data/1_in.txt", "src/data/2_in.txt", "src/data/3_in.txt" };
+	std::vector<std::string> out { "src/data/1_out.txt", "src/data/2_out.txt", "src/data/3_out.txt" };
+	thread_guard test(3, in, out);
 
 	return 0;
 }
