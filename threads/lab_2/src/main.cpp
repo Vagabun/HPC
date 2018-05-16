@@ -6,15 +6,49 @@
 #include <iostream>
 #include <fstream>
 #include <vector>
+#include <memory>
+
+//template<typename T> or template<class T>
+template<typename T>
+class stack_guard {
+public:
+	void push(T value) {
+		std::lock_guard<std::mutex> lock(_m);
+		_stack.push(value);
+	}
+	T pop_top() {
+		std::lock_guard<std::mutex> lock(_m);
+		T data;
+		if (!_stack.empty()) {
+			data = _stack.top(); //T should have copy constructor?
+			_stack.pop();
+		}
+		return data;
+	}
+private:
+	std::stack<T> _stack;
+	std::mutex _m;
+};
+
+stack_guard<int> s;
 
 void print(std::string in, std::string out) {
-	//std::cout << in << std::endl;
-	//std::cout << out << std::endl;
-	std::string data;
+	std::string command;
+	int data;
 	std::ifstream input(in);
 	std::ofstream output(out);
-	input >> data;
-	output << data;
+	while (!input.eof()) {
+		input >> command;
+		if (command == "PUSH") {
+			input >> data;
+			s.push(data);
+			output << "PUSHED " << data << std::endl;
+		}
+		else if (command == "POP") {
+			data = s.pop_top();
+			output << "POPPED " << data << std::endl;
+		}
+	}
 	input.close();
 	output.close();
 }
