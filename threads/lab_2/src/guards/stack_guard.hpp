@@ -16,7 +16,7 @@ public:
 	void pop_top(T &result) {
 		std::lock_guard<std::mutex> lock(_m);
 		if (!_stack.empty()) {
-			result = *_stack.top();
+			result = *_stack.top(); //user data should support copy operation
 			_stack.pop();
 		}
 	}
