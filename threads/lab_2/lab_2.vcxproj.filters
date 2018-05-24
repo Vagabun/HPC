@@ -12,10 +12,19 @@
     <Filter Include="Data Files">
       <UniqueIdentifier>{904ee40c-c2e4-43e7-a776-9b78e7c2c62c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="stack_guard">
+      <UniqueIdentifier>{23de993d-c577-4ec6-830a-f73c595e5c32}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="thread_guard">
+      <UniqueIdentifier>{5be4e09b-c045-45aa-be86-e14146b54375}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\guards\thread_guard.cpp">
+      <Filter>thread_guard</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -37,5 +46,16 @@
     <Text Include="src\data\3_out.txt">
       <Filter>Data Files</Filter>
     </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\guards\headers.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\guards\stack_guard.hpp">
+      <Filter>stack_guard</Filter>
+    </ClInclude>
+    <ClInclude Include="src\guards\thread_guard.h">
+      <Filter>thread_guard</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
