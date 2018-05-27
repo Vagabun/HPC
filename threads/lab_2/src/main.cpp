@@ -9,12 +9,10 @@ public:
 		this->_data = value._data;
 		return *this;
 	}
-	//?
 	friend std::ifstream& operator>>(std::ifstream &in, data &d) {
 		in >> d._data;
 		return in;
 	}
-	//overloading << after string?
 	friend std::ofstream& operator<<(std::ofstream &out, data &d) {
 		out << d._data;
 		return out;
@@ -78,5 +76,5 @@ int main() {
 
 	thread_guard guard(3, func, in, out);
 
-	return 0;
+    return 0;
 }
