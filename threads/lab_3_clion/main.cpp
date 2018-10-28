@@ -3,58 +3,65 @@
 #include <mutex>
 #include <stack>
 #include <map>
+#include <string>
+
+using namespace std;
 
 class hierarchical_mutex {
 public:
     explicit hierarchical_mutex(int level) : _level(level) {};
     ~hierarchical_mutex() = default;
-    int get_level();
     void lock();
     void unlock();
 
 private:
     int _level;
     std::mutex _m;
-    static std::stack<int> _hierarchy_levels;
-    //static int _current_level;
+    static std::map< std::thread::id, std::stack<int> > _hierarchy;
+    void _check_for_hierarchy_violation();
 };
 
-int hierarchical_mutex::get_level() {
-    return _level;
-}
+std::map< std::thread::id, std::stack<int> > hierarchical_mutex::_hierarchy = { };
 
 void hierarchical_mutex::lock() {
-    if (!_hierarchy_levels.empty()) {
-        if (_hierarchy_levels.top() > this->get_level()) {
-            _hierarchy_levels.push(this->get_level());
-            _m.lock();
-        }
-    }
-    else {
-        _hierarchy_levels.push(this->get_level());
-        _m.lock();
-    }
-    //std::this_thread::get_id();
+    _check_for_hierarchy_violation();
+    _hierarchy.at(std::this_thread::get_id()).push(this->_level);
+    _m.lock();
 }
 
 void hierarchical_mutex::unlock() {
-    if (!_hierarchy_levels.empty())
-        _hierarchy_levels.pop();
+    _hierarchy.at(std::this_thread::get_id()).pop();
     _m.unlock();
 }
 
-hierarchical_mutex a(10);
+void hierarchical_mutex::_check_for_hierarchy_violation() {
+    if (!_hierarchy.count(std::this_thread::get_id())) //move this block to separate function
+        _hierarchy.insert(std::make_pair(std::this_thread::get_id(), std::stack<int>())); //() ?
 
-void test() {
-    std::lock_guard<hierarchical_mutex> lk(a);
-    std::cout << "test" << std::endl;
-
+    try {
+        if (_hierarchy.at(std::this_thread::get_id()).empty())
+            return;
+//        if (_hierarchy[std::this_thread::get_id()].empty())
+//            return;
+        else if (_hierarchy.at(std::this_thread::get_id()).top() < this->_level)
+            throw std::logic_error("hierarchy violation");
+            //std::cout << "that's sad" << std::endl;
+    }
+    catch (...) {
+        std::cout << "logic error: mutex hierarchy violation" << std::endl;
+        //std::terminate(); //stack will not unwind
+        throw;
+    }
 }
 
 int main() {
 
-    //std::thread t1(test);
-    //t1.join();
+
+    hierarchical_mutex a(10);
+    hierarchical_mutex b(5);
+
+    std::lock_guard<hierarchical_mutex> lk(a);
+
 
     return 0;
 }
