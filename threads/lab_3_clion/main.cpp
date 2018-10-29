@@ -1,67 +1,26 @@
-#include <iostream>
-#include <thread>
-#include <mutex>
-#include <stack>
-#include <map>
-#include <string>
+#include "src/hierarchical_mutex.h"
 
-using namespace std;
+hierarchical_mutex high_level_mutex(10000);
 
-class hierarchical_mutex {
-public:
-    explicit hierarchical_mutex(int level) : _level(level) {};
-    ~hierarchical_mutex() = default;
-    void lock();
-    void unlock();
-
-private:
-    int _level;
-    std::mutex _m;
-    static std::map< std::thread::id, std::stack<int> > _hierarchy;
-    void _check_for_hierarchy_violation();
-};
-
-std::map< std::thread::id, std::stack<int> > hierarchical_mutex::_hierarchy = { };
-
-void hierarchical_mutex::lock() {
-    _check_for_hierarchy_violation();
-    _hierarchy.at(std::this_thread::get_id()).push(this->_level);
-    _m.lock();
+void high_level_func() {
+    std::lock_guard<hierarchical_mutex> lk(high_level_mutex);
 }
 
-void hierarchical_mutex::unlock() {
-    _hierarchy.at(std::this_thread::get_id()).pop();
-    _m.unlock();
+hierarchical_mutex other_mutex(100);
+
+void other_stuff() {
+    high_level_func();
 }
 
-void hierarchical_mutex::_check_for_hierarchy_violation() {
-    if (!_hierarchy.count(std::this_thread::get_id())) //move this block to separate function
-        _hierarchy.insert(std::make_pair(std::this_thread::get_id(), std::stack<int>())); //() ?
-
-    try {
-        if (_hierarchy.at(std::this_thread::get_id()).empty())
-            return;
-//        if (_hierarchy[std::this_thread::get_id()].empty())
-//            return;
-        else if (_hierarchy.at(std::this_thread::get_id()).top() < this->_level)
-            throw std::logic_error("hierarchy violation");
-            //std::cout << "that's sad" << std::endl;
-    }
-    catch (...) {
-        std::cout << "logic error: mutex hierarchy violation" << std::endl;
-        //std::terminate(); //stack will not unwind
-        throw;
-    }
+void thread_b() {
+    std::lock_guard<hierarchical_mutex> lk(other_mutex);
+    other_stuff();
 }
 
 int main() {
 
-
-    hierarchical_mutex a(10);
-    hierarchical_mutex b(5);
-
-    std::lock_guard<hierarchical_mutex> lk(a);
-
+    std::thread b(thread_b);
+    b.join();
 
     return 0;
 }
