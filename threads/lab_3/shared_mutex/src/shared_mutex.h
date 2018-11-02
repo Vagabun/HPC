@@ -3,6 +3,7 @@
 
 #include <mutex>
 #include <atomic>
+#include <iostream>
 
 class shared_mutex {
 public:
@@ -14,7 +15,7 @@ public:
     void shared_unlock();
 private:
     std::atomic<int> _readers_counter;
+    std::mutex _m;
 };
-
 
 #endif //SHARED_MUTEX_SHARED_MUTEX_H
