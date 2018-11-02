@@ -15,7 +15,7 @@ public:
     void unlock();
 private:
     int _level;
-    std::mutex _m;
+    std::mutex _m, _hierarchy_storage_mutex;
     static std::map< std::thread::id, std::stack<int> > _hierarchy;
     void _check_for_hierarchy_violation();
     void _init_hierarchy_storage();

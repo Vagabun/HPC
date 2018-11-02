@@ -3,8 +3,10 @@
 std::map< std::thread::id, std::stack<int> > hierarchical_mutex::_hierarchy = {};
 
 void hierarchical_mutex::_init_hierarchy_storage() {
+    _hierarchy_storage_mutex.lock();
     if (!_hierarchy.count(std::this_thread::get_id()))
         _hierarchy.insert(std::make_pair(std::this_thread::get_id(), std::stack<int>()));
+    _hierarchy_storage_mutex.unlock();
 }
 
 void hierarchical_mutex::_check_for_hierarchy_violation() {
