@@ -3,7 +3,6 @@
 
 #include <mutex>
 #include <atomic>
-#include <iostream>
 
 class shared_mutex {
 public:

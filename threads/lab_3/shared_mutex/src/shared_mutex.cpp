@@ -2,7 +2,7 @@
 
 void shared_mutex::lock() {
     while (true) {
-        if (!_readers_counter)
+        if (_readers_counter)
             continue;
         else {
             _m.lock();
