@@ -1,36 +1,40 @@
 #include "src/shared_mutex.h"
 #include "src/thread_guard.h"
-#include <thread>
-#include <chrono>
-#include <iostream>
-#include <string>
-#include <vector>
 
 shared_mutex s;
 
 struct database {
-    //add sleep for random time
     void query() {
         std::lock_guard<shared_mutex> lk(s);
-        std::this_thread::sleep_for(std::chrono::seconds(1));
+        std::this_thread::sleep_for(std::chrono::milliseconds(time_generator()));
     }
     void non_blocking_query() {
         s.shared_lock();
-        std::this_thread::sleep_for(std::chrono::seconds(1));
+        std::this_thread::sleep_for(std::chrono::milliseconds(time_generator()));
         s.shared_unlock();
     }
+    int time_generator() {
+        std::random_device rd;
+        std::mt19937 gen(rd());
+        std::uniform_int_distribution<int> distribution(0, 700);
+        return distribution(gen);
+    }
 };
+
 
 int main() {
 
     database d;
+    std::chrono::steady_clock::time_point start, finish;
+    std::chrono::duration<double> elapsed;
+    std::ofstream output("output.txt");
 
-    std::function<void()> f = [&d]() {
+    auto f_simulate_block = [&d]() {
         for (int i = 0; i < 11; ++i)
             d.query();
     };
 
-    std::function<void()> f2 = [&d]() {
+    auto f_simulate_simultaneous = [&d]() {
         for (int i = 0; i <= 11; ++i)
             if (i % 10 == 1)
                 d.query();
@@ -39,20 +43,21 @@ int main() {
     };
 
 
-    std::chrono::steady_clock::time_point start = std::chrono::steady_clock::now();
-    thread_guard workers(std::thread::hardware_concurrency() - 1, f);
-    workers.join();
-    std::chrono::steady_clock::time_point finish = std::chrono::steady_clock::now();
-    std::chrono::duration<double> elapsed = std::chrono::duration_cast<std::chrono::duration<double>>(finish - start);
+    start = std::chrono::steady_clock::now();
+    thread_guard workers_1(std::thread::hardware_concurrency() - 1, f_simulate_block);
+    workers_1.join();
+    finish = std::chrono::steady_clock::now();
+    elapsed = std::chrono::duration_cast<std::chrono::duration<double>>(finish - start);
     std::cout << "Connection with full block: " << elapsed.count() << " s." << std::endl;
+    output << "Connection with full block: " << elapsed.count() << " s." << std::endl;
 
-//    std::chrono::steady_clock::time_point start = std::chrono::steady_clock::now();
-//    thread_guard workers(std::thread::hardware_concurrency() - 1, f2);
-//    workers.join();
-//    std::chrono::steady_clock::time_point finish = std::chrono::steady_clock::now();
-//    std::chrono::duration<double> elapsed = std::chrono::duration_cast<std::chrono::duration<double>>(finish - start);
-//    std::cout << "Connection with full block: " << elapsed.count() << " s." << std::endl;
-
+    start = std::chrono::steady_clock::now();
+    thread_guard workers_2(std::thread::hardware_concurrency() - 1, f_simulate_simultaneous);
+    workers_2.join();
+    finish = std::chrono::steady_clock::now();
+    elapsed = std::chrono::duration_cast<std::chrono::duration<double>>(finish - start);
+    std::cout << "Connection with partial block: " << elapsed.count() << " s." << std::endl;
+    output << "Connection with partial block: " << elapsed.count() << " s." << std::endl;
 
     return 0;
 }

@@ -3,4 +3,4 @@ project(shared_mutex)
 
 set(CMAKE_CXX_STANDARD 11)
 
-add_executable(shared_mutex main.cpp src/shared_mutex.cpp src/shared_mutex.h src/thread_guard.cpp src/thread_guard.h)
+add_executable(shared_mutex main.cpp src/shared_mutex.cpp src/shared_mutex.h src/thread_guard.cpp src/thread_guard.h src/header.h)
