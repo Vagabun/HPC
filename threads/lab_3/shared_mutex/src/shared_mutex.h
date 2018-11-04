@@ -1,12 +1,11 @@
 #ifndef SHARED_MUTEX_SHARED_MUTEX_H
 #define SHARED_MUTEX_SHARED_MUTEX_H
 
-#include <mutex>
-#include <atomic>
+#include "header.h"
 
 class shared_mutex {
 public:
-    shared_mutex() : _readers_counter(0) {}; //is default value == 0?
+    shared_mutex() : _readers_counter(0) {};
     ~shared_mutex() = default;
     void lock();
     void unlock();
