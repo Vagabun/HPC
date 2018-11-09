@@ -16,7 +16,7 @@ struct database {
     int time_generator() {
         std::random_device rd;
         std::mt19937 gen(rd());
-        std::uniform_int_distribution<int> distribution(0, 700);
+        std::uniform_int_distribution<int> distribution(0, 500);
         return distribution(gen);
     }
 };
