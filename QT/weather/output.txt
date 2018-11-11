@@ -1,0 +1,28 @@
+City: Montreal
+Temperature: 0.66 C
+Humidity: 59 %
+Pressure: 1008
+Weather condition: light shower snow
+Speed of wind: 11.3
+
+City: Helsinki
+Temperature: 5 C
+Humidity: 93 %
+Pressure: 1024
+Weather condition: broken clouds
+Speed of wind: 6.7
+
+City: Warsaw
+Temperature: 7 C
+Humidity: 93 %
+Pressure: 1016
+Weather condition: mist
+Speed of wind: 3.1
+
+City: Gdansk
+Temperature: 7 C
+Humidity: 100 %
+Pressure: 1014
+Weather condition: fog
+Speed of wind: 4.6
+
