@@ -11,7 +11,9 @@ void shared_mutex::unlock() {
 }
 
 void shared_mutex::shared_lock() {
+    _m.lock();
     ++_readers_counter;
+    _m.unlock();
 }
 
 void shared_mutex::shared_unlock() {
