@@ -88,6 +88,9 @@
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
     </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+    </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -118,7 +121,21 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\guards\thread_guard.cpp" />
     <ClCompile Include="src\main.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="src\data\1_in.txt" />
+    <Text Include="src\data\1_out.txt" />
+    <Text Include="src\data\2_in.txt" />
+    <Text Include="src\data\2_out.txt" />
+    <Text Include="src\data\3_in.txt" />
+    <Text Include="src\data\3_out.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\guards\headers.h" />
+    <ClInclude Include="src\guards\stack_guard.hpp" />
+    <ClInclude Include="src\guards\thread_guard.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
