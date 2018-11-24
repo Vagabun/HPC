@@ -1,0 +1,2 @@
+Connection with full block: 14.4333 s.
+Connection with partial block: 5.2099 s.
