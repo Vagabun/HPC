@@ -8,29 +8,26 @@
 #define FEED_OR_DIE_TAG 0
 #define MILK_PRODUCING_TAG 1
 
-void filename_maker(int cow, char *filename) {
-    char id_of_cow[] = {cow + '0', '\0'};
-    
-    strcat(filename, "log_");
-    strcat(filename, id_of_cow);
-    strcat(filename, ".txt");
+void filename_maker(int rank, int sizeof_filename, char *filename) {
+    snprintf(filename, sizeof_filename, "log_%d.txt", rank);
 }
 
 void cow_work(int rank) {
-    char log_filename[15] = "";
-    int hay;
+    int message;
     int milk;
+    char filename[15] = "";
     MPI_Status status;
     
-    filename_maker(rank, log_filename);
-    FILE *output = fopen(log_filename, "a");
+    filename_maker(rank, 15, filename);
+    FILE *output = fopen(filename, "a");
     srand(time(NULL));
+
     while (1) {
         MPI_Ssend(0, 0, MPI_INT, 0, FEED_OR_DIE_TAG, MPI_COMM_WORLD);
-        MPI_Recv(&hay, 1, MPI_INT, 0, FEED_OR_DIE_TAG, MPI_COMM_WORLD, &status);
-        if (hay > 0) {
-            fprintf(output, "Cow got %d units of hay\n", hay);
-            milk = hay / 2;
+        MPI_Recv(&message, 1, MPI_INT, 0, FEED_OR_DIE_TAG, MPI_COMM_WORLD, &status);
+        if (message > 0) {
+            fprintf(output, "Cow got %d units of hay\n", message);
+            milk = message / 2;
             fprintf(output, "Cow produced %d units of milk\n", milk);
             MPI_Ssend(&milk, 1, MPI_INT, 0, MILK_PRODUCING_TAG, MPI_COMM_WORLD);
             usleep((rand() % 1000000 + 1)); //usleep(microseconds), 1000000 + 1 - between 1 and 1000000
@@ -61,6 +58,7 @@ void farmer_work(int size, int *milk) {
         cows[i] = 1;
     }
     srand(time(NULL));
+
     while (1) {
         MPI_Probe(MPI_ANY_SOURCE, MPI_ANY_TAG, MPI_COMM_WORLD, &status); //peek into any message, but do not receive it
         id_of_cow = status.MPI_SOURCE;
