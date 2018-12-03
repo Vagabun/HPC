@@ -4,6 +4,12 @@
 
 #define N 10
 
+void error_handler(cudaError_t err) {
+    if (err != cudaSuccess) {
+        std::cerr << cudaGetErrorString(err) << std::endl;
+        exit(1);
+    }
+}
 
 __global__ void kernel(int *a, int *b, int *c) {
     int tid = blockIdx.x;
@@ -11,26 +17,26 @@ __global__ void kernel(int *a, int *b, int *c) {
         c[tid] = a[tid] + b[tid];
 }
 
-int main() {
+__host__ int main() {
     int *a, *b, *c;
     int a_host[N], b_host[N], c_host[N];
 
-    cudaMalloc((void**)&a, N * sizeof(int));
-    cudaMalloc((void**)&b, N * sizeof(int));
-    cudaMalloc((void**)&c, N * sizeof(int));
+    error_handler(cudaMalloc((void**)&a, N * sizeof(int)));
+    error_handler(cudaMalloc((void**)&b, N * sizeof(int)));
+    error_handler(cudaMalloc((void**)&c, N * sizeof(int)));
 
     for (int i = 0; i < N; i++) {
         a_host[i] = i;
         b_host[i] = i * i;
     }
 
-    cudaMemcpy(a, a_host, sizeof(int) * N, cudaMemcpyHostToDevice);
-    cudaMemcpy(b, b_host, sizeof(int) * N, cudaMemcpyHostToDevice);
+    error_handler(cudaMemcpy(a, a_host, sizeof(int) * N, cudaMemcpyHostToDevice));
+    error_handler(cudaMemcpy(b, b_host, sizeof(int) * N, cudaMemcpyHostToDevice));
 
     kernel <<<N, 1>>> (a, b, c);
     cudaDeviceSynchronize();
 
-    cudaMemcpy(c_host, c, sizeof(int) * N, cudaMemcpyDeviceToHost);
+    error_handler(cudaMemcpy(c_host, c, sizeof(int) * N, cudaMemcpyDeviceToHost));
 
     std::cout << "first vector: ";
     for (int i = 0; i < N; i++) {
