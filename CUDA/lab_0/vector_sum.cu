@@ -35,6 +35,7 @@ __host__ int main() {
 
     kernel <<<N, 1>>> (a, b, c);
     cudaDeviceSynchronize();
+    
 
     error_handler(cudaMemcpy(c_host, c, sizeof(int) * N, cudaMemcpyDeviceToHost));
 
