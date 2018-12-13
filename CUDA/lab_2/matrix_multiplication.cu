@@ -7,14 +7,7 @@ using std::cout;
 using std::endl;
 using std::cerr;
 
-__host__ void error_handler(cudaError_t err) {
-    if (err != cudaSuccess) {
-        cerr << cudaGetErrorString(err) << endl;
-        exit(1);
-    }   
-}
-
-__global__ void std_multiplication(int *dev_matrix_1, int *dev_matrix_2, int *dev_answer) {
+__global__ void std_multiplication_kernel(int *dev_matrix_1, int *dev_matrix_2, int *dev_answer) {
     int idx = blockDim.x * blockIdx.x + threadIdx.x; //column
     int idy = blockDim.y * blockIdx.y + threadIdx.y; //row
 
@@ -27,6 +20,13 @@ __global__ void std_multiplication(int *dev_matrix_1, int *dev_matrix_2, int *de
     }
 }
 
+__host__ void error_handler(cudaError_t err) {
+    if (err != cudaSuccess) {
+        cerr << cudaGetErrorString(err) << endl;
+        exit(1);
+    }   
+}
+
 __host__ void output(int (&matrix)[SIZE][SIZE]) {
     for (int i = 0; i < SIZE; ++i) {
         for (int j = 0; j < SIZE; ++j) {
@@ -36,15 +36,14 @@ __host__ void output(int (&matrix)[SIZE][SIZE]) {
     }
 }
 
-__host__ int main() {
-
+__host__ void matrix_multiplication() {
     // const int matrix_1[SIZE][SIZE] = {
     //     {1, 0, 0, 0},
     //     {0, 1, 0, 0},
     //     {0, 0, 1, 0},
     //     {0, 0, 0, 1}
     // };
-    
+
     const int matrix_1[SIZE][SIZE] = {
         {1, 2, 3, 4},
         {5, 6, 7, 8},
@@ -74,7 +73,7 @@ __host__ int main() {
 
     dim3 blockDim(BLOCK_SIZE, BLOCK_SIZE);
     dim3 gridDim((SIZE + BLOCK_SIZE - 1)/BLOCK_SIZE, (SIZE + BLOCK_SIZE - 1)/BLOCK_SIZE);
-    std_multiplication<<<gridDim, blockDim>>>(dev_matrix_1, dev_matrix_2, dev_answer);
+    std_multiplication_kernel<<<gridDim, blockDim>>>(dev_matrix_1, dev_matrix_2, dev_answer);
 
     error_handler(cudaMemcpy(answer, dev_answer, SIZE * SIZE * sizeof(int), cudaMemcpyDeviceToHost));
 
@@ -83,6 +82,11 @@ __host__ int main() {
     error_handler(cudaFree(dev_matrix_1));
     error_handler(cudaFree(dev_matrix_2));
     error_handler(cudaFree(dev_answer));
+}
+
+__host__ int main() {
+
+    matrix_multiplication();
 
     return 0;
 }
