@@ -20,6 +20,22 @@ __global__ void std_multiplication_kernel(int *dev_matrix_1, int *dev_matrix_2, 
     }
 }
 
+__global__ void pitch_multiplication_kernel(int *dev_matrix_1, int *dev_matrix_2, int *dev_answer, size_t pitch) {
+    int idx = blockDim.x * blockIdx.x + threadIdx.x; //column
+    int idy = blockDim.y * blockIdx.y + threadIdx.y; //row
+
+    if (idx < SIZE && idy < SIZE) {
+        int sum = 0;
+        for (int i = 0; i < SIZE; ++i) {
+            //sum += dev_matrix_1[idy * SIZE + i] * dev_matrix_2[SIZE * i + idx];
+            int* row_a = (int*)((char*)dev_matrix_1 + idy * pitch);
+            int* row_b = (int*)((char*)dev_matrix_2 + idx * pitch);
+            sum += row_a[i] * row_b[i];
+        }
+        dev_answer[idy * SIZE + idx] = sum;
+    }
+}
+
 __host__ void error_handler(cudaError_t err) {
     if (err != cudaSuccess) {
         cerr << cudaGetErrorString(err) << endl;
@@ -84,9 +100,52 @@ __host__ void matrix_multiplication() {
     error_handler(cudaFree(dev_answer));
 }
 
+__host__ void matrix_multiplication_pitch() {
+    const int matrix_1[SIZE][SIZE] = {
+        {1, 2, 3, 4},
+        {5, 6, 7, 8},
+        {9, 10, 11, 12},
+        {13, 14, 15, 16}
+    };
+    const int matrix_2[SIZE][SIZE] = {
+        {1, 0, 0, 0},
+        {0, 1, 0, 0},
+        {0, 0, 1, 0},
+        {0, 0, 0, 1}
+    };
+    int answer[SIZE][SIZE] = {};
+
+    int *dev_matrix_1 = NULL;
+    int *dev_matrix_2 = NULL;
+    int *dev_answer = NULL;
+
+    size_t pitch = 0;
+    error_handler(cudaMallocPitch((void**)&dev_matrix_1, &pitch, SIZE * sizeof(int), SIZE));
+    error_handler(cudaMallocPitch((void**)&dev_matrix_2, &pitch, SIZE * sizeof(int), SIZE));
+    error_handler(cudaMalloc((void**)&dev_answer, SIZE * SIZE * sizeof(int)));
+
+    error_handler(cudaMemcpy2D(dev_matrix_1, pitch, matrix_1, 
+        SIZE * sizeof(int), SIZE * sizeof(int), SIZE, cudaMemcpyHostToDevice)); 
+    error_handler(cudaMemcpy2D(dev_matrix_2, pitch, matrix_2, 
+        SIZE * sizeof(int), SIZE * sizeof(int), SIZE, cudaMemcpyHostToDevice));
+    
+    dim3 blockDim(BLOCK_SIZE, BLOCK_SIZE);
+    dim3 gridDim((SIZE + BLOCK_SIZE - 1)/BLOCK_SIZE, (SIZE + BLOCK_SIZE - 1)/BLOCK_SIZE);
+    pitch_multiplication_kernel<<<gridDim, blockDim>>>(dev_matrix_1, dev_matrix_2, dev_answer, pitch);
+
+    error_handler(cudaMemcpy(answer, dev_answer, SIZE * SIZE * sizeof(int), cudaMemcpyDeviceToHost));
+
+    output(answer);
+
+    error_handler(cudaFree(dev_matrix_1));
+    error_handler(cudaFree(dev_matrix_2));
+    error_handler(cudaFree(dev_answer));
+}
+
 __host__ int main() {
 
-    matrix_multiplication();
+    //matrix_multiplication();
+    matrix_multiplication_pitch();
 
     return 0;
 }
