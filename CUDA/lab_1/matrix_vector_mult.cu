@@ -82,7 +82,6 @@ __host__ void std_matrix_vector_multiplication() {
     const int threads_per_block = 32;
     std_kernel<<<(SIZE + (threads_per_block - 1))/threads_per_block, threads_per_block>>>(dev_linear_matrix, dev_vector, dev_answer);
 
-    error_handler(cudaDeviceSynchronize()); //?
     error_handler(cudaMemcpy(answer, dev_answer, SIZE * sizeof(int), cudaMemcpyDeviceToHost));
     output(answer);
 
